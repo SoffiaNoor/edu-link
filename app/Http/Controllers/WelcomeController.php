@@ -11,18 +11,22 @@ class WelcomeController extends Controller
         return view('welcome', []);
     }
 
-    public function about_us()
+    public function kursus()
     {
-        return view('about_us', []);
+        return view('pages.kursus', []);
     }
 
-    public function portofolio()
+    public function pelayanan()
     {
-        return view('portofolio', []);
+        return view('pages.pelayanan', []);
     }
 
-    public function testimoni()
+    public function konsultasi()
     {
-        return view('testimoni', []);
+        return view('pages.konsultasi', []);
+    }
+
+    public function login(){
+        return view('pages.login', []);
     }
 }

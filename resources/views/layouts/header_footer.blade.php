@@ -11,13 +11,13 @@
     <meta property="og:url" content="">
     <meta name="keywords" content="">
     <script type="text/javascript" async="" src=""></script>
-    <link rel='icon' type="image/x-icon" href='{{asset('assets/img/favicon.ico')}}'>
-    <title>1017 Studios</title>
+    <link rel='icon' type="image/x-icon" href='{{asset('assets/images/logo2.ico')}}'>
+    <title>Edulink</title>
 
     <!--CSS-->
-    {{-- @vite('resources/css/app.css') --}}
+    @vite('resources/css/app.css')
 
-    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" />
+    {{-- <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" /> --}}
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
@@ -36,6 +36,37 @@
     <link href="https://unpkg.com/swiper/swiper-bundle.min.css" rel="stylesheet" />
 
     <style>
+        swiper-container {
+            width: 100%;
+            height: 100%;
+        }
+
+        swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        swiper-slide img {
+            display: block;
+            width: 100%;
+            object-fit: cover;
+        }
+
+
+        /* Custom styles for the overlay effect */
+        .overlay {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .group:hover .overlay {
+            opacity: 1;
+        }
+
         /* width */
         ::-webkit-scrollbar {
             width: 10px;
@@ -43,19 +74,20 @@
 
         /* Track */
         ::-webkit-scrollbar-track {
-            background: #2d2c2c;
+            background: #2e1065;
         }
 
         /* Handle */
         ::-webkit-scrollbar-thumb {
-            background: #FFE200;
+            background: #4c1d95;
             border-radius: 5px;
         }
 
         /* Handle on hover */
         ::-webkit-scrollbar-thumb:hover {
-            background: #ffe100ee;
+            background: #4c1d95;
         }
+
         @keyframes spin {
             0% {
                 transform: rotate(0deg);
@@ -66,8 +98,12 @@
             }
         }
 
-        .menu li a.active {
-            font-weight: bold;
+        .animate-spin-slow {
+            animation: spin 4s linear infinite;
+            background-image: url("assets/img/favicon.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
         }
 
         @keyframes rock-boat {
@@ -104,7 +140,7 @@
         }
 
         .loader {
-            border-top-color: #FFE200;
+            border-top-color: #7e22ce;
             -webkit-animation: spinner 1.5s linear infinite;
             animation: spinner 1.5s linear infinite;
         }
@@ -128,15 +164,19 @@
                 transform: rotate(360deg);
             }
         }
+
+        #movingImage {
+            position: absolute;
+            transition: transform 0.2s ease-out;
+        }
     </style>
 </head>
 
-<body class="bg-white">
+<body class="bg-gradient-to-r from-[#0e1737] to-[#0e183b]">
     <div id="loader" wire:loading
-        class="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden bg-black opacity-75 flex flex-col items-center justify-center">
+        class="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden bg-gradient-to-r from-indigo-950 to-blue-950 flex flex-col items-center justify-center">
         <div class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4"></div>
-        <h2 class="text-center text-white text-xl font-extrabold">Loading...</h2>
-        <p class="text-xl text-center font-extrabold text-[#FFE200]">- 1017 studios -</p>
+        <img src="{{ asset('assets/images/edulink2.png') }}" alt="Nefa Logo" class="w-24 xl:w-28">
     </div>
     <div id="__layout">
         <div class="min-h-screen font-sans antialiased relative">
@@ -144,13 +184,13 @@
                 <div class="absolute top-0 left-0 w-full h-[130vh] sm:h-[225vh] lg:h-[100vh]">
                 </div>
                 <nav
-                    class="hover:shadow-xl fixed z-10 w-full text-neutral-800 bg-black shadow-2xl hover:bg-[#181818] duration-500">
+                    class="hover:shadow-xl fixed z-10 w-full text-neutral-800 bg-gradient-to-r from-[#0e1737] to-[#0e183b] shadow-2xl hover:bg-[#181818] duration-500">
                     <div
                         class="flex flex-col max-w-screen-xl px-8 mx-auto lg:items-center lg:justify-between lg:flex-row py-4">
                         <div class="flex flex-col lg:flex-row items-center space-x-4 xl:space-x-8">
                             <div class="w-full flex flex-row items-center justify-between py-6">
-                                <div><a href="{{url('/')}}"><img src="{{ asset('assets/img/logo.png') }}"
-                                            alt="Nefa Logo" class="w-24 xl:w-28"></a>
+                                <div><a href="{{url('/')}}"><img src="{{ asset('assets/images/edulink2.png') }}"
+                                    alt="Nefa Logo" class="w-24 xl:w-28"></a>
                                 </div>
                                 <div class="lg:hidden">
                                     <button
@@ -169,31 +209,20 @@
                         </div>
                         <div class="space-x-3 hidden lg:flex">
                             <ul
-                                class="menu w-full h-auto flex flex-col flex-grow lg:items-center pb-4 lg:pb-0 lg:justify-end lg:flex-row origin-top duration-300 xl:space-x-2 space-y-3 lg:space-y-0 hidden lg:flex">
-                                <li class="w-25"><a href="{{url('/')}}"
-                                        class="md:px-2 py-2 font-light text-xl bg-transparent rounded-lg text-white hover:text-[#FFE200] duration-500 focus:outline-none focus:shadow-outline">
-                                        Home
-                                    </a></li>
-                                <li class="w-25"><a href="{{url('/portofolio')}}"
-                                        class="md:px-2 py-2 font-light text-xl bg-transparent rounded-lg text-white hover:text-[#FFE200] duration-500 focus:outline-none focus:shadow-outline">
-                                        Portofolio
-                                    </a></li>
-                                <li class="w-25"><a href="{{url('/about_us')}}"
-                                        class="md:px-2 py-2 font-light text-xl bg-transparent rounded-lg text-white hover:text-[#FFE200] duration-500 focus:outline-none focus:shadow-outline">
-                                        Tentang Kami
-                                    </a></li>
-                                <li class="w-25"><a href="{{url('/testimoni')}}"
-                                        class="md:px-2 py-2 font-light text-xl bg-transparent rounded-lg text-white hover:text-[#FFE200] duration-500 focus:outline-none focus:shadow-outline">
-                                        Testimoni
-                                    </a></li>
-                                <li class="w-25"><a href="{{url('/kontak')}}"
-                                        class="md:px-2 py-2 font-light text-xl bg-transparent rounded-lg text-white hover:text-[#FFE200] duration-500 focus:outline-none focus:shadow-outline">
-                                        Kontak
-                                    </a></li>
-                                <li class="w-25"><a href="{{url('/berita')}}"
-                                        class="md:px-2 py-2 font-light text-xl bg-transparent rounded-lg text-white hover:text-[#FFE200] duration-500 focus:outline-none focus:shadow-outline">
-                                        Berita
-                                    </a></li>
+                                class="w-full font-['Fredoka'] h-auto flex flex-col flex-grow lg:items-center pb-4 lg:pb-0 lg:justify-end lg:flex-row origin-top duration-300 xl:space-x-2 space-y-3 lg:space-y-0 hidden lg:flex">
+                                <li class="w-25"><a href="{{url('/kursus')}}"
+                                        class="md:px-2 py-2 font-bold text-xl bg-transparent rounded-lg text-white hover:text-[#FFE200] duration-500 focus:outline-none focus:shadow-outline">
+                                        E-Course </a></li>
+                                <li class="w-25"><a href="{{url('/konsultasi')}}"
+                                        class="md:px-2 py-2 font-bold text-xl bg-transparent rounded-lg text-white hover:text-[#FFE200] duration-500 focus:outline-none focus:shadow-outline">
+                                        Konsultasi </a></li>
+                                <li class="w-25"><a href="{{url('/pelayanan')}}"
+                                        class="md:px-2 py-2 font-bold text-xl bg-transparent rounded-lg text-white hover:text-[#FFE200] duration-500 focus:outline-none focus:shadow-outline">
+                                        Pelayanan </a></li>
+                                <li class="w-25"><a
+                                        class="lg:text-xl duration-300 font-extrabold text-center rounded-full shadow-md transition max-w-full px-6 py-4 bg-gradient-to-r from-fuchsia-600 to-violet-800 text-white"
+                                        href="{{url('/login')}}">
+                                        Login </a></li>
                             </ul>
                         </div>
                     </div>
@@ -251,86 +280,116 @@
 
                 <div class="fixed bottom-20 left-10 z-10">
                     <button id="to-top-button" onclick="goToTop()" title="Go To Top"
-                        class="hidden fixed z-90 border-0 w-16 h-16 rounded-full drop-shadow-md bg-[#FFE200] text-black text-3xl font-bold">&uarr;</button>
+                        class="hidden fixed z-90 border-0 w-16 h-16 rounded-full drop-shadow-md bg-gradient-to-r from-purple-400 to-pink-600 text-white text-3xl font-bold">&uarr;</button>
                 </div>
-
-                <div class="fixed bottom-20 right-10 z-10">
-                    <a title="Chat Whatsapp" href="{{url('/kontak')}}" target="_blank"
-                        class="block rounded-full transition-all shadow transform hover:scale-110 hover:rotate-12">
-                        <img class="object-cover object-center lg:w-36 lg:h-36 w-16 h-16"
-                            src="{{ asset('assets/img/order.png') }}" alt="Saya mau pesan">
+        
+                <div class="fixed bottom-10 right-10 z-10">
+                    <a title="Chat Whatsapp" href="{{url('/login')}}" target="_blank"
+                        class="block rounded-full transition-all transform hover:scale-110 hover:rotate-12">
+                        <img class="object-cover object-center lg:w-full lg:h-24 w-full h-24"
+                            src="{{ asset('assets/images/order.png') }}" alt="Saya mau pesan">
                     </a>
                 </div>
 
-                <footer class="relative bg-black pt-8 pb-6">
-                    <div class="container mx-auto px-4">
-                        <div class="flex flex-wrap text-left lg:text-left place-content-center">
-                            <div class="w-full lg:w-3/12 px-4">
-                                <div
-                                    class="hidden sm:block col-span-12 mt-12 mb-12 lg:mt-20 lg:col-span-6 place-self-center"="">
-                                    <div class="w-full place-self-center"=""><img data-aos="fade-up"
-                                            data-aos-once="true" src="{{ asset('assets/img/logo.png') }}" alt=""
-                                            class="-mt-30 aos-init aos-animate"="">
-                                    </div>
-                                    <div class="mt-7">
-                                        <h3 class="text-xl font-bold text-white text-center">berdiri sejak
-                                            2014<br>lebih dari 2000 klien</h3>
-                                    </div>
-                                </div>
+                <footer class="px-4 -my-2 bg-gradient-to-r from-[#0e1737] to-[#0e183b] font-[Fredoka]">
+                    <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+                        <div class="md:flex md:justify-between">
+                            <div class="mb-6 md:mb-0">
+                                <a href="http://127.0.0.1:8000/" class="flex items-center">
+                                    <img src="assets/images/edulink2.png" class="h-8 me-3" alt="FlowBite Logo" />
+                                </a>
                             </div>
-                            <div class="w-full lg:w-6/12 px-4 place-self-center">
-                                <div class="flex flex-wrap items-top mb-6">
-                                    <div class="w-full lg:w-4/12 px-4 ml-auto">
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <a class="text-white hover:text-blueGray-800 font-bold block pb-2 text-xl"
-                                                    href="{{url('/berita')}}">Berita</a>
-                                            </li>
-                                            <li>
-                                                <a class="text-white hover:text-blueGray-800 font-bold block pb-2 text-xl"
-                                                    href="{{url('/portofolio')}}">Portofolio</a>
-                                            </li>
-                                            <li>
-                                                <a class="font-bold block pb-2 text-xl" style="color:#FFE200"
-                                                    href="{{url('/kontak')}}">Saya mau pesan</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <hr class="lg:hidden color-white">
-                                    <div class="w-full lg:w-6/12 px-4">
-                                        <ul class="list-unstyled">
-                                            <li class="flex items-center lg:justify-end">
-                                                <i class="fab fa-whatsapp text-white text-2xl mr-2"
-                                                    aria-hidden="true"></i>
-                                                <a class="text-white hover:text-blueGray-800 font-bold block pb-2 text-xl lg:text-right"
-                                                    target="_blank"
-                                                    href="https://api.whatsapp.com/send?phone=6281938646560">081 938
-                                                    64 6560</a>
-                                            </li>
-                                            <li class="flex items-center lg:justify-end">
-                                                <i class="fab fa-instagram text-white text-2xl mr-2"></i>
-                                                <a class="text-white hover:text-blueGray-800 font-bold block pb-2 text-xl lg:text-right"
-                                                    href="https://www.instagram.com/studiodesign1017/"
-                                                    target="_blank">studiodesign1017</a>
-                                            </li>
-                                            <li class="flex items-center lg:justify-end lg:mt-20">
-                                                <a class="font-bold text-white block pb-2 text-xl lg:text-right"
-                                                    href="https://goo.gl/maps/your-location" target="_blank">
-                                                    Jemundo, Sawunggaling<br>
-                                                    Timur 3 RT 22 RW 04<br>
-                                                    Sepanjang - Sidoarjo
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                            <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+                                <div>
+                                    <h2 class="mb-6 text-sm font-semibold text-white uppercase dark:text-white">
+                                        Resources</h2>
+                                    <ul class="text-white font-medium">
+                                        <li class="mb-4">
+                                            <a href="https://flowbite.com/" class="hover:underline">Flowbite</a>
+                                        </li>
+                                        <li>
+                                            <a href="https://tailwindcss.com/" class="hover:underline">Tailwind CSS</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h2 class="mb-6 text-sm font-semibold text-white uppercase dark:text-white">
+                                        Follow us</h2>
+                                    <ul class="text-white font-medium">
+                                        <li class="mb-4">
+                                            <a href="https://github.com/themesberg/flowbite"
+                                                class="hover:underline ">Github</a>
+                                        </li>
+                                        <li>
+                                            <a href="https://discord.gg/4eeurUVvTy" class="hover:underline">Discord</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h2 class="mb-6 text-sm font-semibold text-white uppercase dark:text-white">Legal
+                                    </h2>
+                                    <ul class="text-white font-medium">
+                                        <li class="mb-4">
+                                            <a href="#" class="hover:underline">Privacy Policy</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="hover:underline">Terms &amp; Conditions</a>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="flex flex-wrap items-center md:justify-between justify-center">
-                            <div class="w-full md:w-4/12 px-4 mx-auto text-center">
-                                <div class="text-sm text-white font-semibold py-1">
-                                    © 2023 Copyright 1017studios All Right reserved
-                                </div>
+                        <hr class="my-6 h-2 border-none rounded-full bg-transparent sm:mx-auto lg:my-8" />
+                        <div class="sm:flex sm:items-center sm:justify-between">
+                            <span class="text-sm font-medium text-white sm:text-center">Copyright <script>document.write(new Date().getFullYear());</script><a
+                                    href="http://127.0.0.1:8000/" class="hover:underline"> EduLink</a>. All Rights
+                                Reserved.
+                            </span>
+                            <div class="flex mt-4 sm:justify-center sm:mt-0">
+                                <a href="#" class="text-white">
+                                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        fill="currentColor" viewBox="0 0 8 19">
+                                        <path fill-rule="evenodd"
+                                            d="M6.135 3H8V0H6.135a4.147 4.147 0 0 0-4.142 4.142V6H0v3h2v9.938h3V9h2.021l.592-3H5V3.591A.6.6 0 0 1 5.592 3h.543Z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="sr-only">Facebook page</span>
+                                </a>
+                                <a href="#" class="text-white ms-5">
+                                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        fill="currentColor" viewBox="0 0 21 16">
+                                        <path
+                                            d="M16.942 1.556a16.3 16.3 0 0 0-4.126-1.3 12.04 12.04 0 0 0-.529 1.1 15.175 15.175 0 0 0-4.573 0 11.585 11.585 0 0 0-.535-1.1 16.274 16.274 0 0 0-4.129 1.3A17.392 17.392 0 0 0 .182 13.218a15.785 15.785 0 0 0 4.963 2.521c.41-.564.773-1.16 1.084-1.785a10.63 10.63 0 0 1-1.706-.83c.143-.106.283-.217.418-.33a11.664 11.664 0 0 0 10.118 0c.137.113.277.224.418.33-.544.328-1.116.606-1.71.832a12.52 12.52 0 0 0 1.084 1.785 16.46 16.46 0 0 0 5.064-2.595 17.286 17.286 0 0 0-2.973-11.59ZM6.678 10.813a1.941 1.941 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.919 1.919 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Zm6.644 0a1.94 1.94 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.918 1.918 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Z" />
+                                    </svg>
+                                    <span class="sr-only">Discord community</span>
+                                </a>
+                                <a href="#" class="text-white ms-5">
+                                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        fill="currentColor" viewBox="0 0 20 17">
+                                        <path fill-rule="evenodd"
+                                            d="M20 1.892a8.178 8.178 0 0 1-2.355.635 4.074 4.074 0 0 0 1.8-2.235 8.344 8.344 0 0 1-2.605.98A4.13 4.13 0 0 0 13.85 0a4.068 4.068 0 0 0-4.1 4.038 4 4 0 0 0 .105.919A11.705 11.705 0 0 1 1.4.734a4.006 4.006 0 0 0 1.268 5.392 4.165 4.165 0 0 1-1.859-.5v.05A4.057 4.057 0 0 0 4.1 9.635a4.19 4.19 0 0 1-1.856.07 4.108 4.108 0 0 0 3.831 2.807A8.36 8.36 0 0 1 0 14.184 11.732 11.732 0 0 0 6.291 16 11.502 11.502 0 0 0 17.964 4.5c0-.177 0-.35-.012-.523A8.143 8.143 0 0 0 20 1.892Z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="sr-only">Twitter page</span>
+                                </a>
+                                <a href="#" class="text-white ms-5">
+                                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M10 .333A9.911 9.911 0 0 0 6.866 19.65c.5.092.678-.215.678-.477 0-.237-.01-1.017-.014-1.845-2.757.6-3.338-1.169-3.338-1.169a2.627 2.627 0 0 0-1.1-1.451c-.9-.615.07-.6.07-.6a2.084 2.084 0 0 1 1.518 1.021 2.11 2.11 0 0 0 2.884.823c.044-.503.268-.973.63-1.325-2.2-.25-4.516-1.1-4.516-4.9A3.832 3.832 0 0 1 4.7 7.068a3.56 3.56 0 0 1 .095-2.623s.832-.266 2.726 1.016a9.409 9.409 0 0 1 4.962 0c1.89-1.282 2.717-1.016 2.717-1.016.366.83.402 1.768.1 2.623a3.827 3.827 0 0 1 1.02 2.659c0 3.807-2.319 4.644-4.525 4.889a2.366 2.366 0 0 1 .673 1.834c0 1.326-.012 2.394-.012 2.72 0 .263.18.572.681.475A9.911 9.911 0 0 0 10 .333Z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="sr-only">GitHub account</span>
+                                </a>
+                                <a href="#" class="text-white ms-5">
+                                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M10 0a10 10 0 1 0 10 10A10.009 10.009 0 0 0 10 0Zm6.613 4.614a8.523 8.523 0 0 1 1.93 5.32 20.094 20.094 0 0 0-5.949-.274c-.059-.149-.122-.292-.184-.441a23.879 23.879 0 0 0-.566-1.239 11.41 11.41 0 0 0 4.769-3.366ZM8 1.707a8.821 8.821 0 0 1 2-.238 8.5 8.5 0 0 1 5.664 2.152 9.608 9.608 0 0 1-4.476 3.087A45.758 45.758 0 0 0 8 1.707ZM1.642 8.262a8.57 8.57 0 0 1 4.73-5.981A53.998 53.998 0 0 1 9.54 7.222a32.078 32.078 0 0 1-7.9 1.04h.002Zm2.01 7.46a8.51 8.51 0 0 1-2.2-5.707v-.262a31.64 31.64 0 0 0 8.777-1.219c.243.477.477.964.692 1.449-.114.032-.227.067-.336.1a13.569 13.569 0 0 0-6.942 5.636l.009.003ZM10 18.556a8.508 8.508 0 0 1-5.243-1.8 11.717 11.717 0 0 1 6.7-5.332.509.509 0 0 1 .055-.02 35.65 35.65 0 0 1 1.819 6.476 8.476 8.476 0 0 1-3.331.676Zm4.772-1.462A37.232 37.232 0 0 0 13.113 11a12.513 12.513 0 0 1 5.321.364 8.56 8.56 0 0 1-3.66 5.73h-.002Z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="sr-only">Dribbble account</span>
+                                </a>
                             </div>
                         </div>
                     </div>

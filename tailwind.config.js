@@ -11,6 +11,7 @@ module.exports = {
                 poppins: "'Poppins', sans-serif",
                 hahmlet: "'Hahmlet', serif",
                 gotham: "'Gotham',serif ",
+                fredoka: "Fredoka",
             },
             colors: {
                 sk_primary: "#1c1c1c",

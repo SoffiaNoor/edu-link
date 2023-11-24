@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-class HomeController extends Controller {
+use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
-    public function __construct() {
-        
+
+class HomeController extends Controller
+{
+    public function index()
+    {
+        return view("admin.home");
     }
-
-    public function index() {
-        return view('pages.home', []);
-    }
-
 }
