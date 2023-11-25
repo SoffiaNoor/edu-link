@@ -14,10 +14,10 @@
     <title>Edulink</title>
 
     <!--CSS-->
-    @vite('resources/css/app.css')
+    {{-- @vite('resources/css/app.css') --}}
 
-    {{--
-    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" /> --}}
+    
+    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" />
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
