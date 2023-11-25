@@ -29,4 +29,8 @@ class WelcomeController extends Controller
     public function login(){
         return view('pages.login', []);
     }
+
+    public function pesan(){
+        return view('pages.pesan', []);
+    }
 }

@@ -18,6 +18,9 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', [WelcomeController::class, 'index']);
 Route::get('/kursus', [WelcomeController::class, 'kursus']);
+Route::get('/pelayanan', [WelcomeController::class, 'pelayanan']);
+Route::get('/konsultasi', [WelcomeController::class, 'konsultasi']);
+Route::get('/pesan', [WelcomeController::class, 'pesan']);
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -25,9 +28,6 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
     Route::post('/register', [AuthController::class, 'register']);
 });
-Route::get('/pelayanan', [WelcomeController::class, 'pelayanan']);
-Route::get('/konsultasi', [WelcomeController::class, 'konsultasi']);
-
 
 View::composer('layouts.master', function ($view) {
     $loggedInUser = Auth::user();

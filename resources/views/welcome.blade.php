@@ -182,7 +182,8 @@
                 <div class="absolute top-0 left-0 h-[130vh] w-full sm:h-[225vh] md:h-[100vh] lg:h-[100vh] bg-cover bg-center"
                     style="background-image: url({{ asset('assets/images/bg6.png') }});">
                 </div>
-                <nav class="hover:shadow-xl hover:bg-gradient-to-r from-[#0e1737] to-[#0e183b] sticky z-10 w-full text-neutral-800 duration-500">
+                <nav
+                    class="hover:shadow-xl hover:bg-gradient-to-r from-[#0e1737] to-[#0e183b] sticky z-10 w-full text-neutral-800 duration-500">
                     <div
                         class="flex flex-col max-w-screen-xl px-8 mx-auto lg:items-center lg:justify-between lg:flex-row py-4">
                         <div class="flex flex-col lg:flex-row items-center space-x-4 xl:space-x-8">
@@ -217,10 +218,38 @@
                                 <li class="w-25"><a href="{{url('/pelayanan')}}"
                                         class="md:px-2 py-2 font-bold text-xl bg-transparent rounded-lg text-white hover:text-[#FFE200] duration-500 focus:outline-none focus:shadow-outline">
                                         Pelayanan </a></li>
-                                <li class="w-25"><a
-                                        class="lg:text-xl duration-300 font-extrabold text-center rounded-full shadow-md transition max-w-full px-6 py-4 bg-gradient-to-r from-fuchsia-600 to-violet-800 text-white"
-                                        href="{{url('/login')}}">
-                                        Login </a></li>
+                                @if(auth()->check())
+                                <li class="w-25"><a href="{{url('/pesan')}}"
+                                        class="md:px-2 py-2 font-bold text-xl bg-transparent rounded-lg text-white hover:text-[#FFE200] duration-500 focus:outline-none focus:shadow-outline">
+                                        Pesan </a></li>
+                                @else
+                                @endif
+                                @if(auth()->check())
+                                <li class="relative group">
+                                    <div
+                                        class="flex items-center px-6 py-2 shadow-xl bg-gradient-to-r from-fuchsia-600 to-violet-800 rounded-full cursor-pointer">
+                                        <span class="mr-4 text-white font-bold text-xl">{{ auth()->user()->name
+                                            }}</span>
+                                        <img src="assets/images/profile-user.png" alt="Profile Photo"
+                                            class="w-8 h-8 rounded-full">
+                                    </div>
+                                    <ul
+                                        class="absolute hidden font-bold w-full text-md mt-2 bg-gradient-to-r from-fuchsia-600 to-violet-800 text-white rounded-md shadow-lg group-hover:block z-10">
+                                        <li><a href="{{ url('/admin') }}" class="block px-4 py-2">Dashboard</a></li>
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+                                            <li><button class="block px-4 py-2" type="submit">Logout</button></li>
+                                        </form>
+                                    </ul>
+                                </li>
+                                @else
+                                <li class="w-25">
+                                    <a class="lg:text-xl duration-300 font-extrabold text-center rounded-full shadow-md transition max-w-full px-6 py-4 bg-gradient-to-r from-fuchsia-600 to-violet-800 text-white"
+                                        href="{{ url('/login') }}">
+                                        Login
+                                    </a>
+                                </li>
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -903,7 +932,7 @@
                         </swiper-container>
                     </div>
                 </section>
-                
+
                 <footer class="px-4 -my-2 bg-[#00ffff] font-[Fredoka]">
                     <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
                         <div class="md:flex md:justify-between">
@@ -954,8 +983,10 @@
                         </div>
                         <hr class="my-6 h-2 border-none rounded-full bg-transparent sm:mx-auto lg:my-8" />
                         <div class="sm:flex sm:items-center sm:justify-between">
-                            <span class="text-sm font-medium text-black sm:text-center">Copyright <script>document.write(new Date().getFullYear());</script><a
-                                    href="http://127.0.0.1:8000/" class="hover:underline"> EduLink</a>. All Rights
+                            <span class="text-sm font-medium text-black sm:text-center">Copyright <script>
+                                    document.write(new Date().getFullYear());
+                                </script><a href="http://127.0.0.1:8000/" class="hover:underline"> EduLink</a>. All
+                                Rights
                                 Reserved.
                             </span>
                             <div class="flex mt-4 sm:justify-center sm:mt-0">

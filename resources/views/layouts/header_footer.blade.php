@@ -17,7 +17,8 @@
     <!--CSS-->
     @vite('resources/css/app.css')
 
-    {{-- <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" /> --}}
+    {{--
+    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" /> --}}
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
@@ -190,7 +191,7 @@
                         <div class="flex flex-col lg:flex-row items-center space-x-4 xl:space-x-8">
                             <div class="w-full flex flex-row items-center justify-between py-6">
                                 <div><a href="{{url('/')}}"><img src="{{ asset('assets/images/edulink2.png') }}"
-                                    alt="Nefa Logo" class="w-24 xl:w-28"></a>
+                                            alt="Nefa Logo" class="w-24 xl:w-28"></a>
                                 </div>
                                 <div class="lg:hidden">
                                     <button
@@ -219,10 +220,38 @@
                                 <li class="w-25"><a href="{{url('/pelayanan')}}"
                                         class="md:px-2 py-2 font-bold text-xl bg-transparent rounded-lg text-white hover:text-[#FFE200] duration-500 focus:outline-none focus:shadow-outline">
                                         Pelayanan </a></li>
-                                <li class="w-25"><a
-                                        class="lg:text-xl duration-300 font-extrabold text-center rounded-full shadow-md transition max-w-full px-6 py-4 bg-gradient-to-r from-fuchsia-600 to-violet-800 text-white"
-                                        href="{{url('/login')}}">
-                                        Login </a></li>
+                                @if(auth()->check())
+                                <li class="w-25"><a href="{{url('/pesan')}}"
+                                        class="md:px-2 py-2 font-bold text-xl bg-transparent rounded-lg text-white hover:text-[#FFE200] duration-500 focus:outline-none focus:shadow-outline">
+                                        Pesan </a></li>
+                                @else
+                                @endif
+                                @if(auth()->check())
+                                <li class="relative group">
+                                    <div
+                                        class="flex items-center px-6 py-2 shadow-xl bg-gradient-to-r from-fuchsia-600 to-violet-800 rounded-full cursor-pointer">
+                                        <span class="mr-4 text-white font-bold text-xl">{{ auth()->user()->name
+                                            }}</span>
+                                        <img src="assets/images/profile-user.png" alt="Profile Photo"
+                                            class="w-8 h-8 rounded-full">
+                                    </div>
+                                    <ul
+                                        class="absolute hidden font-bold w-full text-md mt-2 bg-gradient-to-r from-fuchsia-600 to-violet-800 text-white rounded-md shadow-lg group-hover:block z-10">
+                                        <li><a href="{{ url('/admin') }}" class="block px-4 py-2">Dashboard</a></li>
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+                                            <li><button class="block px-4 py-2" type="submit">Logout</button></li>
+                                        </form>
+                                    </ul>
+                                </li>
+                                @else
+                                <li class="w-25">
+                                    <a class="lg:text-xl duration-300 font-extrabold text-center rounded-full shadow-md transition max-w-full px-6 py-4 bg-gradient-to-r from-fuchsia-600 to-violet-800 text-white"
+                                        href="{{ url('/login') }}">
+                                        Login
+                                    </a>
+                                </li>
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -282,7 +311,7 @@
                     <button id="to-top-button" onclick="goToTop()" title="Go To Top"
                         class="hidden fixed z-90 border-0 w-16 h-16 rounded-full drop-shadow-md bg-gradient-to-r from-purple-400 to-pink-600 text-white text-3xl font-bold">&uarr;</button>
                 </div>
-        
+
                 <div class="fixed bottom-10 right-10 z-10">
                     <a title="Chat Whatsapp" href="{{url('/login')}}" target="_blank"
                         class="block rounded-full transition-all transform hover:scale-110 hover:rotate-12">
@@ -341,8 +370,10 @@
                         </div>
                         <hr class="my-6 h-2 border-none rounded-full bg-transparent sm:mx-auto lg:my-8" />
                         <div class="sm:flex sm:items-center sm:justify-between">
-                            <span class="text-sm font-medium text-white sm:text-center">Copyright <script>document.write(new Date().getFullYear());</script><a
-                                    href="http://127.0.0.1:8000/" class="hover:underline"> EduLink</a>. All Rights
+                            <span class="text-sm font-medium text-white sm:text-center">Copyright <script>
+                                    document.write(new Date().getFullYear());
+                                </script><a href="http://127.0.0.1:8000/" class="hover:underline"> EduLink</a>. All
+                                Rights
                                 Reserved.
                             </span>
                             <div class="flex mt-4 sm:justify-center sm:mt-0">
