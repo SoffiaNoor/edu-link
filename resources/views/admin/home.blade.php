@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="container-fluid px-3 pt-1">
+{{-- <div class="container-fluid px-3 pt-1">
     <div class="row">
         <div class="col-sm-4 mt-2" data-aos="fade-up" data-aos-delay="300" data-aos-easing="ease-in-sine">
             <div class="info-horizontal bg-gradient-danger border-radius-xl p-3">
@@ -84,7 +84,7 @@
             <span class="visually-hidden">Next</span>
         </a>
     </div>
-</div>
+</div> --}}
 
 @endsection
 

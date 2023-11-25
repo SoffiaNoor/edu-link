@@ -4,10 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" type="image/png" href="http://localhost:8000/assets/images/RUNGKAD.png">
-    <title>
-        RUNGKAD
-    </title>
+    <link rel='icon' type="image/x-icon" href='{{asset(' assets/images/logo2.ico')}}'>
+    <title>Edulink</title>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <!-- Font Awesome Icons -->
@@ -79,72 +77,71 @@
     }
 </style>
 
-<body class="g-sidenav-show bg-gray-100">
+<body class="g-sidenav-show bg-default">
     {{-- <div class="loader-container">
         <img src="http://localhost:8000/assets/images/RUNGKAD3.png" class="swing-animation" alt="Loading..." />
     </div> --}}
     <div class="min-height-300 position-absolute w-100"></div>
     <span class="mask bg-gradient-warning opacity-10"
-        style="background: linear-gradient(45deg, #1b3c5fc9, #1B3C5F);background-size: cover;"></span>
-    <aside
-        class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 "
-        id="sidenav-main">
+        style="background: linear-gradient(45deg, #0e1737, #0e1737);background-size: cover;"></span>
+    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 "
+        id="sidenav-main" style="background-color:#2c0a71">
         <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
                 aria-hidden="true" id="iconSidenav"></i>
             <a class="navbar-brand m-0" href="/">
-                <img src="/assets/images/RUNGKAD.png" class="navbar-brand-img h-100" alt="main_logo">
-                <span class="ms-1 font-weight-bolder">Ruang Akademik</span>
+                <img src="/assets/images/edulink2.png" class="navbar-brand-img h-100" alt="main_logo">
             </a>
         </div>
         <hr class="horizontal dark mt-0">
         <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link mx-3 my-1 text-dark {{ preg_match('/^\/$/', Route::current()->uri) == 1 ? 'bg-gradient-secondary shadow border-radius-xl mx-3 my-1 text-white font-weight-bolder' : '' }}"
+                    <a class="nav-link mx-3 my-1 text-white {{ preg_match('/admin/', Route::current()->uri) == 1 ? 'bg-gradient-secondary shadow border-radius-xl mx-3 my-1 text-white font-weight-bolder' : '' }}"
                         href="/"
-                        style="{{ preg_match('/^\/$/', Route::current()->uri) == 1 ? 'background: linear-gradient(45deg, #1b3c5fc9, #1B3C5F);background-size: cover;' : '' }}">
+                        style="{{ preg_match('/admin/', Route::current()->uri) == 1 ? 'background:#7523d6;background-size: cover;' : '' }}">
                         <i class="fa fa-tachometer" aria-hidden="true"></i>
                         <span class="nav-link-text ms-1 font-weight-bold">Dashboard</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mx-3 my-1 text-dark {{ preg_match('/mentor/',Route::current()->uri) == true ? 'bg-gradient-secondary shadow border-radius-xl mx-3 my-1 text-white font-weight-bolder' : '' }}"
+                    <a class="nav-link mx-3 my-1 text-white {{ preg_match('/mentor/',Route::current()->uri) == true ? 'bg-gradient-secondary shadow border-radius-xl mx-3 my-1 text-white font-weight-bolder' : '' }}"
                         href="/mentor"
-                        style="{{ preg_match('/mentor/',Route::current()->uri) == true ? 'background: linear-gradient(45deg, #1b3c5fc9, #1B3C5F);background-size: cover;' : '' }}">
+                        style="{{ preg_match('/mentor/',Route::current()->uri) == true ? 'background:#7523d6;background-size: cover;' : '' }}">
                         <i class="fa fa-user" aria-hidden="true"></i>
                         <span class="nav-link-text ms-1 font-weight-bold">Mentor</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mx-3 my-1 text-dark {{ preg_match('/mata_kuliah/',Route::current()->uri) == true ? 'bg-gradient-secondary shadow border-radius-xl mx-3 my-1 text-white font-weight-bolder' : '' }}"
+                    <a class="nav-link mx-3 my-1 text-white {{ preg_match('/mata_kuliah/',Route::current()->uri) == true ? 'bg-gradient-secondary shadow border-radius-xl mx-3 my-1 text-white font-weight-bolder' : '' }}"
                         href="/mata_kuliah"
-                        style="{{ preg_match('/mata_kuliah/',Route::current()->uri) == true ? 'background: linear-gradient(45deg, #1b3c5fc9, #1B3C5F);background-size: cover;' : '' }}">
+                        style="{{ preg_match('/mata_kuliah/',Route::current()->uri) == true ? 'background:#7523d6;background-size: cover;' : '' }}">
                         <i class="fa fa-bookmark" aria-hidden="true"></i>
                         <span class="nav-link-text ms-1 font-weight-bold">Mata Kuliah</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mx-3 my-1 text-dark {{ preg_match('/dosen/',Route::current()->uri) == true ? 'bg-gradient-secondary shadow border-radius-xl mx-3 my-1 text-white font-weight-bolder' : '' }}"
+                    <a class="nav-link mx-3 my-1 text-white {{ preg_match('/dosen/',Route::current()->uri) == true ? 'bg-gradient-secondary shadow border-radius-xl mx-3 my-1 text-white font-weight-bolder' : '' }}"
                         href="/dosen"
-                        style="{{ preg_match('/dosen/',Route::current()->uri) == true ? 'background: linear-gradient(45deg, #1b3c5fc9, #1B3C5F);background-size: cover;' : '' }}">
+                        style="{{ preg_match('/dosen/',Route::current()->uri) == true ? 'background:#7523d6;background-size: cover;' : '' }}">
                         <i class="fa fa-users" aria-hidden="true"></i>
                         <span class="nav-link-text ms-1 font-weight-bold">Dosen</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mx-3 my-1 text-dark {{ preg_match('/ruang/',Route::current()->uri) == true ? 'bg-gradient-secondary shadow border-radius-xl mx-3 my-1 text-white font-weight-bolder' : '' }}"
+                    <a class="nav-link mx-3 my-1 text-white {{ preg_match('/ruang/',Route::current()->uri) == true ? 'bg-gradient-secondary shadow border-radius-xl mx-3 my-1 text-white font-weight-bolder' : '' }}"
                         href="/ruang"
-                        style="{{ preg_match('/ruang/',Route::current()->uri) == true ? 'background: linear-gradient(45deg, #1b3c5fc9, #1B3C5F);background-size: cover;' : '' }}">
+                        style="{{ preg_match('/ruang/',Route::current()->uri) == true ? 'background:#7523d6;background-size: cover;' : '' }}">
                         <i class="fa fa-map-marker" aria-hidden="true"></i>
                         <span class="nav-link-text ms-1 font-weight-bold">Ruang Kelas</span>
                     </a>
                 </li>
-                <h6 class="ps-4 my-2 text-uppercase text-xs font-weight-bolder opacity-6">User Configuration</h6>
+                <h6 class="ps-4 my-2 text-uppercase text-xs font-weight-bolder text-white opacity-6">User Configuration
+                </h6>
                 <li class="nav-item">
-                    <a class="nav-link mx-3 my-1 text-dark {{ preg_match('/user/',Route::current()->uri) == true ? 'bg-gradient-secondary shadow border-radius-xl mx-3 my-1 text-white font-weight-bolder' : '' }}"
+                    <a class="nav-link mx-3 my-1 text-white {{ preg_match('/user/',Route::current()->uri) == true ? 'bg-gradient-secondary shadow border-radius-xl mx-3 my-1 text-white font-weight-bolder' : '' }}"
                         href="/user"
-                        style="{{ preg_match('/user/',Route::current()->uri) == true ? 'background: linear-gradient(45deg, #1b3c5fc9, #1B3C5F);background-size: cover;' : '' }}">
+                        style="{{ preg_match('/user/',Route::current()->uri) == true ? 'background:#7523d6;background-size: cover;' : '' }}">
                         <i class="fa fa-save" aria-hidden="true"></i>
                         <span class="nav-link-text ms-1 font-weight-bold">List User</span>
                     </a>
@@ -163,7 +160,7 @@
                 </div>
             </div>
             <a href="/register" target="_blank" class="btn btn-dark btn-sm w-100 mb-3"
-                style="background: linear-gradient(45deg, #1b3c5fc9, #1B3C5F);background-size: cover;">Daftar Akun</a>
+                style="background:#7523d6;background-size: cover;">Daftar Akun</a>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button class="btn btn-danger btn-sm mb-0 w-100" type="submit">Log Out</button>
@@ -178,7 +175,7 @@
                 <nav aria-label="breadcrumb">
                     @if(request()->path() !== '/')
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white">Ruang Akademik</a></li>
+                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white">EduLink</a></li>
                         @php
                         $urlSegments = explode('/', request()->path());
                         $breadcrumbPath = '';
@@ -210,8 +207,9 @@
                     </div>
                     <ul class="navbar-nav  justify-content-end">
                         <li class="nav-item d-flex align-items-center">
+                            <a href="/user/{{{$loggedInUser->id}}}" class="nav-link text-white font-weight-bold px-0">
                                 <i class="fa fa-user me-sm-1"></i>
-                                <span class="d-sm-inline d-none"></span>
+                                <span class="d-sm-inline d-none">{{ ucfirst($loggedInUser->name) }}</span>
                             </a>
                         </li>
                         <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
@@ -241,8 +239,8 @@
                                 document.write(new Date().getFullYear())
                             </script>,
                             made with <i class="far fa-grin"></i> by
-                            <a class="font-weight-bolder text-white">Ruang Akademik</a>
-                            for a better SIAKAD.
+                            <a class="font-weight-bolder text-white">EduLink</a>
+                            for a Online Courses
                         </div>
                     </div>
                 </div>

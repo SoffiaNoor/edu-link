@@ -226,21 +226,28 @@
                                 @endif
                                 @if(auth()->check())
                                 <li class="relative group">
-                                    <div
+                                    <div id="userDropdown"
                                         class="flex items-center px-6 py-2 shadow-xl bg-gradient-to-r from-fuchsia-600 to-violet-800 rounded-full cursor-pointer">
                                         <span class="mr-4 text-white font-bold text-xl">{{ auth()->user()->name
                                             }}</span>
                                         <img src="assets/images/profile-user.png" alt="Profile Photo"
                                             class="w-8 h-8 rounded-full">
                                     </div>
-                                    <ul
-                                        class="absolute hidden font-bold w-full text-md mt-2 bg-gradient-to-r from-fuchsia-600 to-violet-800 text-white rounded-md shadow-lg group-hover:block z-10">
+                                    <ul id="dropdownMenu"
+                                        class="absolute hidden font-bold w-full text-md mt-2 bg-gradient-to-r from-fuchsia-600 to-violet-800 text-white rounded-md shadow-lg z-10">
                                         <li><a href="{{ url('/admin') }}" class="block px-4 py-2">Dashboard</a></li>
                                         <form method="POST" action="{{ route('logout') }}">
                                             @csrf
                                             <li><button class="block px-4 py-2" type="submit">Logout</button></li>
                                         </form>
                                     </ul>
+
+                                    <script>
+                                        document.getElementById('userDropdown').addEventListener('click', function () {
+                                            var dropdown = document.getElementById('dropdownMenu');
+                                            dropdown.classList.toggle('hidden');
+                                        });
+                                    </script>
                                 </li>
                                 @else
                                 <li class="w-25">
