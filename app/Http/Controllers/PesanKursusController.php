@@ -5,18 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Ruang;
 
-class RuangController extends Controller
+class PesanKursusController extends Controller
 {
     public function index()
     {
         // $Ruang = Ruang::paginate(5);
 
         // return view("ruang.index", compact('Ruang'));
-        return view("ruang.index");
+        return view("admin.pesan_kursus.index");
     }
     public function create()
     {
-        return view("ruang.create");
+        return view("admin.pesan_kursus.create");
     }
 
 

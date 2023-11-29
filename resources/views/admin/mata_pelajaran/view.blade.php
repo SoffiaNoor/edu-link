@@ -37,14 +37,14 @@
                 <div class="row">
                     <div class="col-sm-6 pt-2">
                         <button class="btn btn-icon btn-3 btn-secondary" type="button">
-                            <a href="/mata_kuliah" class="btn-inner--icon text-white"><i class="fa fa-arrow-left"
+                            <a href="/mata_pelajaran" class="btn-inner--icon text-white"><i class="fa fa-arrow-left"
                                     aria-hidden="true"></i></a>
-                            <a href="/mata_kuliah" class="btn-inner--text text-white ms-2">Kembali</a>
+                            <a href="/mata_pelajaran" class="btn-inner--text text-white ms-2">Kembali</a>
                         </button>
                         <button class="btn btn-icon btn-3 btn-primary" type="button">
-                            <a href="{{route('mata_kuliah.edit',$mataKuliah->IDMK)}}"
+                            <a href="{{route('mata_pelajaran.edit',$mataKuliah->IDMK)}}"
                                 class="btn-inner--icon text-white"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                            <a href="{{route('mata_kuliah.edit',$mataKuliah->IDMK)}}"
+                            <a href="{{route('mata_pelajaran.edit',$mataKuliah->IDMK)}}"
                                 class="btn-inner--text text-white ms-2">Edit</a>
                         </button>
                         <button class="btn btn-icon btn-3 btn-danger" type="button" data-bs-toggle="modal"
@@ -74,7 +74,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
-                <form action="{{ route('mata_kuliah.destroy', $mataKuliah->IDMK) }}" method="POST"
+                <form action="{{ route('mata_pelajaran.destroy', $mataKuliah->IDMK) }}" method="POST"
                     style="display: inline;">
                     @csrf
                     @method('DELETE')

@@ -7,25 +7,25 @@ use App\Models\MataKuliah;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class MataKuliahController extends Controller
+class MataPelajaranController extends Controller
 {
     public function index()
     {
         // $mataKuliah = MataKuliah::paginate(5);
 
-        // return view("mata_kuliah.index", compact('mataKuliah'));
-        return view("admin.mata_kuliah.index");
+        // return view("mata_pelajaran.index", compact('mataKuliah'));
+        return view("admin.mata_pelajaran.index");
     }
     public function create()
     {
-        return view("admin.mata_kuliah.create");
+        return view("admin.mata_pelajaran.create");
     }
 
 
     public function show(string $IDMK)
     {
         $mataKuliah = MataKuliah::where('IDMK', $IDMK)->first();
-        return view("admin.mata_kuliah.view", compact('mataKuliah'));
+        return view("admin.mata_pelajaran.view", compact('mataKuliah'));
     }
 
     public function store(Request $request)
@@ -45,9 +45,9 @@ class MataKuliahController extends Controller
 
             MataKuliah::create($data);
 
-            return redirect()->route('admin.mata_kuliah.index')->with('success', 'Mata Kuliah berhasil ditambah!');
+            return redirect()->route('admin.mata_pelajaran.index')->with('success', 'Mata Kuliah berhasil ditambah!');
         } catch (\Exception $e) {
-            return redirect()->route('admin.mata_kuliah.create')->with('error', 'Gagal input Mata Kuliah. Pastikan data yang Anda masukkan benar.');
+            return redirect()->route('admin.mata_pelajaran.create')->with('error', 'Gagal input Mata Kuliah. Pastikan data yang Anda masukkan benar.');
         }
     }
 
@@ -71,7 +71,7 @@ class MataKuliahController extends Controller
 
         $mataKuliah->update($data);
 
-        return redirect()->route('admin.mata_kuliah.index')->with('success', 'Mata Kuliah berhasil diperbarui!');
+        return redirect()->route('admin.mata_pelajaran.index')->with('success', 'Mata Kuliah berhasil diperbarui!');
     }
 
 
@@ -80,17 +80,17 @@ class MataKuliahController extends Controller
         $mataKuliah = MataKuliah::find($id);
 
         if (!$mataKuliah) {
-            return redirect()->route('admin.mata_kuliah.index')->with('error', 'Mata kuliah tidak ditemukan!');
+            return redirect()->route('admin.mata_pelajaran.index')->with('error', 'Mata kuliah tidak ditemukan!');
         }
 
         $mataKuliah->delete();
 
-        return redirect()->route('admin.mata_kuliah.index')->with('success', 'Mata kuliah berhasil dihapus!');
+        return redirect()->route('admin.mata_pelajaran.index')->with('success', 'Mata kuliah berhasil dihapus!');
     }
 
 
     public function edit(MataKuliah $mataKuliah)
     {
-        return view("admin.mata_kuliah.update", compact('mataKuliah'));
+        return view("admin.mata_pelajaran.update", compact('mataKuliah'));
     }
 }

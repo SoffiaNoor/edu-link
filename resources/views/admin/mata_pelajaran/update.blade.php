@@ -16,7 +16,7 @@
                                 {{ session('error') }}
                             </div>
                         @endif
-                        <form class="p-3" method="POST" action="{{ route('mata_kuliah.update',$mataKuliah->IDMK)}}" enctype="multipart/form-data">
+                        <form class="p-3" method="POST" action="{{ route('mata_pelajaran.update',$mataKuliah->IDMK)}}" enctype="multipart/form-data">
                         @csrf 
                         @method('PUT') 
                             <div class="row">
@@ -55,10 +55,10 @@
                             <div class="row">
                                 <div class="col-sm-6 pt-2">
                                     <button class="btn btn-icon btn-3 btn-secondary" type="button">
-                                        <a href="/mata_kuliah" class="btn-inner--icon text-white"><i
+                                        <a href="/mata_pelajaran" class="btn-inner--icon text-white"><i
                                                 class="fa fa-arrow-left" aria-hidden="true"></i>
                                         </a>
-                                        <a href="/mata_kuliah" class="btn-inner--text text-white ms-2">Kembali</a>
+                                        <a href="/mata_pelajaran" class="btn-inner--text text-white ms-2">Kembali</a>
                                     </button>
                                     <button class="btn btn-icon btn-3 btn-success" type="submit">
                                         <a class="btn-inner--icon text-white"><i class="fa fa-pencil" aria-hidden="true"></i>

@@ -113,27 +113,35 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mx-3 my-1 text-white {{ preg_match('/mata_kuliah/',Route::current()->uri) == true ? 'bg-gradient-secondary shadow border-radius-xl mx-3 my-1 text-white font-weight-bolder' : '' }}"
-                        href="/mata_kuliah"
-                        style="{{ preg_match('/mata_kuliah/',Route::current()->uri) == true ? 'background:#7523d6;background-size: cover;' : '' }}">
+                    <a class="nav-link mx-3 my-1 text-white {{ preg_match('/murid/',Route::current()->uri) == true ? 'bg-gradient-secondary shadow border-radius-xl mx-3 my-1 text-white font-weight-bolder' : '' }}"
+                        href="/murid"
+                        style="{{ preg_match('/murid/',Route::current()->uri) == true ? 'background:#7523d6;background-size: cover;' : '' }}">
                         <i class="fa fa-bookmark" aria-hidden="true"></i>
-                        <span class="nav-link-text ms-1 font-weight-bold">Mata Kuliah</span>
+                        <span class="nav-link-text ms-1 font-weight-bold">Murid</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mx-3 my-1 text-white {{ preg_match('/dosen/',Route::current()->uri) == true ? 'bg-gradient-secondary shadow border-radius-xl mx-3 my-1 text-white font-weight-bolder' : '' }}"
-                        href="/dosen"
-                        style="{{ preg_match('/dosen/',Route::current()->uri) == true ? 'background:#7523d6;background-size: cover;' : '' }}">
+                    <a class="nav-link mx-3 my-1 text-white {{ preg_match('/mata_pelajaran/',Route::current()->uri) == true ? 'bg-gradient-secondary shadow border-radius-xl mx-3 my-1 text-white font-weight-bolder' : '' }}"
+                        href="/mata_pelajaran"
+                        style="{{ preg_match('/mata_pelajaran/',Route::current()->uri) == true ? 'background:#7523d6;background-size: cover;' : '' }}">
                         <i class="fa fa-users" aria-hidden="true"></i>
-                        <span class="nav-link-text ms-1 font-weight-bold">Dosen</span>
+                        <span class="nav-link-text ms-1 font-weight-bold">Mata Pelajaran</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mx-3 my-1 text-white {{ preg_match('/ruang/',Route::current()->uri) == true ? 'bg-gradient-secondary shadow border-radius-xl mx-3 my-1 text-white font-weight-bolder' : '' }}"
-                        href="/ruang"
-                        style="{{ preg_match('/ruang/',Route::current()->uri) == true ? 'background:#7523d6;background-size: cover;' : '' }}">
+                    <a class="nav-link mx-3 my-1 text-white {{ preg_match('/pesan_kursus/',Route::current()->uri) == true ? 'bg-gradient-secondary shadow border-radius-xl mx-3 my-1 text-white font-weight-bolder' : '' }}"
+                        href="/pesan_kursus"
+                        style="{{ preg_match('/pesan_kursus/',Route::current()->uri) == true ? 'background:#7523d6;background-size: cover;' : '' }}">
                         <i class="fa fa-map-marker" aria-hidden="true"></i>
-                        <span class="nav-link-text ms-1 font-weight-bold">Ruang Kelas</span>
+                        <span class="nav-link-text ms-1 font-weight-bold">Pesan Kursus</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mx-3 my-1 text-white {{ preg_match('/pesan_konsul/',Route::current()->uri) == true ? 'bg-gradient-secondary shadow border-radius-xl mx-3 my-1 text-white font-weight-bolder' : '' }}"
+                        href="/pesan_konsul"
+                        style="{{ preg_match('/pesan_konsul/',Route::current()->uri) == true ? 'background:#7523d6;background-size: cover;' : '' }}">
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                        <span class="nav-link-text ms-1 font-weight-bold">Pesan Konsul</span>
                     </a>
                 </li>
                 <h6 class="ps-4 my-2 text-uppercase text-xs font-weight-bolder text-white opacity-6">User Configuration

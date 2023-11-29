@@ -7,11 +7,11 @@
             <div class="card p-3">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h3 class="px-3">Mata Kuliah
+                        <h3 class="px-3">pesan_konsul
                         </h3>
                         <hr class="ms-3 mt-0" style="background-color:#01353f;height:10px;border-radius:40px;width:50%">
                     </div>
-                    <div class="col-sm-6"> <a class="btn btn-warning" href="{{route('mata_kuliah.create')}}"
+                    <div class="col-sm-6"> <a class="btn btn-warning" href="{{route('pesan_konsul.create')}}"
                             style="float:right;">
                             <span>Tambah Data</span>
                             <i class="fa fa-plus ms-2"></i>
@@ -41,8 +41,8 @@
                             <tr>
                                 <th class="text-uppercase text-default text-xs font-weight-bolder">No.</th>
                                 <th class="text-uppercase text-default text-xs font-weight-bolder">ID</th>
-                                <th class="text-uppercase text-default text-xs font-weight-bolder">Nama Mata Kuliah</th>
-                                <th class="text-uppercase text-default text-xs font-weight-bolder ps-2">Jumlah SKS</th>
+                                <th class="text-uppercase text-default text-xs font-weight-bolder">Nama pesan_konsul</th>
+                                <th class="text-uppercase text-default text-xs font-weight-bolder ps-2">Kapasitas</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -60,7 +60,7 @@
                                         </span>
                                     </div>
                                 </td>
-                                <td class="text-default text-xs font-weight-bolder">
+                                <td class="text-uppercase text-default text-xs font-weight-bolder">
                                     <div class="d-flex align-items-center">
                                         <span class="ms-3 text-xs">
                                         </span>
@@ -99,7 +99,7 @@
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body text-sm">
-                                                    Apakah anda yakin menghapus Mata Kuliah <span
+                                                    Apakah anda yakin menghapus pesan_konsul <span
                                                         class="font-weight-bolder"></span>?
                                                 </div>
                                                 <div class="modal-footer">
@@ -138,7 +138,6 @@
                         </ul>
                     </nav>
                 </div>
-
                 <div class="alert alert-info shadow border-radius-xl text-white font-weight-bolder">
                     Tabel masih kosong.
                 </div>
