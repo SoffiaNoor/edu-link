@@ -18,6 +18,7 @@
 
     
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" />
+    <link href='https://fonts.googleapis.com/css?family=Fredoka One' rel='stylesheet'>
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
