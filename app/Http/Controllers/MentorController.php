@@ -19,23 +19,22 @@ class MentorController extends Controller
 
     public function create()
     {
-        // $mentor = mentor::all();
-        // $model1 = new mentor();
-        // $dosen = Dosen::all();
-        // $model2 = new Dosen();
-        // return view("admin.mentor.create", compact('mentor'));
-        return view("admin.mentor.create");
+        $mentor = mentor::all();
+        $model1 = new mentor();
+        $dosen = Dosen::all();
+        $model2 = new Dosen();
+        return view("admin.mentor.create", compact('mentor','model1','dosen','model2'));
     }
 
     public function show(string $NRP)
     {
         $mentor = mentor::where('NRP', $NRP)->first();
-        // $dosen = Dosen::all();
+        $dosen = Dosen::all();
         return view("admin.mentor.view", compact('mentor', 'dosen'));
     }
     public function edit(mentor $mentor)
     {
-        // $dosenWali = Dosen::all();
+        $dosenWali = Dosen::all();
         return view("admin.mentor.update", compact('mentor', 'dosenWali'));
     }
 
@@ -54,28 +53,33 @@ class MentorController extends Controller
 
     public function store(Request $request)
     {
-        // 'ptn' = (int)$request;
         $this->validate($request, [
-            'namamentor' => 'required|max:5|string',
-            'pendidikan' => 'required|string',
-            'ptn' => 'required|string',
-            'idbidang' => 'required|int',
+            'NRP' => 'required|max:5|string',
+            'NamaMhs' => 'required|string',
+            'Alamat' => 'required|string',
+            'IDDosen' => 'required|max:5|string',
+            'IPK' => 'required|numeric|max:4|min:0',
+            'JenisKelamin' => 'required|string',
+        ], [
+            'IPK.max' => 'IPK harus kurang dari atau sama dengan :max.',
+            'IPK.min' => 'IPK harus lebih dari atau sama dengan :min.',
         ]);
 
         try {
             $data = [
-                'namamentor' => $request->input('namamentor'),
-                'pendidikan' => $request->input('pendidikan'),
-                'ptn' => $request->input('ptn'),
-                'idbidang' => $request->input('idbidang'),
+                'NRP' => $request->input('NRP'),
+                'NamaMhs' => $request->input('NamaMhs'),
+                'Alamat' => $request->input('Alamat'),
+                'IDDosen' => $request->input('IDDosen'),
+                'IPK' => $request->input('IPK'),
+                'JenisKelamin' => $request->input('JenisKelamin')
             ];
-            // var_dump($data);die;
-            Mentor::create($data);
     
-            return redirect()->route('mentor.index')->with('success', 'mentor berhasil ditambah!');
+            mentor::create($data);
+    
+            return redirect()->route('admin.mentor.index')->with('success', 'mentor berhasil ditambah!');
         } catch (\Exception $e) {
-            return redirect()->route('mentor.index')->with('error', 'Gagal input mentor. Pastikan data yang Anda masukkan benar.');
-            // return redirect()->route('mentor.index')->with('error', 'Gagal input mentor. Pastikan data yang Anda masukkan benar.');
+            return redirect()->route('admin.mentor.create')->with('error', 'Gagal input mentor. Pastikan data yang Anda masukkan benar.');
         }
     }
 
