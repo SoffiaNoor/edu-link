@@ -10,9 +10,13 @@ class Mentor extends Model
     use HasFactory;
     protected $table = 'mentor';
 
+    protected $primaryKey = 'idmentor';
+
+
     protected $fillable = ["namamentor", "pendidikan", "ptn", "idbidang"];
 
-    // public function bidang() {
-    //     return $this->belongsTo(Bidang ::class, 'idbidang');
-    // }
+    public function bidang()
+    {
+        return $this->belongsTo(Bidang::class, 'idbidang');
+    }
 }
