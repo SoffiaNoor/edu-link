@@ -12,7 +12,6 @@ class Mentor extends Model
 
     protected $primaryKey = 'idmentor';
 
-
     protected $fillable = ["namamentor", "pendidikan", "ptn", "idbidang"];
 
     public function bidang()

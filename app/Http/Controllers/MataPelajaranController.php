@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\MataKuliah;
+use App\Models\Mapel;
+use App\Models\Bidang;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -11,43 +12,48 @@ class MataPelajaranController extends Controller
 {
     public function index()
     {
-        // $mataKuliah = MataKuliah::paginate(5);
+        $mapel = Mapel::with('bidang')->paginate(5);
+
+        $bidang = Bidang::all();
 
         // return view("mata_pelajaran.index", compact('mataKuliah'));
-        return view("admin.mata_pelajaran.index");
+        return view("admin.mata_pelajaran.index", compact('mapel', 'bidang'));
     }
     public function create()
     {
-        return view("admin.mata_pelajaran.create");
+        $mapel = Mapel::all();
+        $model1 = new Mapel();
+        return view("admin.mata_pelajaran.create", compact('mapel','model1'));
     }
 
 
-    public function show(string $IDMK)
+    public function show(string $idmp)
     {
-        $mataKuliah = MataKuliah::where('IDMK', $IDMK)->first();
-        return view("admin.mata_pelajaran.view", compact('mataKuliah'));
+        $mapel = Mapel::where('idmp', $idmp)->with('bidang')->first();
+        return view("admin.mata_pelajaran.view", compact('mapel'));
     }
 
     public function store(Request $request)
     {
+        $request['idbidang'] = intval($request['idbidang']);
+
         $this->validate($request, [
-            'IDMK' => 'required|max:5|string',
-            'NamaMK' => 'required|string',
+            'namamapel' => 'required|string',
+            'idbidang' => 'required|integer',
         ]);
 
         try {
-            $user = Auth::user(); 
+            // $user = Auth::user(); 
             $data = [
-                'IDMK' => $request->input('IDMK'),
-                'NamaMK' => $request->input('NamaMK'),
-                'user_id' => $user->id,
+                'namamapel' => $request->input('namamapel'),
+                'idbidang' => $request->input('idbidang'),
             ];
 
-            MataKuliah::create($data);
+            Mapel::create($data);
 
-            return redirect()->route('admin.mata_pelajaran.index')->with('success', 'Mata Kuliah berhasil ditambah!');
+            return redirect()->route('mata_pelajaran.index')->with('success', 'Mata Kuliah berhasil ditambah!');
         } catch (\Exception $e) {
-            return redirect()->route('admin.mata_pelajaran.create')->with('error', 'Gagal input Mata Kuliah. Pastikan data yang Anda masukkan benar.');
+            return redirect()->route('mata_pelajaran.create')->with('error', 'Gagal input Mata Kuliah. Pastikan data yang Anda masukkan benar.');
         }
     }
 

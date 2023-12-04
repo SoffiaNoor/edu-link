@@ -7,18 +7,18 @@
             <div class="card p-3">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h3 class="px-3">Mentor
+                        <h3 class="px-3">Mata Pelajaran
                         </h3>
                         <hr class="ms-3 mt-0" style="background-color:#01353f;height:10px;border-radius:40px;width:50%">
                     </div>
-                    <div class="col-sm-6"> <a class="btn btn-warning" href="{{route('mentor.create')}}"
+                    <div class="col-sm-6"> <a class="btn btn-warning" href="{{route('mata_pelajaran.create')}}"
                             style="float:right;">
                             <span>Tambah Data</span>
                             <i class="fa fa-plus ms-2"></i>
                         </a>
                     </div>
                 </div>
-                @if (count($mentor) > 0)
+                @if (count($mapel) > 0)
                 <div class="table-responsive">
                     @if (count($errors) > 0)
                     <div
@@ -41,21 +41,18 @@
                         <thead>
                             <tr>
                                 <th class="text-uppercase text-default text-xs font-weight-bolder">No.</th>
-                                <th class="text-uppercase text-default text-xs font-weight-bolder">Nama</th>
-                                <th class="text-uppercase text-default text-xs font-weight-bolder">Pendidikan</th>
-                                <th class="text-uppercase text-default text-xs font-weight-bolder ps-2">PTN</th>
-                                <th class="text-uppercase text-default text-xs font-weight-bolder ps-2">Bidang Peminatan
-                                </th>
+                                <th class="text-uppercase text-default text-xs font-weight-bolder">Nama Mapel</th>
+                                <th class="text-uppercase text-default text-xs font-weight-bolder">Bidang</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($mentor as $mtr)
+                            @foreach ($mapel as $m)
                             <tr>
                                 <td class="text-default text-xs font-weight-bolder">
                                     <div class="d-flex align-items-center">
                                         <span class="ms-3 text-xs">
-                                            {{ ($mentor->currentPage() - 1) * $mentor->perPage() + $loop->iteration }}
+                                            {{ ($mapel->currentPage() - 1) * $mapel->perPage() + $loop->iteration }}
                                         </span>
                                     </div>
                                 </td>
@@ -63,47 +60,33 @@
                                     <div class="d-flex align-items-center">
                                         <span class="ms-3 text-xs">
 
-                                            {{ $mtr->namamentor }}
+                                            {{ $m->namamapel }}
 
                                         </span>
                                     </div>
                                 </td>
                                 <td class="text-uppercase text-default text-xs font-weight-bolder">
                                     <div class="d-flex align-items-center">
-                                        <span class="ms-3 text-xs">
-                                            {{ $mtr-> pendidikan }}
-                                        </span>
-                                    </div>
-                                </td>
-                                <td class="text-uppercase text-default text-xs font-weight-bolder">
-                                    <div class="d-flex align-items-center">
-                                        <span class="ms-3 text-xs">
-                                            {{ $mtr-> ptn }}
-                                        </span>
-                                    </div>
-                                </td>
-                                <td class="text-uppercase text-default text-xs font-weight-bolder">
-                                    <div class="d-flex align-items-center">
-                                        <span class="ms-3 text-xs px-5 py-2 btn {{ $mtr->bidang->namabidang == 'IPS' ? 'btn-danger' : 'btn-info' }}">
-                                            {{ $mtr->bidang->namabidang }}
+                                        <span class="ms-3 text-xs px-5 py-2 btn {{ $m->bidang->namabidang == 'IPS' ? 'btn-danger' : 'btn-info' }}">
+                                            {{ $m->bidang->namabidang }}
                                         </span>
                                     </div>
                                 </td>
                                 <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                    <a href="{{ route('mentor.show', $mtr->idmentor) }}"
+                                    <a href="{{ route('mata_pelajaran.show', $m->idmp) }}"
                                         class="text-gray-400 hover:text-amber-400  mr-2">
                                         <i class="fa fa-eye text-sm"></i>
                                     </a>
-                                    <a href="{{ route('mentor.edit', $mtr->idmentor) }}"
+                                    <a href="{{ route('mata_pelajaran.edit', $m->idmp) }}"
                                         class="text-gray-400 hover:text-amber-400 mx-2">
                                         <i class="fas fa-edit text-sm"></i>
                                     </a>
                                     <a href="#" class="text-gray-400 hover:text-amber-400" data-bs-toggle="modal"
-                                        data-bs-target="#deleteModal{{$mtr->idmentor}}">
+                                        data-bs-target="#deleteModal{{$m->idmp}}">
                                         <i class="fa fa-trash text-sm"></i>
                                     </a>
 
-                                    <div class="modal fade" id="deleteModal{{$mtr->idmentor}}" tabindex="-1"
+                                    <div class="modal fade" id="deleteModal{{$m->idmp}}" tabindex="-1"
                                         role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
@@ -112,16 +95,17 @@
                                                         Delete Confirmation
                                                     </h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
+                                                        aria-label="Close">
+                                                    </button>
                                                 </div>
                                                 <div class="modal-body text-sm">
-                                                    Apakah anda yakin menghapus Mentor <span
-                                                        class="font-weight-bolder">{{$mtr->namamentor}}</span>?
+                                                    Apakah anda yakin menghapus Mata Pelajaran <span
+                                                        class="font-weight-bolder">{{$m->namamapel}}</span>?
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
                                                         data-bs-dismiss="modal">Tidak</button>
-                                                    <form action="{{ route('mentor.destroy', $mtr->idmentor) }}"
+                                                    <form action="{{ route('mata_pelajaran.destroy', $m->idmp) }}"
                                                         method="POST" style="display: inline;">
                                                         @csrf
                                                         @method('DELETE')
@@ -132,16 +116,15 @@
                                         </div>
                                     </div>
                                 </td>
-
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-end pt-4">
-                            @if ($mentor -> currentPage() > 1)
+                            @if ($mapel -> currentPage() > 1)
                             <li class="page-item">
-                                <a class="page-link" href="{{ $mentor->previousPageUrl() }}" tabindex="-1">
+                                <a class="page-link" href="{{ $mapel->previousPageUrl() }}" tabindex="-1">
                                     <i class="fa fa-angle-left"></i>
                                     <span class="sr-only">Previous</span>
                                 </a>
@@ -155,18 +138,18 @@
                             </li>
                             @endif
 
-                            @for ($i = 1; $i <= $mentor->lastPage(); $i++)
-                                <li class="page-item {{ $i == $mentor->currentPage() ? 'active' : '' }}">
-                                    <a class="page-link" href="{{ $mentor->url($i) }}"
-                                        style="{{ $i == $mentor->currentPage() ? 'color:white;background-color:#1B3C5F;border:none' : '' }}">
+                            @for ($i = 1; $i <= $mapel->lastPage(); $i++)
+                                <li class="page-item {{ $i == $mapel->currentPage() ? 'active' : '' }}">
+                                    <a class="page-link" href="{{ $mapel->url($i) }}"
+                                        style="{{ $i == $mapel->currentPage() ? 'color:white;background-color:#1B3C5F;border:none' : '' }}">
                                         {{ $i }}
                                     </a>
                                 </li>
                                 @endfor
 
-                                @if ($mentor->currentPage() < $mentor->lastPage())
+                                @if ($mapel->currentPage() < $mapel->lastPage())
                                     <li class="page-item">
-                                        <a class="page-link" href="{{ $mentor->nextPageUrl() }}">
+                                        <a class="page-link" href="{{ $mapel->nextPageUrl() }}">
                                             <i class="fa fa-angle-right"></i>
                                             <span class="sr-only">Next</span>
                                         </a>

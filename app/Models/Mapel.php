@@ -5,16 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Murid extends Model
+class Mapel extends Model
 {
     use HasFactory;
-    public $timestamps = false;
-    public $incrementing = false;
-    protected $keyType = 'string';
-    protected $table = 'Dosen';
+    protected $table = 'mapel';
 
     // Specify the primary key column name
-    protected $primaryKey = 'IDDosen';
-    protected $fillable = ['IDDosen', 'NamaDosen','Alamat'];
+    protected $primaryKey = 'idmp';
+    protected $fillable = ['namamapel', 'idbidang'];
+
+    public function bidang()
+    {
+        return $this->belongsTo(Bidang::class, 'idbidang');
+    }
 }
 

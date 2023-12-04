@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\pesan_konsul;
+use App\Models\PesanKonsul;
 
 class PesanKonsulController extends Controller
 {
     public function index()
     {
-        // $pesan_konsul = pesan_konsul::paginate(5);
+        $pesan_konsul = PesanKonsul::paginate(5);
 
         // return view("pesan_konsul.index", compact('pesan_konsul'));
-        return view("admin.pesan_konsul.index");
+        return view("admin.PesanKonsul.index");
     }
     public function create()
     {
