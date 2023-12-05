@@ -57,46 +57,40 @@ class MataPelajaranController extends Controller
         }
     }
 
-    public function update(Request $request, MataKuliah $mataKuliah)
+    public function update(Request $request, Mapel $mapel)
     {
+        $request['idbidang'] = intval($request['idbidang']);
+
         $this->validate($request, [
-            'NamaMK' => 'required|string',
-            'SKS' => 'required|integer|min:1|max:6',
-        ], [
-            'SKS.max' => 'SKS harus kurang dari atau sama dengan :max.',
-            'SKS.min' => 'SKS harus lebih dari atau sama dengan :min.',
+            'namamapel' => 'required|string',
+            'idbidang' => 'required|integer',
         ]);
 
-        $user = Auth::user();
 
-        $data = [
-            'NamaMK' => $request->input('NamaMK'),
-            'SKS' => $request->input('SKS'),
-            'user_id' => $user->id,
-        ];
+        $mapel->update($request->all());
 
-        $mataKuliah->update($data);
-
-        return redirect()->route('admin.mata_pelajaran.index')->with('success', 'Mata Kuliah berhasil diperbarui!');
+        return redirect()->route('mata_pelajaran.index')->with('success', 'Mata Pelajaran berhasil diperbarui!');
     }
 
 
-    public function destroy($id)
+    public function destroy($idmp)
     {
-        $mataKuliah = MataKuliah::find($id);
+        $mapel = Mapel::find($idmp);
 
-        if (!$mataKuliah) {
+        if (!$mapel) {
             return redirect()->route('admin.mata_pelajaran.index')->with('error', 'Mata kuliah tidak ditemukan!');
         }
 
-        $mataKuliah->delete();
+        $mapel->delete();
 
         return redirect()->route('admin.mata_pelajaran.index')->with('success', 'Mata kuliah berhasil dihapus!');
     }
 
 
-    public function edit(MataKuliah $mataKuliah)
+    public function edit($id)
     {
-        return view("admin.mata_pelajaran.update", compact('mataKuliah'));
+        $mapel = Mapel::find($id);
+        $bidang = Bidang::all();
+        return view("admin.mata_pelajaran.update", compact('mapel', 'bidang'));
     }
 }
