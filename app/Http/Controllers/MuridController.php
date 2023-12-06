@@ -2,82 +2,101 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bidang;
 use Illuminate\Http\Request;
 use App\Models\Murid;
 
 class MuridController extends Controller
 {
     public function index()
-    {
-        // $Dosen = Dosen::paginate(5);
-
-        // return view("dosen.index", compact('Dosen'));
-        return view("admin.murid.index");
+    {  
+        $murid = Murid::with('bidang')->paginate(5);
+        $bidang = Bidang::all();
+        return view("admin.murid.index", compact('murid', 'bidang'));
     }
     public function create()
     {
-        return view("admin.murid.create");
+        $murid = Murid::all();
+
+        return view("admin.murid.create", compact('murid'));
     }
 
 
-    public function show(string $IDDosen)
+    public function show(string $idmurid)
     {
-        $Dosen = Murid::where('IDDosen', $IDDosen)->first();
+        $murid = Murid::where('idmurid', $idmurid)->with('bidang')->first();
         return view("admin.murid.view", compact('murid'));
     }
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'IDDosen' => 'required|max:5|string',
-            'NamaDosen' => 'required|string',
-            'Alamat' => 'required|string',
+        $request['idbidang'] = intval($request['idbidang']);
+
+        $test = $this->validate($request, [
+            'namamurid' => 'required|string',
+            'namasekolah' => 'required|string',
+            'gender' => 'required|string',
+            'tanggallahir' => 'required|string',
+            'kelas' => 'required|string',
+            'idbidang' => 'required|integer',
         ]);
+
+        // var_dump($test);die;
 
         try {
             $data = [
-                'IDDosen' => $request->input('IDDosen'),
-                'NamaDosen' => $request->input('NamaDosen'),
-                'Alamat' => $request->input('Alamat'),
+                'namamurid' => $request->input('namamurid'),
+                'namasekolah' => $request->input('namasekolah'),
+                'gender' => $request->input('gender'),
+                'tanggallahir' => $request->input('tanggallahir'),
+                'kelas' => $request->input('kelas'),
+                'idbidang' => $request->input('idbidang'),
             ];
     
             Murid::create($data);
     
-            return redirect()->route('admin.murid.index')->with('success', 'Dosen berhasil ditambah!');
+            return redirect()->route('murid.index')->with('success', 'Data Murid berhasil ditambahkan!');
         } catch (\Exception $e) {
-            return redirect()->route('admin.murid.create')->with('error', 'Gagal input Dosen. Pastikan data yang Anda masukkan benar.');
+            return redirect()->route('murid.create')->with('error', 'Gagal input Murid. Pastikan data yang Anda masukkan benar.');
         }
     }
 
-    public function update(Request $request, Murid $Dosen)
+    public function update(Request $request, Murid $murid)
     {
+        $request['idbidang'] = intval($request['idbidang']);
+
         $this->validate($request, [
-            'NamaDosen' => 'required|string',
-            'Alamat' => 'required|string',
+            'namamurid' => 'required|string',
+            'namasekolah' => 'required|string',
+            'gender' => 'required|string',
+            'tanggallahir' => 'required|string',
+            'kelas' => 'required|string',
+            'idbidang' => 'required|integer',
         ]);
 
-        $Dosen->update($request->all());
+        $murid->update($request->all());
 
-        return redirect()->route('dosen.index')->with('success', 'Dosen berhasil diperbarui!');
+        return redirect()->route('murid.index')->with('success', 'murid berhasil diperbarui!');
 
     }
 
-    public function destroy($id)
+    public function destroy($idmurid)
     {
-        $Dosen = Murid::find($id);
+        $murid = Murid::find($idmurid);
 
-        if (!$Dosen) {
-            return redirect()->route('dosen.index')->with('error', 'Dosen tidak ditemukan!');
+        if (!$murid) {
+            return redirect()->route('murid.index')->with('error', 'murid tidak ditemukan!');
         }
 
-        $Dosen->delete();
+        $murid->delete();
 
-        return redirect()->route('dosen.index')->with('success', 'Dosen berhasil dihapus!');
+        return redirect()->route('murid.index')->with('success', 'Murid berhasil dihapus!');
     }
 
 
-    public function edit(Murid $Dosen)
+    public function edit(Murid $murid)
     {
-        return view("dosen.update", compact('Dosen'));
+        $bidang = Bidang::all();
+        return view("admin.murid.update", compact('murid', 'bidang'));
     }
 }

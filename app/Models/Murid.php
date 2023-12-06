@@ -5,15 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Ruang extends Model
+class Murid extends Model
 {
     use HasFactory;
-    public $timestamps = false;
-    public $incrementing = false;
-    protected $keyType = 'string';
-    protected $table = 'Ruang';
+    protected $table = 'murid';
 
     // Specify the primary key column name
-    protected $primaryKey = 'IDRuang';
-    protected $fillable = ['IDRuang', 'NamaRuang','Kapasitas'];
+    protected $primaryKey = 'idmurid';
+    protected $fillable = ['namamurid', 'namasekolah','gender', 'tanggallahir','kelas','fotomurid','idbidang'];
+
+    
+    public function bidang()
+    {
+        return $this->belongsTo(Bidang::class, 'idbidang');
+    }
+
 }
