@@ -67,7 +67,7 @@
                                 </td>
                                 <td class="text-uppercase text-default text-xs font-weight-bolder">
                                     <div class="d-flex align-items-center">
-                                        <span class="ms-3 text-xs px-5 py-2 btn {{ $m->bidang->namabidang == 'IPS' ? 'btn-danger' : 'btn-info' }}">
+                                        <span class="ms-3 text-xs px-5 py-2 btn {{ $m->bidang->namabidang == 'IPS' ? 'btn-danger' : ($m->bidang->namabidang == 'IT' ? 'btn-success' : 'btn-info') }}">
                                             {{ $m->bidang->namabidang }}
                                         </span>
                                     </div>

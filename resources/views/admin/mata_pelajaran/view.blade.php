@@ -25,6 +25,32 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-md-12">
+                            @if($mapel->gambar)
+                            <label for="gambar">Gambar</label>
+                            <br>
+                            <img src="{{ asset($mapel->gambar) }}" alt="Mapel Image" class="img-fluid"
+                                style="width:25%">
+                            @endif
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="harga">Harga Kursus</label>
+                                <input type="number" class="form-control" id="harga" name="harga" readonly value="{{$mapel->harga}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="deskripsi">Deskripsi</label>
+                                <textarea type="text" class="form-control" id="deskripsi" name="deskripsi" readonly>{{$mapel->deskripsi}}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-sm-6 pt-2">
                             <button class="btn btn-icon btn-3 btn-secondary" type="button">
                                 <a href="/mata_pelajaran" class="btn-inner--icon text-white"><i class="fa fa-arrow-left"

@@ -33,12 +33,44 @@
                                     @endforeach
                                 </select>
                             </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="gambar">Gambar</label>
+                                        <br>
+                                        @if ($mapel->gambar)
+                                        <img src="{{ asset($mapel->gambar) }}" alt="Current Image" class="img-thumbnail"
+                                            style="max-width: 100px; max-height: 100px; object-fit: contain;">
+                                        <br>
+                                        @endif
+                                        <input type="file" class="form-control" id="gambar" name="gambar">
+                                        <small class="text-muted">Optional: Upload a new image if you want to update
+                                            it.</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="harga">Harga Kursus</label>
+                                        <input type="number" class="form-control" id="harga" name="harga" required value="{{$mapel->harga}}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="deskripsi">Deskripsi</label>
+                                        <textarea type="text" class="form-control" id="deskripsi" name="deskripsi">{{$mapel->deskripsi}}</textarea>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6 pt-2">
                                 <button class="btn btn-icon btn-3 btn-secondary" type="button">
-                                    <a href="/mata_pelajaran" class="btn-inner--icon text-white"><i class="fa fa-arrow-left"
-                                            aria-hidden="true"></i></a>
+                                    <a href="/mata_pelajaran" class="btn-inner--icon text-white"><i
+                                            class="fa fa-arrow-left" aria-hidden="true"></i></a>
                                     <a href="/mata_pelajaran" class="btn-inner--text text-white ms-2">Kembali</a>
                                 </button>
                                 <button class="btn btn-icon btn-3 btn-success" type="submit">
@@ -66,11 +98,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Apakah anda yakin menghapus Mata Pelajaran <span class="font-weight-bolder">{{$mapel->namamapel}}</span>?
+                Apakah anda yakin menghapus Mata Pelajaran <span
+                    class="font-weight-bolder">{{$mapel->namamapel}}</span>?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
-                <form action="{{ route('mata_pelajaran.destroy', $mapel->idmp) }}" method="POST" style="display: inline;">
+                <form action="{{ route('mata_pelajaran.destroy', $mapel->idmp) }}" method="POST"
+                    style="display: inline;">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Hapus</button>

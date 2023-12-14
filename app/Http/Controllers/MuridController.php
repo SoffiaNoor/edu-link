@@ -5,9 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\Bidang;
 use Illuminate\Http\Request;
 use App\Models\Murid;
+use Illuminate\Support\Facades\Auth;
+
 
 class MuridController extends Controller
 {
+    public function dashboard(){
+
+        $user = Auth::user();
+        return view("murid.dashboard", compact('user'));
+    }
+
+    public function mataPelajaran(){
+
+        $user = Auth::user();
+        return view("murid.matapelajaran", compact('user'));
+    }
+
     public function index()
     {  
         $murid = Murid::with('bidang')->paginate(5);

@@ -12,9 +12,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PesanKonsulController;
 use App\Http\Controllers\PesanKursusController;
 use App\Http\Controllers\MataPelajaranController;
+use App\Models\Murid;
 
 Route::get('/', [WelcomeController::class, 'index']);
 Route::get('/kursus', [WelcomeController::class, 'kursus']);
+Route::get('/detail_mapel/{id}', [WelcomeController::class, 'detail'])->name('detail_mapel');
 Route::get('/pelayanan', [WelcomeController::class, 'pelayanan']);
 Route::get('/konsultasi', [WelcomeController::class, 'konsultasi']);
 Route::get('/pesan', [WelcomeController::class, 'pesan']);
@@ -31,7 +33,7 @@ View::composer('layouts.master', function ($view) {
     $view->with('loggedInUser', $loggedInUser);
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'role:superadmin'])->group(function () {
     Route::get('/admin', [HomeController::class, 'index']);
     Route::resource('/mata_pelajaran', MataPelajaranController::class);
     Route::resource('/murid', MuridController::class);
@@ -42,6 +44,13 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/user', UserController::class);
     Route::post('/user/{id}', [UserController::class, 'changePassword'])->name('user.changePassword');
 });
+
+Route::middleware(['auth', 'role:murid'])->group(function (){
+    Route::get('/dashboard', [MuridController::class, 'dashboard']);
+    Route::get('/akses_matapelajaran', [MuridController::class, 'mataPelajaran']);
+});
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/404', function () {
     return view('admin.errors.404');

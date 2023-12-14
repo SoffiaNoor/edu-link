@@ -14,10 +14,10 @@
     <title>Edulink</title>
 
     <!--CSS-->
-    {{-- @vite('resources/css/app.css') --}}
+    @vite('resources/css/app.css')
 
     
-    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" />
+    {{-- <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" /> --}}
     <link href='https://fonts.googleapis.com/css?family=Fredoka One' rel='stylesheet'>
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -236,18 +236,21 @@
                                     </div>
                                     <ul id="dropdownMenu"
                                         class="absolute hidden font-bold w-full text-md mt-2 bg-gradient-to-r from-fuchsia-600 to-violet-800 text-white rounded-md shadow-lg z-10">
+                                        @if(auth()->user()->role->name === 'superadmin')
                                         <li><a href="{{ url('/admin') }}" class="block px-4 py-2">Dashboard</a></li>
+                                        @elseif(auth()->user()->role->name === 'murid')
+                                        <li><a href="{{ url('/dashboard') }}" class="block px-4 py-2">My Profile</a></li>
+                                        @endif
                                         <form method="POST" action="{{ route('logout') }}">
                                             @csrf
                                             <li><button class="block px-4 py-2" type="submit">Logout</button></li>
                                         </form>
                                     </ul>
-
                                     <script>
                                         document.getElementById('userDropdown').addEventListener('click', function () {
                                             var dropdown = document.getElementById('dropdownMenu');
                                             dropdown.classList.toggle('hidden');
-                                        });
+                                            });
                                     </script>
                                 </li>
                                 @else

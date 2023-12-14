@@ -16,7 +16,8 @@
                     {{ session('error') }}
                 </div>
                 @endif
-                <form class="p-3" method="POST" action="{{ route('mata_pelajaran.store')}}" enctype="multipart/form-data">
+                <form class="p-3" method="POST" action="{{ route('mata_pelajaran.store')}}"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-md-6">
@@ -30,10 +31,34 @@
                             <select class="form-select" id="idbidang" name="idbidang">
                                 <option value="1">IPA</option>
                                 <option value="2">IPS</option>
+                                <option value="3">IT</option>
                             </select>
                         </div>
                     </div>
-
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="gambar">Gambar</label>
+                                <input type="file" class="form-control" id="gambar" name="gambar">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="harga">Harga Kursus</label>
+                                <input type="number" class="form-control" id="harga" name="harga" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="deskripsi">Deskripsi</label>
+                                <textarea type="text" class="form-control" id="deskripsi" name="deskripsi"></textarea>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-sm-6 pt-2">
                             <button class="btn btn-icon btn-3 btn-secondary" type="button">
@@ -59,4 +84,15 @@
 
 @section('jquery')
 
+<script src="https://cdn.tiny.cloud/1/your-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+<!-- Initialize TinyMCE on your textarea -->
+<script>
+    tinymce.init({
+        selector: 'textarea#deskripsi',
+        plugins: 'lists bold italic',
+        toolbar: 'undo redo | formatselect | bold italic | bullist numlist',
+        menubar: false
+    });
+</script>
 @endsection

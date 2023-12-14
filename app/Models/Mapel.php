@@ -10,9 +10,8 @@ class Mapel extends Model
     use HasFactory;
     protected $table = 'mapel';
 
-    // Specify the primary key column name
     protected $primaryKey = 'idmp';
-    protected $fillable = ['namamapel', 'idbidang'];
+    protected $fillable = ['namamapel', 'idbidang', 'gambar', 'deskripsi','harga'];
 
     public function bidang()
     {
