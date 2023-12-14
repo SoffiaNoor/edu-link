@@ -46,7 +46,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="deskripsi">Deskripsi</label>
-                                <textarea type="text" class="form-control" id="deskripsi" name="deskripsi" readonly>{{$mapel->deskripsi}}</textarea>
+                                <textarea type="text" class="form-control" id="deskripsi" name="deskripsi">{{$mapel->deskripsi}}</textarea>
                             </div>
                         </div>
                     </div>
@@ -85,5 +85,15 @@
 @endsection
 
 @section('jquery')
+<script src="https://cdn.tiny.cloud/1/your-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
+<!-- Initialize TinyMCE on your textarea -->
+<script>
+    tinymce.init({
+        selector: 'textarea#deskripsi',
+        plugins: 'lists bold italic',
+        toolbar: 'undo redo | formatselect | bold italic | bullist numlist',
+        menubar: false
+    });
+</script>
 @endsection
