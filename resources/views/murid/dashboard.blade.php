@@ -39,11 +39,11 @@
                 </div>
                 <div class="card-content divide-y flex flex-col gap-y-3 mt-5">
                     <label class="text-white px-4 py-0 mb-[-1rem]">Nama Lengkap</label>
-                    <input class="form-control rounded-2xl m-3 py-3 px-4" value="{{$user->name}}" />
+                    <input class="form-control rounded-2xl m-3 py-3 px-4" name="namamurid" value="{{$user->name}}" />
                 </div>
                 <div class="card-content divide-y flex flex-col gap-y-3 mt-5">
                     <label class="text-white px-4 py-0 mb-[-1rem]">Asal Sekolah</label>
-                    <input class="form-control rounded-2xl m-3 py-3 px-4" value="" />
+                    <input class="form-control rounded-2xl m-3 py-3 px-4" name="namasekolah" value="{{murid->namasekolah}}" />
                 </div>
                 <div class="card-content divide-y flex flex-col gap-y-3 mt-5">
                     <label class="text-white px-4 py-0 mb-[-1rem]">Gender</label>

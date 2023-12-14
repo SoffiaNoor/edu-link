@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Murid;
 
 class AuthController extends Controller
 {
@@ -36,10 +37,16 @@ class AuthController extends Controller
                     'name' => $request->name,
                     'email' => $request->email,
                     'password' => bcrypt($request->password),
+                    'role_id' => 3
+                ];
+
+                $dataMurid = [
+                    'namamurid' => $request->name,
                 ];
         
                 User::create($data);
-        
+                Murid::create($dataMurid);
+
                 return redirect()->route('register')->with('success', 'Account created successfully.');
         
             } catch (\Exception $e) {
