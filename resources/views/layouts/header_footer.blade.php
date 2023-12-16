@@ -11,7 +11,7 @@
     <meta property="og:url" content="">
     <meta name="keywords" content="">
     <script type="text/javascript" async="" src=""></script>
-    <link rel='icon' type="image/x-icon" href='{{asset(' assets/images/logo2.ico')}}'>
+    <link rel='icon' type="image/x-icon" href='{{asset('assets/images/logo2.ico')}}'>
     <title>Edulink</title>
 
     <!--CSS-->
@@ -242,7 +242,9 @@
                                         @if(auth()->user()->role->name === 'superadmin')
                                         <li><a href="{{ url('/admin') }}" class="block px-4 py-2">Dashboard</a></li>
                                         @elseif(auth()->user()->role->name === 'murid')
-                                        <li><a href="{{ url('/dashboard') }}" class="block px-4 py-2">My Profile</a></li>
+                                        <li><a href="{{ url('/dashboard') }}" class="block px-4 py-2">Dashboard</a></li>
+                                        @elseif(auth()->user()->role->name === 'mentor')
+                                        <li><a href="{{ url('/dashboard') }}" class="block px-4 py-2">Dashboard</a></li>
                                         @endif
                                         <form method="POST" action="{{ route('logout') }}">
                                             @csrf
@@ -336,45 +338,45 @@
                     <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
                         <div class="md:flex md:justify-between">
                             <div class="mb-6 md:mb-0">
-                                <a href="http://127.0.0.1:8000/" class="flex items-center">
-                                    <img src="assets/images/edulink2.png" class="h-8 me-3" alt="FlowBite Logo" />
+                                <a href="/" class="flex items-center">
+                                    <img src="{{ asset('assets/images/edulink2.png') }}" class="h-8 me-3" alt="FlowBite Logo" />
                                 </a>
                             </div>
                             <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
                                 <div>
                                     <h2 class="mb-6 text-sm font-semibold text-white uppercase dark:text-white">
-                                        Resources</h2>
+                                        Edulink</h2>
                                     <ul class="text-white font-medium">
                                         <li class="mb-4">
-                                            <a href="https://flowbite.com/" class="hover:underline">Flowbite</a>
+                                            <a href="#" class="hover:underline">Tentang</a>
                                         </li>
                                         <li>
-                                            <a href="https://tailwindcss.com/" class="hover:underline">Tailwind CSS</a>
+                                            <a href="#" class="hover:underline">Alumni</a>
                                         </li>
                                     </ul>
                                 </div>
                                 <div>
                                     <h2 class="mb-6 text-sm font-semibold text-white uppercase dark:text-white">
-                                        Follow us</h2>
+                                        Program Kami</h2>
                                     <ul class="text-white font-medium">
                                         <li class="mb-4">
-                                            <a href="https://github.com/themesberg/flowbite"
-                                                class="hover:underline ">Github</a>
+                                            <a href="#"
+                                                class="hover:underline ">Kursus Online</a>
                                         </li>
                                         <li>
-                                            <a href="https://discord.gg/4eeurUVvTy" class="hover:underline">Discord</a>
+                                            <a href="#" class="hover:underline">Konsultasi Akademik</a>
                                         </li>
                                     </ul>
                                 </div>
                                 <div>
-                                    <h2 class="mb-6 text-sm font-semibold text-white uppercase dark:text-white">Legal
+                                    <h2 class="mb-6 text-sm font-semibold text-white uppercase dark:text-white">Lainnya
                                     </h2>
                                     <ul class="text-white font-medium">
                                         <li class="mb-4">
-                                            <a href="#" class="hover:underline">Privacy Policy</a>
+                                            <a href="#" class="hover:underline">Ketentuan Privasi</a>
                                         </li>
                                         <li>
-                                            <a href="#" class="hover:underline">Terms &amp; Conditions</a>
+                                            <a href="#" class="hover:underline">Syarat dan Ketentuan</a>
                                         </li>
                                     </ul>
                                 </div>

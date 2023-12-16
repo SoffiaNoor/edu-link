@@ -5,9 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\Bidang;
 use Illuminate\Http\Request;
 use App\Models\Mentor;
-use App\Models\Dosen;
+use Illuminate\Support\Facades\Auth;
+
 class MentorController extends Controller
 {
+    
+    public function dashboard(){
+
+        $user = Auth::user();
+        return view("mentor.dashboard", compact('user'));
+    }
+
+    public function mataPelajaran(){
+
+        $user = Auth::user();
+        return view("mentor.matapelajaran", compact('user'));
+    }
+
     public function index()
     {
         $mentor = Mentor::with('bidang')->paginate(5);

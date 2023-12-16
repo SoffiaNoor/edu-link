@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+
 <div class="container-fluid py-2">
     <div class="row">
         <div class="col-lg-12 mb-lg-0 mb-4 shadow-xl">
@@ -53,7 +54,8 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="harga">Harga Kursus</label>
-                                        <input type="number" class="form-control" id="harga" name="harga" required value="{{$mapel->harga}}">
+                                        <input type="number" class="form-control" id="harga" name="harga" required
+                                            value="{{$mapel->harga}}">
                                     </div>
                                 </div>
                             </div>
@@ -61,7 +63,8 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="deskripsi">Deskripsi</label>
-                                        <textarea type="text" class="form-control" id="deskripsi" name="deskripsi">{{$mapel->deskripsi}}</textarea>
+                                        <textarea type="text" class="form-control" id="deskripsi"
+                                            name="deskripsi" style="list-style:disc!important">{{$mapel->deskripsi}}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -116,5 +119,15 @@
 @endsection
 
 @section('jquery')
+<script src="https://cdn.tiny.cloud/1/your-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
+<!-- Initialize TinyMCE on your textarea -->
+<script>
+    tinymce.init({
+        selector: 'textarea#deskripsi',
+        plugins: 'lists bold italic',
+        toolbar: 'undo redo | formatselect | bold italic | bullist numlist',
+        menubar: false
+    });
+</script>
 @endsection

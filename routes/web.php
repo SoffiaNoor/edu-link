@@ -50,6 +50,11 @@ Route::middleware(['auth', 'role:murid'])->group(function (){
     Route::get('/akses_matapelajaran', [MuridController::class, 'mataPelajaran']);
 });
 
+Route::middleware(['auth', 'role:mentor'])->group(function (){
+    Route::get('/dashboard', [MentorController::class, 'dashboard']);
+    Route::get('/akses_matapelajaran', [MentorController::class, 'mataPelajaran']);
+});
+
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/404', function () {

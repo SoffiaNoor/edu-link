@@ -221,7 +221,7 @@
                             Username </label>
                         <input type="text" name="name"
                             class="appearance-none block w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                            id="grid-first-name">
+                            id="grid-first-name" required>
                     </div>
                 </div>
                 <div class="flex flex-wrap mb-6">

@@ -35,7 +35,7 @@
                             Pembahasan detail untuk persiapan yang diperlukan sesuai minat.</span></i>
                 </div>
             </div>
-            <div class="max-w-screen-xl mx-auto px-4 m sm:px-6 lg:px-0 sm:py-8 rounded-[2.25rem] transform lg:-translate-y-12"
+            <div class="max-w-screen-xl mx-auto px-4 m sm:px-6 lg:px-0 sm:py-8 rounded-[2.25rem] transform lg:-translate-y-12 "
                 data-aos="zoom-in-up">
                 <h1 style="padding-top:3rem"
                     class="font-extrabold text-transparent text-center pb-10 font-['Fredoka'] text-5xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
@@ -44,11 +44,12 @@
                     style="margin-top:-20px;">
                 <div id="portfolio-home"
                     class="flex flex-col font-[Fredoka] flex-wrap md:py-6 sm:flex-row items-center justify-center space-y-6 sm:space-y-0 -mx-4">
-                    <div class="mx-auto" data-aos="zoom-in">
-                        <div class="relative flex flex-col h-full bg-indigo-700 shadow-lg rounded-lg shadow-lg p-5">
+                    <div class="mx-auto " data-aos="zoom-in">
+                        <div
+                            class="relative flex flex-col h-full bg-indigo-700 shadow-lg rounded-lg shadow-lg p-5 hover:scale-125 transition-all duration-300">
                             <div class="absolute top-0 right-5">
                                 <div
-                                    class="text-xs inline-flex font-semibold bg-green-100 text-green-600 rounded-full text-center px-3 py-1.5 shadow-sm transform -translate-y-1/2">
+                                    class="text-xs inline-flex font-semibold bg-green-100 text-green-600 rounded-full text-center px-3 py-1.5 shadow-sm transform -translate-y-1/2 ">
                                     Most Popular</div>
                             </div>
                             <header class="pb-4 mb-4 border-b border-indigo-200 border-opacity-30">
@@ -86,7 +87,8 @@
                                         </g>
                                     </svg>
                                 </div>
-                                <div class="font-extrabold mb-1"><span class="text-4xl text-indigo-50">1x Konsultasi</span>
+                                <div class="font-extrabold mb-1"><span class="text-4xl text-indigo-50">1x
+                                        Konsultasi</span>
                                 </div>
                                 <div class="text-indigo-200">Bimbingan Persiapan Kuliah sampai Diterima PTN.
                                 </div>
@@ -117,14 +119,22 @@
                                     <span class="font-bold text-xl">Rp 25.000</span>
                                 </li>
                             </ul>
-                            <button
+                            @if(auth()->check())
+                            <a href="{{url('/pesan')}}"
                                 class="font-semibold text-sm inline-flex items-center justify-center px-3 py-2 border border-transparent rounded leading-5 shadow transition duration-150 ease-in-out w-full bg-green-400 hover:bg-green-500 text-white focus:outline-none focus-visible:ring-2">
                                 Pesan Konsul
-                            </button>
+                            </a>
+                            @else
+                            <a href="{{url('/login')}}"
+                                class="font-semibold text-sm inline-flex items-center justify-center px-3 py-2 border border-transparent rounded leading-5 shadow transition duration-150 ease-in-out w-full bg-green-400 hover:bg-green-500 text-white focus:outline-none focus-visible:ring-2">
+                                Pesan Konsul
+                            </a>
+                            @endif
                         </div>
                     </div>
                     <div class="mx-auto mb-8" data-aos="zoom-in">
-                        <div class="relative flex flex-col h-full bg-gradient-to-r from-fuchsia-600 to-violet-800 shadow-lg rounded-lg shadow-lg p-5">
+                        <div
+                            class="relative flex flex-col h-full bg-gradient-to-r from-fuchsia-600 to-violet-800 shadow-lg rounded-lg shadow-lg p-5 hover:scale-125 transition-all duration-300">
                             <div class="absolute top-0 right-5">
                                 <div
                                     class="text-xs inline-flex font-semibold bg-green-100 text-green-600 rounded-full text-center px-3 py-1.5 shadow-sm transform -translate-y-1/2">
@@ -165,7 +175,8 @@
                                         </g>
                                     </svg>
                                 </div>
-                                <div class="font-extrabold mb-1"><span class="text-4xl text-indigo-50">3 Tahun Konsultasi</span>
+                                <div class="font-extrabold mb-1"><span class="text-4xl text-indigo-50">3 Tahun
+                                        Konsultasi</span>
                                 </div>
                                 <div class="text-indigo-200">Bimbingan Persiapan Kuliah sampai Diterima PTN.
                                 </div>
@@ -197,10 +208,17 @@
                                         Jurusan.</span>
                                 </li>
                             </ul>
-                            <button
+                            @if(auth()->check())
+                            <a href="{{url('/pesan')}}"
                                 class="font-semibold text-sm inline-flex items-center justify-center px-3 py-2 border border-transparent rounded leading-5 shadow transition duration-150 ease-in-out w-full bg-green-400 hover:bg-green-500 text-white focus:outline-none focus-visible:ring-2">
-                                Pesan Konsul
-                            </button>
+                                Pesan Kursus
+                            </a>
+                            @else
+                            <a href="{{url('/login')}}"
+                                class="font-semibold text-sm inline-flex items-center justify-center px-3 py-2 border border-transparent rounded leading-5 shadow transition duration-150 ease-in-out w-full bg-green-400 hover:bg-green-500 text-white focus:outline-none focus-visible:ring-2">
+                                Pesan Kursus
+                            </a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -209,7 +227,7 @@
     </div>
     @if(auth()->check())
     @else
-    <div 
+    <div
         class="flex flex-col sm:flex-row space-y-6 sm:space-y-0 place-content-center sm:space-x-6 pt-3 mt-2 aos-init aos-animate">
         <a class="lg:text-2xl duration-300 hover:scale-125 ease-in-out font-extrabold text-center rounded-full transition max-w-full px-6 py-4 bg-gradient-to-r from-fuchsia-600 to-violet-800 text-white"
             href="{{url('/login')}}">
