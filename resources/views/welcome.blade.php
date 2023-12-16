@@ -10,7 +10,7 @@
     <meta property="og:description" content="">
     <meta property="og:url" content="">
     <meta name="keywords" content="">
-    <link rel='icon' type="image/x-icon" href='{{asset('assets/images/logo2.ico')}}'>
+    <link rel='icon' type="image/x-icon" href='{{asset(' assets/images/logo2.ico')}}'>
     <title>Edulink</title>
 
     <!--CSS-->
@@ -402,6 +402,7 @@
                                         class="lg:text-2xl text-3xl font-['Fredoka'] font-bold text-white paragraph sm:block aos-init aos-animate">
                                         Curi Start dan Dapatkan PTN Impian di Edulink
                                     </p>
+                                    @if(auth()->check())
                                     @if(auth()->user()->role->name === 'superadmin')
                                     <div
                                         class="flex flex-col sm:flex-row space-y-6 sm:space-y-0 sm:space-x-6 pt-3 pb-3 mt-2 aos-init aos-animate">
@@ -426,6 +427,8 @@
                                             Jadwal Mengajar
                                         </a>
                                     </div>
+                                    @else
+                                    @endif
                                     @else
                                     <div
                                         class="flex flex-col sm:flex-row space-y-6 sm:space-y-0 sm:space-x-6 pt-3 pb-3 mt-2 aos-init aos-animate">
@@ -457,6 +460,7 @@
                                         class="lg:text-2xl text-3xl font-['Fredoka'] font-bold text-white paragraph sm:block aos-init aos-animate">
                                         Kelas yang Fleksibel dan Kuasai Soal Prediksi Ujian dengan Sempurna
                                     </p>
+                                    @if(auth()->check())
                                     @if(auth()->user()->role->name === 'superadmin')
                                     <div
                                         class="flex flex-col sm:flex-row space-y-6 sm:space-y-0 sm:space-x-6 pt-3 pb-3 mt-2 aos-init aos-animate">
@@ -481,6 +485,8 @@
                                             Jadwal Mengajar
                                         </a>
                                     </div>
+                                    @else
+                                    @endif
                                     @else
                                     <div
                                         class="flex flex-col sm:flex-row space-y-6 sm:space-y-0 sm:space-x-6 pt-3 pb-3 mt-2 aos-init aos-animate">
@@ -512,6 +518,7 @@
                                         class="lg:text-2xl text-3xl font-['Fredoka'] font-bold text-white paragraph sm:block aos-init aos-animate">
                                         Konsultasi Rapot dan Matangkan Persiapan dari Sekarang
                                     </p>
+                                    @if(auth()->check())
                                     @if(auth()->user()->role->name === 'superadmin')
                                     <div
                                         class="flex flex-col sm:flex-row space-y-6 sm:space-y-0 sm:space-x-6 pt-3 pb-3 mt-2 aos-init aos-animate">
@@ -537,6 +544,8 @@
                                         </a>
                                     </div>
                                     @else
+                                    @endif
+                                    @else
                                     <div
                                         class="flex flex-col sm:flex-row space-y-6 sm:space-y-0 sm:space-x-6 pt-3 pb-3 mt-2 aos-init aos-animate">
                                         <a class="font-['Fredoka'] lg:text-2xl duration-300 hover:scale-125 ease-in-out font-extrabold text-center rounded-full shadow-md transition max-w-full px-6 py-4 bg-gradient-to-r from-purple-400 to-pink-600 text-white"
@@ -561,7 +570,7 @@
                 <section class="w-full relative"
                     style="background-image: url({{ asset('assets/images/bubble1.png') }});background-size: cover;background-position: top; margin-top: -250px;z-index: 49"
                     data-aos="fade-up">
-                    <div class="max-w-screen-xl mx-auto px-4 m sm:px-6 lg:px-0 sm:py-8 rounded-[2.25rem] transform lg:-translate-y-12"
+                    <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-0 sm:py-8 rounded-[2.25rem] transform lg:-translate-y-12"
                         data-aos="zoom-in-up">
                         <div id="portfolio-home"
                             class="flex flex-col flex-wrap md:py-6 sm:flex-row items-center justify-center space-y-6 sm:space-y-0 -mx-4">
@@ -596,7 +605,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="group relative rounded-2xl shadow-lg my-3 mx-3 max-w-sm" data-aos="zoom-in-up">
+                            <div class="group relative rounded-2xl shadow-lg my-10 mx-3 max-w-sm" data-aos="zoom-in-up">
                                 <img src="assets/images/card1.png" alt="Hello World Image"
                                     class="w-full object-cover rounded-2xl">
                                 <div
@@ -610,7 +619,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="group relative rounded-2xl shadow-lg my-3 mx-3 max-w-sm" data-aos="zoom-in-up">
+                            <div class="group relative rounded-2xl shadow-lg my-10 mx-3 max-w-sm" data-aos="zoom-in-up">
                                 <img src="assets/images/card2.png" alt="Hello World Image"
                                     class="w-full object-cover rounded-2xl">
                                 <div
@@ -624,7 +633,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="group relative rounded-2xl shadow-lg my-3 mx-3 max-w-sm" data-aos="zoom-in-up">
+                            <div class="group relative rounded-2xl shadow-lg my-10 mx-3 max-w-sm" data-aos="zoom-in-up">
                                 <img src="assets/images/card1.png" alt="Hello World Image"
                                     class="w-full object-cover rounded-2xl">
                                 <div
