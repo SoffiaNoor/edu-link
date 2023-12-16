@@ -23,16 +23,6 @@
             </div>
         </div>
     </div>
-    @if(auth()->check())
-    @else
-    <div
-        class="flex flex-col sm:flex-row space-y-6 sm:space-y-0 place-content-center sm:space-x-6 pt-3 mt-2 aos-init aos-animate">
-        <a class="lg:text-2xl duration-300 hover:scale-125 ease-in-out font-extrabold text-center rounded-full transition max-w-full px-6 py-4 bg-gradient-to-r from-fuchsia-600 to-violet-800 text-white"
-            href="{{url('/login')}}">
-            Pesan Kursus
-        </a>
-    </div>
-    @endif
 </section>
 @endsection
 

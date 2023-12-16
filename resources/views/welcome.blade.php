@@ -16,8 +16,9 @@
     <!--CSS-->
     @vite('resources/css/app.css')
 
-    
-    {{-- <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" /> --}}
+
+    {{--
+    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" /> --}}
     <link href='https://fonts.googleapis.com/css?family=Fredoka One' rel='stylesheet'>
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -138,44 +139,114 @@
             /* Set the desired opacity value when scrolling */
         }
 
-        .loader {
-            border-top-color: #7e22ce;
-            -webkit-animation: spinner 1.5s linear infinite;
-            animation: spinner 1.5s linear infinite;
-        }
-
-        @-webkit-keyframes spinner {
-            0% {
-                -webkit-transform: rotate(0deg);
-            }
-
-            100% {
-                -webkit-transform: rotate(360deg);
-            }
-        }
-
-        @keyframes spinner {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
         #movingImage {
             position: absolute;
             transition: transform 0.2s ease-out;
+        }
+
+        .loader {
+            position: fixed;
+            left: 0;
+            top: 0;
+            background-image: url('assets/images/loader.png');
+            background-size: cover;
+            color: #d40cb9;
+            width: 100%;
+            height: 100vh;
+            animation: backgroundChange .5s linear 3s forwards, fadeOut .5s linear 4s forwards;
+            z-index: 51;
+        }
+
+        .load-text {
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            position: absolute;
+            font-size: 10vmax;
+            width: fit-content;
+            display: flex;
+            animation: colorChange .5s linear 3s forwards;
+        }
+
+        .loaded-text {
+            transform: scale(1.5);
+            animation: scaleText .5s linear .5s forwards;
+        }
+
+        .loading-text {
+            width: 0;
+            overflow: hidden;
+            animation: expand 1s linear 1.5s forwards;
+            white-space: nowrap;
+        }
+
+        main {
+            padding: 1em;
+            box-sizing: border-box;
+            background-color: black;
+            color: white;
+            min-height: 100vh;
+        }
+
+        @keyframes scaleText {
+            from {
+                transform: scale(1.5)
+            }
+
+            to {
+                transform: scale(1)
+            }
+        }
+
+        @keyframes expand {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 50vmax;
+            }
+        }
+
+        @keyframes backgroundChange {
+            from {
+                background-color: rgb(30, 11, 66);
+            }
+
+            to {
+                background-color: #19073a;
+            }
+        }
+
+        @keyframes colorChange {
+            from {
+                color: linear-gradient(45deg, #d40cb9, #4204a5);
+            }
+
+            to {
+                color: #581bbb;
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1
+            }
+
+            to {
+                opacity: 0;
+                z-index: -1;
+            }
         }
     </style>
 </head>
 
 <body class="bg-gradient-to-r from-[#0e1737] to-[#0e183b]">
-    <div id="loader" wire:loading
-        class="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden bg-gradient-to-r from-indigo-950 to-blue-950 flex flex-col items-center justify-center">
-        <div class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4"></div>
-        <img src="{{ asset('assets/images/edulink2.png') }}" alt="Nefa Logo" class="w-24 xl:w-28">
+    <div class="loader fixed" id="loader">
+        <div class="load-text">
+            <div class="loaded-text font-[Fredoka] font-bold text-9xl">H</div>
+            <div class="loading-text font-[Fredoka] font-bold text-9xl">alo, Edulearns!</div>
+        </div>
     </div>
     <div id="__layout">
         <div class="min-h-screen font-sans antialiased relative">
@@ -239,7 +310,11 @@
                                         @if(auth()->user()->role->name === 'superadmin')
                                         <li><a href="{{ url('/admin') }}" class="block px-4 py-2">Dashboard</a></li>
                                         @elseif(auth()->user()->role->name === 'murid')
-                                        <li><a href="{{ url('/dashboard') }}" class="block px-4 py-2">My Profile</a></li>
+                                        <li><a href="{{ url('/dashboard') }}" class="block px-4 py-2">Dashboard</a>
+                                        </li>
+                                        @elseif(auth()->user()->role->name === 'mentor')
+                                        <li><a href="{{ url('/dashboard') }}" class="block px-4 py-2">Dashboard</a>
+                                        </li>
                                         @endif
                                         <form method="POST" action="{{ route('logout') }}">
                                             @csrf
@@ -327,13 +402,39 @@
                                         class="lg:text-2xl text-3xl font-['Fredoka'] font-bold text-white paragraph sm:block aos-init aos-animate">
                                         Curi Start dan Dapatkan PTN Impian di Edulink
                                     </p>
+                                    @if(auth()->user()->role->name === 'superadmin')
                                     <div
                                         class="flex flex-col sm:flex-row space-y-6 sm:space-y-0 sm:space-x-6 pt-3 pb-3 mt-2 aos-init aos-animate">
                                         <a class="font-['Fredoka'] lg:text-2xl duration-300 hover:scale-125 ease-in-out font-extrabold text-center rounded-full shadow-md transition max-w-full px-6 py-4 bg-gradient-to-r from-purple-400 to-pink-600 text-white"
-                                            href="{{url('/kontak')}}">
-                                            Beli Kursus
+                                            href="{{url('/admin')}}">
+                                            Admin
                                         </a>
                                     </div>
+                                    @elseif(auth()->user()->role->name === 'murid')
+                                    <div
+                                        class="flex flex-col sm:flex-row space-y-6 sm:space-y-0 sm:space-x-6 pt-3 pb-3 mt-2 aos-init aos-animate">
+                                        <a class="font-['Fredoka'] lg:text-2xl duration-300 hover:scale-125 ease-in-out font-extrabold text-center rounded-full shadow-md transition max-w-full px-6 py-4 bg-gradient-to-r from-purple-400 to-pink-600 text-white"
+                                            href="{{url('/dashboard')}}">
+                                            Jadwal Kelas
+                                        </a>
+                                    </div>
+                                    @elseif(auth()->user()->role->name === 'mentor')
+                                    <div
+                                        class="flex flex-col sm:flex-row space-y-6 sm:space-y-0 sm:space-x-6 pt-3 pb-3 mt-2 aos-init aos-animate">
+                                        <a class="font-['Fredoka'] lg:text-2xl duration-300 hover:scale-125 ease-in-out font-extrabold text-center rounded-full shadow-md transition max-w-full px-6 py-4 bg-gradient-to-r from-purple-400 to-pink-600 text-white"
+                                            href="{{url('/dashboard')}}">
+                                            Jadwal Mengajar
+                                        </a>
+                                    </div>
+                                    @else
+                                    <div
+                                        class="flex flex-col sm:flex-row space-y-6 sm:space-y-0 sm:space-x-6 pt-3 pb-3 mt-2 aos-init aos-animate">
+                                        <a class="font-['Fredoka'] lg:text-2xl duration-300 hover:scale-125 ease-in-out font-extrabold text-center rounded-full shadow-md transition max-w-full px-6 py-4 bg-gradient-to-r from-purple-400 to-pink-600 text-white"
+                                            href="{{url('/login')}}">
+                                            Pesan Sekarang!
+                                        </a>
+                                    </div>
+                                    @endif
                                 </div>
                                 <div
                                     class="hidden sm:block col-span-12 mt-12 lg:mt-20 md:col-span-6 lg:col-span-6 place-self-center">
@@ -347,7 +448,7 @@
                         <swiper-slide class="bg-transparent">
                             <div class="max-w-screen-xl px-4 sm:px-8 mx-auto grid grid-cols-12 gap-x-6 overflow-hidden">
                                 <div
-                                    class="col-span-12 lg:col-span-6 md:col-span-6 mt-12 lg:mt-20 space-y-4 sm:space-y-6 text-center sm:text-left">
+                                    class="col-span-12 lg:col-span-6 md:col-span-6 mt-12 lg:mt-20 space-y-4 sm:space-y-6 text-center sm:text-left self-center">
                                     <h1 style="padding-top:3rem"
                                         class="font-extrabold text-transparent font-['Fredoka'] text-8xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
                                         E-COURSE
@@ -356,18 +457,45 @@
                                         class="lg:text-2xl text-3xl font-['Fredoka'] font-bold text-white paragraph sm:block aos-init aos-animate">
                                         Kelas yang Fleksibel dan Kuasai Soal Prediksi Ujian dengan Sempurna
                                     </p>
+                                    @if(auth()->user()->role->name === 'superadmin')
                                     <div
                                         class="flex flex-col sm:flex-row space-y-6 sm:space-y-0 sm:space-x-6 pt-3 pb-3 mt-2 aos-init aos-animate">
                                         <a class="font-['Fredoka'] lg:text-2xl duration-300 hover:scale-125 ease-in-out font-extrabold text-center rounded-full shadow-md transition max-w-full px-6 py-4 bg-gradient-to-r from-purple-400 to-pink-600 text-white"
-                                            href="{{url('/kontak')}}">
-                                            Beli Kursus
+                                            href="{{url('/admin')}}">
+                                            Admin
                                         </a>
                                     </div>
+                                    @elseif(auth()->user()->role->name === 'murid')
+                                    <div
+                                        class="flex flex-col sm:flex-row space-y-6 sm:space-y-0 sm:space-x-6 pt-3 pb-3 mt-2 aos-init aos-animate">
+                                        <a class="font-['Fredoka'] lg:text-2xl duration-300 hover:scale-125 ease-in-out font-extrabold text-center rounded-full shadow-md transition max-w-full px-6 py-4 bg-gradient-to-r from-purple-400 to-pink-600 text-white"
+                                            href="{{url('/dashboard')}}">
+                                            Jadwal Kelas
+                                        </a>
+                                    </div>
+                                    @elseif(auth()->user()->role->name === 'mentor')
+                                    <div
+                                        class="flex flex-col sm:flex-row space-y-6 sm:space-y-0 sm:space-x-6 pt-3 pb-3 mt-2 aos-init aos-animate">
+                                        <a class="font-['Fredoka'] lg:text-2xl duration-300 hover:scale-125 ease-in-out font-extrabold text-center rounded-full shadow-md transition max-w-full px-6 py-4 bg-gradient-to-r from-purple-400 to-pink-600 text-white"
+                                            href="{{url('/dashboard')}}">
+                                            Jadwal Mengajar
+                                        </a>
+                                    </div>
+                                    @else
+                                    <div
+                                        class="flex flex-col sm:flex-row space-y-6 sm:space-y-0 sm:space-x-6 pt-3 pb-3 mt-2 aos-init aos-animate">
+                                        <a class="font-['Fredoka'] lg:text-2xl duration-300 hover:scale-125 ease-in-out font-extrabold text-center rounded-full shadow-md transition max-w-full px-6 py-4 bg-gradient-to-r from-purple-400 to-pink-600 text-white"
+                                            href="{{url('/login')}}">
+                                            Pesan Sekarang!
+                                        </a>
+                                    </div>
+                                    @endif
                                 </div>
                                 <div
                                     class="hidden sm:block col-span-12 mt-12 lg:mt-20 md:col-span-6 lg:col-span-6 place-self-center">
                                     <div class="lg:w-full lg:place-self-center">
-                                        {{-- <img src="" alt="" class="-mt-30 aos-init aos-animate"> --}}
+                                        <img src="{{ asset('assets/images/book.png') }}" alt=""
+                                            class="-mt-30 aos-init aos-animate">
                                     </div>
                                 </div>
                             </div>
@@ -384,18 +512,45 @@
                                         class="lg:text-2xl text-3xl font-['Fredoka'] font-bold text-white paragraph sm:block aos-init aos-animate">
                                         Konsultasi Rapot dan Matangkan Persiapan dari Sekarang
                                     </p>
+                                    @if(auth()->user()->role->name === 'superadmin')
                                     <div
                                         class="flex flex-col sm:flex-row space-y-6 sm:space-y-0 sm:space-x-6 pt-3 pb-3 mt-2 aos-init aos-animate">
                                         <a class="font-['Fredoka'] lg:text-2xl duration-300 hover:scale-125 ease-in-out font-extrabold text-center rounded-full shadow-md transition max-w-full px-6 py-4 bg-gradient-to-r from-purple-400 to-pink-600 text-white"
-                                            href="{{url('/kontak')}}">
-                                            Beli Kursus
+                                            href="{{url('/admin')}}">
+                                            Admin
                                         </a>
                                     </div>
+                                    @elseif(auth()->user()->role->name === 'murid')
+                                    <div
+                                        class="flex flex-col sm:flex-row space-y-6 sm:space-y-0 sm:space-x-6 pt-3 pb-3 mt-2 aos-init aos-animate">
+                                        <a class="font-['Fredoka'] lg:text-2xl duration-300 hover:scale-125 ease-in-out font-extrabold text-center rounded-full shadow-md transition max-w-full px-6 py-4 bg-gradient-to-r from-purple-400 to-pink-600 text-white"
+                                            href="{{url('/dashboard')}}">
+                                            Jadwal Kelas
+                                        </a>
+                                    </div>
+                                    @elseif(auth()->user()->role->name === 'mentor')
+                                    <div
+                                        class="flex flex-col sm:flex-row space-y-6 sm:space-y-0 sm:space-x-6 pt-3 pb-3 mt-2 aos-init aos-animate">
+                                        <a class="font-['Fredoka'] lg:text-2xl duration-300 hover:scale-125 ease-in-out font-extrabold text-center rounded-full shadow-md transition max-w-full px-6 py-4 bg-gradient-to-r from-purple-400 to-pink-600 text-white"
+                                            href="{{url('/dashboard')}}">
+                                            Jadwal Mengajar
+                                        </a>
+                                    </div>
+                                    @else
+                                    <div
+                                        class="flex flex-col sm:flex-row space-y-6 sm:space-y-0 sm:space-x-6 pt-3 pb-3 mt-2 aos-init aos-animate">
+                                        <a class="font-['Fredoka'] lg:text-2xl duration-300 hover:scale-125 ease-in-out font-extrabold text-center rounded-full shadow-md transition max-w-full px-6 py-4 bg-gradient-to-r from-purple-400 to-pink-600 text-white"
+                                            href="{{url('/login')}}">
+                                            Pesan Sekarang!
+                                        </a>
+                                    </div>
+                                    @endif
                                 </div>
                                 <div
                                     class="hidden sm:block col-span-12 mt-12 lg:mt-20 md:col-span-6 lg:col-span-6 place-self-center">
                                     <div class="lg:w-full lg:place-self-center">
-                                        {{-- <img src="" alt="" class="-mt-30 aos-init aos-animate"> --}}
+                                        <img src="{{ asset('assets/images/laptop.png') }}" alt=""
+                                            class="-mt-30 aos-init aos-animate">
                                     </div>
                                 </div>
                             </div>
@@ -404,7 +559,7 @@
                 </section>
 
                 <section class="w-full relative"
-                    style="background-image: url({{ asset('assets/images/bubble1.png') }});background-size: cover;background-position: top; margin-top: -250px;z-index: 999"
+                    style="background-image: url({{ asset('assets/images/bubble1.png') }});background-size: cover;background-position: top; margin-top: -250px;z-index: 49"
                     data-aos="fade-up">
                     <div class="max-w-screen-xl mx-auto px-4 m sm:px-6 lg:px-0 sm:py-8 rounded-[2.25rem] transform lg:-translate-y-12"
                         data-aos="zoom-in-up">
@@ -1073,6 +1228,18 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+    var loader = document.getElementById('loader');
+
+    function removeLoader() {
+        loader.remove();
+    }
+
+    loader.addEventListener('animationend', function () {
+        setTimeout(removeLoader, 10000);
+    });
+});
+
         document.addEventListener('DOMContentLoaded', function() {
     const movingImage = document.getElementById('movingImage');
     const container = document.getElementById('app');
@@ -1165,14 +1332,6 @@
       });
         });
     });
-    window.addEventListener('load', function () {
-    const loader = document.getElementById('loader');
-    const content = document.getElementById('content');
-
-    loader.style.display = 'none';
-    content.style.display = 'block';
-    });
-
   
     </script>
     <script>
