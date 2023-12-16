@@ -27,6 +27,12 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
+                                <label for="foto_profil">Foto Profil</label>
+                                <input type="file" class="form-control" id="foto_profil" name="foto_profil">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
                                 <label for="pendidikan">Pendidikan</label>
                                 <input type="text" class="form-control" id="pendidikan" name="pendidikan" required>
                             </div>

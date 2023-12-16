@@ -310,7 +310,8 @@
                                         @if(auth()->user()->role->name === 'superadmin')
                                         <li><a href="{{ url('/admin') }}" class="block px-4 py-2">Dashboard</a></li>
                                         @elseif(auth()->user()->role->name === 'murid')
-                                        <li><a href="{{ url('/dashboard_murid') }}" class="block px-4 py-2">Dashboard</a>
+                                        <li><a href="{{ url('/dashboard_murid') }}"
+                                                class="block px-4 py-2">Dashboard</a>
                                         </li>
                                         @elseif(auth()->user()->role->name === 'mentor')
                                         <li><a href="{{ url('/dashboard') }}" class="block px-4 py-2">Dashboard</a>
@@ -931,24 +932,26 @@
                         <hr class="w-72 h-2 mx-auto bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700"
                             style="margin-top:-20px;">
                         <swiper-container class="mySwiper h-64" pagination="true" pagination-clickable="true"
-                            space-between="30" slides-per-view="3">
+                            space-between="30" slides-per-view="3" autoplay="true" delay="5000">
+                            @foreach ($mentor as $m)
                             <swiper-slide class="bg-transparent">
                                 <div class="group relative rounded-2xl shadow-2xl max-w-sm" style="margin-left:130px">
                                     <div
                                         class="flex flex-col items-center w-full max-w-xs p-4 bg-white rounded-3xl md:flex-row">
                                         <div class="-mt-28 md:-my-16 md:-ml-32 overflow-hidden rounded-full h-48 w-48 border-8 border-white"
                                             style="clip-path: circle(50% at 50% 50%)">
-                                            <img class="object-cover h-full w-full" src="assets/images/profile1.jpeg"
-                                                alt="Ahmed Kamel" />
+                                            <img class="object-cover h-full w-full"
+                                                src="uploads/mentor/{{$m->foto_profil}}" alt="Ahmed Kamel" />
                                         </div>
                                         <div class="flex flex-col space-y-4">
                                             <div class="flex flex-col mx-6 items-center md:items-start">
-                                                <h2 class="text-xl font-bold">Cha Eun Woo</h2>
-                                                <p class="text-base font-medium text-gray-400">Kimia S1 ITS</p>
+                                                <h2 class="text-xl font-bold">{{$m->namamentor}}</h2>
+                                                <p class="text-base font-medium text-gray-400">{{$m->pendidikan}} di
+                                                    {{$m->ptn}}</p>
                                             </div>
                                             <div
                                                 class="flex items-center mx-6 justify-center space-x-3 md:justify-start">
-                                                <a href="https://twitter.com/ak_kamona" target="_blank"
+                                                <a href="{{$m->twitter}}" target="_blank"
                                                     class="transition-transform transform hover:scale-125">
                                                     <span class="sr-only">Twitter</span>
                                                     <svg aria-hidden="true" class="w-8 h-8 text-blue-500"
@@ -959,151 +962,20 @@
                                                         </path>
                                                     </svg>
                                                 </a>
-                                                <a href="https://github.com/Kamona-WD" target="_blank"
+                                                <a href="{{$m->instagram}}" target="_blank"
                                                     class="transition-transform transform hover:scale-125">
                                                     <span class="sr-only">Github</span>
-                                                    <svg aria-hidden="true" class="w-8 h-8 text-black"
-                                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 24 24">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                                            d="M12.026,2c-5.509,0-9.974,4.465-9.974,9.974c0,4.406,2.857,8.145,6.821,9.465 c0.499,0.09,0.679-0.217,0.679-0.481c0-0.237-0.008-0.865-0.011-1.696c-2.775,0.602-3.361-1.338-3.361-1.338 c-0.452-1.152-1.107-1.459-1.107-1.459c-0.905-0.619,0.069-0.605,0.069-0.605c1.002,0.07,1.527,1.028,1.527,1.028 c0.89,1.524,2.336,1.084,2.902,0.829c0.091-0.645,0.351-1.085,0.635-1.334c-2.214-0.251-4.542-1.107-4.542-4.93 c0-1.087,0.389-1.979,1.024-2.675c-0.101-0.253-0.446-1.268,0.099-2.64c0,0,0.837-0.269,2.742,1.021 c0.798-0.221,1.649-0.332,2.496-0.336c0.849,0.004,1.701,0.115,2.496,0.336c1.906-1.291,2.742-1.021,2.742-1.021 c0.545,1.372,0.203,2.387,0.099,2.64c0.64,0.696,1.024,1.587,1.024,2.675c0,3.833-2.33,4.675-4.552,4.922 c0.355,0.308,0.675,0.916,0.675,1.846c0,1.334-0.012,2.41-0.012,2.737c0,0.267,0.178,0.577,0.687,0.479 C19.146,20.115,22,16.379,22,11.974C22,6.465,17.535,2,12.026,2z">
-                                                        </path>
-                                                    </svg>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </swiper-slide>
-                            <swiper-slide class="bg-transparent">
-                                <div class="group relative rounded-2xl shadow-2xl max-w-sm" style="margin-left:130px">
-                                    <div
-                                        class="flex flex-col items-center w-full max-w-xs p-4 bg-white rounded-3xl md:flex-row">
-                                        <div class="-mt-28 md:-my-16 md:-ml-32 overflow-hidden rounded-full h-48 w-48 border-8 border-white"
-                                            style="clip-path: circle(50% at 50% 50%)">
-                                            <img class="object-cover h-full w-full" src="assets/images/profile2.jpg"
-                                                alt="Ahmed Kamel" />
-                                        </div>
-                                        <div class="flex flex-col space-y-4">
-                                            <div class="flex flex-col mx-6 items-center md:items-start">
-                                                <h2 class="text-xl font-bold">Mark Lee</h2>
-                                                <p class="text-base font-medium text-gray-400">Fisika S1 UGM</p>
-                                            </div>
-                                            <div
-                                                class="flex items-center mx-6 justify-center space-x-3 md:justify-start">
-                                                <a href="https://twitter.com/ak_kamona" target="_blank"
-                                                    class="transition-transform transform hover:scale-125">
-                                                    <span class="sr-only">Twitter</span>
-                                                    <svg aria-hidden="true" class="w-8 h-8 text-blue-500"
-                                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 24 24">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-blue-500"
+                                                        viewBox="0 0 448 512">
                                                         <path
-                                                            d="M19.633,7.997c0.013,0.175,0.013,0.349,0.013,0.523c0,5.325-4.053,11.461-11.46,11.461c-2.282,0-4.402-0.661-6.186-1.809 c0.324,0.037,0.636,0.05,0.973,0.05c1.883,0,3.616-0.636,5.001-1.721c-1.771-0.037-3.255-1.197-3.767-2.793 c0.249,0.037,0.499,0.062,0.761,0.062c0.361,0,0.724-0.05,1.061-0.137c-1.847-0.374-3.23-1.995-3.23-3.953v-0.05 c0.537,0.299,1.16,0.486,1.82,0.511C3.534,9.419,2.823,8.184,2.823,6.787c0-0.748,0.199-1.434,0.548-2.032 c1.983,2.443,4.964,4.04,8.306,4.215c-0.062-0.3-0.1-0.611-0.1-0.923c0-2.22,1.796-4.028,4.028-4.028 c1.16,0,2.207,0.486,2.943,1.272c0.91-0.175,1.782-0.512,2.556-0.973c-0.299,0.935-0.936,1.721-1.771,2.22 c0.811-0.088,1.597-0.312,2.319-0.624C21.104,6.712,20.419,7.423,19.633,7.997z">
-                                                        </path>
-                                                    </svg>
-                                                </a>
-                                                <a href="https://github.com/Kamona-WD" target="_blank"
-                                                    class="transition-transform transform hover:scale-125">
-                                                    <span class="sr-only">Github</span>
-                                                    <svg aria-hidden="true" class="w-8 h-8 text-black"
-                                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 24 24">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                                            d="M12.026,2c-5.509,0-9.974,4.465-9.974,9.974c0,4.406,2.857,8.145,6.821,9.465 c0.499,0.09,0.679-0.217,0.679-0.481c0-0.237-0.008-0.865-0.011-1.696c-2.775,0.602-3.361-1.338-3.361-1.338 c-0.452-1.152-1.107-1.459-1.107-1.459c-0.905-0.619,0.069-0.605,0.069-0.605c1.002,0.07,1.527,1.028,1.527,1.028 c0.89,1.524,2.336,1.084,2.902,0.829c0.091-0.645,0.351-1.085,0.635-1.334c-2.214-0.251-4.542-1.107-4.542-4.93 c0-1.087,0.389-1.979,1.024-2.675c-0.101-0.253-0.446-1.268,0.099-2.64c0,0,0.837-0.269,2.742,1.021 c0.798-0.221,1.649-0.332,2.496-0.336c0.849,0.004,1.701,0.115,2.496,0.336c1.906-1.291,2.742-1.021,2.742-1.021 c0.545,1.372,0.203,2.387,0.099,2.64c0.64,0.696,1.024,1.587,1.024,2.675c0,3.833-2.33,4.675-4.552,4.922 c0.355,0.308,0.675,0.916,0.675,1.846c0,1.334-0.012,2.41-0.012,2.737c0,0.267,0.178,0.577,0.687,0.479 C19.146,20.115,22,16.379,22,11.974C22,6.465,17.535,2,12.026,2z">
-                                                        </path>
-                                                    </svg>
-                                                </a>
+                                                            d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
+                                                    </svg> </a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </swiper-slide>
-                            <swiper-slide class="bg-transparent">
-                                <div class="group relative rounded-2xl shadow-2xl max-w-sm" style="margin-left:130px">
-                                    <div
-                                        class="flex flex-col items-center w-full max-w-xs p-4 bg-white rounded-3xl md:flex-row">
-                                        <div class="-mt-28 md:-my-16 md:-ml-32 overflow-hidden rounded-full h-48 w-48 border-8 border-white"
-                                            style="clip-path: circle(50% at 50% 50%)">
-                                            <img class="object-cover h-full w-full" src="assets/images/profile3.jpg"
-                                                alt="Ahmed Kamel" />
-                                        </div>
-                                        <div class="flex flex-col space-y-4">
-                                            <div class="flex flex-col mx-6 items-center md:items-start">
-                                                <h2 class="text-xl font-bold">Kentaro</h2>
-                                                <p class="text-base font-medium text-gray-400">Biologi S1 ITS</p>
-                                            </div>
-                                            <div
-                                                class="flex items-center mx-6 justify-center space-x-3 md:justify-start">
-                                                <a href="https://twitter.com/ak_kamona" target="_blank"
-                                                    class="transition-transform transform hover:scale-125">
-                                                    <span class="sr-only">Twitter</span>
-                                                    <svg aria-hidden="true" class="w-8 h-8 text-blue-500"
-                                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M19.633,7.997c0.013,0.175,0.013,0.349,0.013,0.523c0,5.325-4.053,11.461-11.46,11.461c-2.282,0-4.402-0.661-6.186-1.809 c0.324,0.037,0.636,0.05,0.973,0.05c1.883,0,3.616-0.636,5.001-1.721c-1.771-0.037-3.255-1.197-3.767-2.793 c0.249,0.037,0.499,0.062,0.761,0.062c0.361,0,0.724-0.05,1.061-0.137c-1.847-0.374-3.23-1.995-3.23-3.953v-0.05 c0.537,0.299,1.16,0.486,1.82,0.511C3.534,9.419,2.823,8.184,2.823,6.787c0-0.748,0.199-1.434,0.548-2.032 c1.983,2.443,4.964,4.04,8.306,4.215c-0.062-0.3-0.1-0.611-0.1-0.923c0-2.22,1.796-4.028,4.028-4.028 c1.16,0,2.207,0.486,2.943,1.272c0.91-0.175,1.782-0.512,2.556-0.973c-0.299,0.935-0.936,1.721-1.771,2.22 c0.811-0.088,1.597-0.312,2.319-0.624C21.104,6.712,20.419,7.423,19.633,7.997z">
-                                                        </path>
-                                                    </svg>
-                                                </a>
-                                                <a href="https://github.com/Kamona-WD" target="_blank"
-                                                    class="transition-transform transform hover:scale-125">
-                                                    <span class="sr-only">Github</span>
-                                                    <svg aria-hidden="true" class="w-8 h-8 text-black"
-                                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 24 24">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                                            d="M12.026,2c-5.509,0-9.974,4.465-9.974,9.974c0,4.406,2.857,8.145,6.821,9.465 c0.499,0.09,0.679-0.217,0.679-0.481c0-0.237-0.008-0.865-0.011-1.696c-2.775,0.602-3.361-1.338-3.361-1.338 c-0.452-1.152-1.107-1.459-1.107-1.459c-0.905-0.619,0.069-0.605,0.069-0.605c1.002,0.07,1.527,1.028,1.527,1.028 c0.89,1.524,2.336,1.084,2.902,0.829c0.091-0.645,0.351-1.085,0.635-1.334c-2.214-0.251-4.542-1.107-4.542-4.93 c0-1.087,0.389-1.979,1.024-2.675c-0.101-0.253-0.446-1.268,0.099-2.64c0,0,0.837-0.269,2.742,1.021 c0.798-0.221,1.649-0.332,2.496-0.336c0.849,0.004,1.701,0.115,2.496,0.336c1.906-1.291,2.742-1.021,2.742-1.021 c0.545,1.372,0.203,2.387,0.099,2.64c0.64,0.696,1.024,1.587,1.024,2.675c0,3.833-2.33,4.675-4.552,4.922 c0.355,0.308,0.675,0.916,0.675,1.846c0,1.334-0.012,2.41-0.012,2.737c0,0.267,0.178,0.577,0.687,0.479 C19.146,20.115,22,16.379,22,11.974C22,6.465,17.535,2,12.026,2z">
-                                                        </path>
-                                                    </svg>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </swiper-slide>
-                            <swiper-slide class="bg-transparent">
-                                <div class="group relative rounded-2xl shadow-2xl max-w-sm" style="margin-left:130px">
-                                    <div
-                                        class="flex flex-col items-center w-full max-w-xs p-4 bg-white rounded-3xl md:flex-row">
-                                        <div class="-mt-28 md:-my-16 md:-ml-32 overflow-hidden rounded-full h-48 w-48 border-8 border-white"
-                                            style="clip-path: circle(50% at 50% 50%)">
-                                            <img class="object-cover h-full w-full" src="assets/images/profile4.jpeg"
-                                                alt="Ahmed Kamel" />
-                                        </div>
-                                        <div class="flex flex-col space-y-4">
-                                            <div class="flex flex-col mx-6 items-center md:items-start">
-                                                <h2 class="text-xl font-bold">Haechan</h2>
-                                                <p class="text-base font-medium text-gray-400">Matematika S1 ITS</p>
-                                            </div>
-                                            <div
-                                                class="flex items-center mx-6 justify-center space-x-3 md:justify-start">
-                                                <a href="https://twitter.com/ak_kamona" target="_blank"
-                                                    class="transition-transform transform hover:scale-125">
-                                                    <span class="sr-only">Twitter</span>
-                                                    <svg aria-hidden="true" class="w-8 h-8 text-blue-500"
-                                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M19.633,7.997c0.013,0.175,0.013,0.349,0.013,0.523c0,5.325-4.053,11.461-11.46,11.461c-2.282,0-4.402-0.661-6.186-1.809 c0.324,0.037,0.636,0.05,0.973,0.05c1.883,0,3.616-0.636,5.001-1.721c-1.771-0.037-3.255-1.197-3.767-2.793 c0.249,0.037,0.499,0.062,0.761,0.062c0.361,0,0.724-0.05,1.061-0.137c-1.847-0.374-3.23-1.995-3.23-3.953v-0.05 c0.537,0.299,1.16,0.486,1.82,0.511C3.534,9.419,2.823,8.184,2.823,6.787c0-0.748,0.199-1.434,0.548-2.032 c1.983,2.443,4.964,4.04,8.306,4.215c-0.062-0.3-0.1-0.611-0.1-0.923c0-2.22,1.796-4.028,4.028-4.028 c1.16,0,2.207,0.486,2.943,1.272c0.91-0.175,1.782-0.512,2.556-0.973c-0.299,0.935-0.936,1.721-1.771,2.22 c0.811-0.088,1.597-0.312,2.319-0.624C21.104,6.712,20.419,7.423,19.633,7.997z">
-                                                        </path>
-                                                    </svg>
-                                                </a>
-                                                <a href="https://github.com/Kamona-WD" target="_blank"
-                                                    class="transition-transform transform hover:scale-125">
-                                                    <span class="sr-only">Github</span>
-                                                    <svg aria-hidden="true" class="w-8 h-8 text-black"
-                                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 24 24">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                                            d="M12.026,2c-5.509,0-9.974,4.465-9.974,9.974c0,4.406,2.857,8.145,6.821,9.465 c0.499,0.09,0.679-0.217,0.679-0.481c0-0.237-0.008-0.865-0.011-1.696c-2.775,0.602-3.361-1.338-3.361-1.338 c-0.452-1.152-1.107-1.459-1.107-1.459c-0.905-0.619,0.069-0.605,0.069-0.605c1.002,0.07,1.527,1.028,1.527,1.028 c0.89,1.524,2.336,1.084,2.902,0.829c0.091-0.645,0.351-1.085,0.635-1.334c-2.214-0.251-4.542-1.107-4.542-4.93 c0-1.087,0.389-1.979,1.024-2.675c-0.101-0.253-0.446-1.268,0.099-2.64c0,0,0.837-0.269,2.742,1.021 c0.798-0.221,1.649-0.332,2.496-0.336c0.849,0.004,1.701,0.115,2.496,0.336c1.906-1.291,2.742-1.021,2.742-1.021 c0.545,1.372,0.203,2.387,0.099,2.64c0.64,0.696,1.024,1.587,1.024,2.675c0,3.833-2.33,4.675-4.552,4.922 c0.355,0.308,0.675,0.916,0.675,1.846c0,1.334-0.012,2.41-0.012,2.737c0,0.267,0.178,0.577,0.687,0.479 C19.146,20.115,22,16.379,22,11.974C22,6.465,17.535,2,12.026,2z">
-                                                        </path>
-                                                    </svg>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </swiper-slide>
+                            @endforeach
                         </swiper-container>
                     </div>
                 </section>
@@ -1134,8 +1006,7 @@
                                         Follow us</h2>
                                     <ul class="text-black font-medium">
                                         <li class="mb-4">
-                                            <a href="#"
-                                                class="hover:underline ">Kursus Online</a>
+                                            <a href="#" class="hover:underline ">Kursus Online</a>
                                         </li>
                                         <li>
                                             <a href="#" class="hover:underline">Konsultasi Akademik</a>
@@ -1143,7 +1014,8 @@
                                     </ul>
                                 </div>
                                 <div>
-                                    <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Lainnya
+                                    <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+                                        Lainnya
                                     </h2>
                                     <ul class="text-black font-medium">
                                         <li class="mb-4">

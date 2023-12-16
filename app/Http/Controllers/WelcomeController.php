@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Mapel;
 use App\Models\Bidang;
-
+use App\Models\Mentor;
 class WelcomeController extends Controller
 {
     public function index()
     {
-        return view('welcome', []);
+        $mentor = Mentor::all();
+        return view('welcome', compact('mentor'));
     }
 
     public function kursus()

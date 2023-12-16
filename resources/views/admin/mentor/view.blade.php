@@ -11,28 +11,36 @@
                 </div>
                 <div class="p-3">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label for="namamentor">Nama Mentor</label>
                                 <input type="text" class="form-control" id="namamentor" name="namamentor"
                                     value="{{$mentor->namamentor}}" readonly>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
+                            @if($mentor->foto_profil)
+                            <label for="foto_profil">Foto Profil</label>
+                            <br>
+                            <img src="/uploads/mentor/{{ $mentor->foto_profil }}" alt="Mapel Image" class="img-fluid"
+                                style="width:25%">
+                            @endif
+                        </div>
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label for="pendidikan">Pendidikan</label>
                                 <input type="text" class="form-control" id="pendidikan" name="pendidikan"
                                     value="{{$mentor->pendidikan}}" readonly>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label for="ptn">PTN</label>
                                 <input type="text" class="form-control" id="ptn" name="ptn" value="{{$mentor->ptn}}"
                                     readonly>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <label for="idbidang">Bidang</label>
                             <input type="text" class="form-control" id="idbidang" name="idbidang"
                                 value="{{$mentor->bidang->namabidang}}" readonly>

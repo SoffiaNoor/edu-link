@@ -9,34 +9,77 @@
                     <h5 class="font-weight-bolder">Data Mentor: {{$mentor->namamentor}}</h5>
                     <hr style="background-color:#01353f;height:10px;border-radius:40px;width:25%">
                 </div>
+                @if (count($errors) > 0)
+                <div
+                    class="alert alert-danger shadow border-radius-xl p-2 border-none text-white font-weight-bolder flex flex-col ">
+                    <strong>Sorry ! There were some problems with your input.</strong>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
                 <form method="POST" action="{{ route('mentor.update',$mentor->idmentor)}}"
                     enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="p-3">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="namamentor">Nama Mentor</label>
                                     <input type="text" class="form-control" id="namamentor" name="namamentor"
                                         value="{{$mentor->namamentor}}">
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label style="color:black">foto_profil</label>
+                                        <div class="grid grid-cols-6">
+                                            @if($mentor->foto_profil)
+                                            <img class="object-contain items-center"
+                                                style="width:10rem;height:10rem;object-fit:cover"
+                                                src="/uploads/mentor/{{ $mentor->foto_profil }}">
+                                            @else
+                                            <img id="image_display" class="object-contain items-center"
+                                                style="width:10rem;height:10rem;object-fit:cover"
+                                                src="{{ asset('assets/img/no-photo.png') }}">
+                                            @endif
+                                        </div>
+                                        @if($mentor->foto_profil)
+                                        <input type="file" class="form-control" id="foto_profil" name="foto_profil">
+                                        <small class="text-muted">Optional: Upload a new image if you want to update
+                                            it.</small>
+                                        @else
+                                        <input type="file" class="form-control mt-3" id="file_input" name="foto_profil"
+                                            value="">
+                                        @endif
+                
+                                        @error('foto_profil')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="pendidikan">Pendidikan</label>
                                     <input type="text" class="form-control" id="pendidikan" name="pendidikan"
                                         value="{{$mentor->pendidikan}}">
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="ptn">PTN</label>
                                     <input type="text" class="form-control" id="ptn" name="ptn"
                                         value="{{$mentor->ptn}}">
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <label for="idbidang">Bidang</label>
                                 <select class="form-select" name="idbidang">
                                     @foreach ($bidang as $bid)
@@ -56,7 +99,8 @@
                                     <a href="/mentor" class="btn-inner--text text-white ms-2">Kembali</a>
                                 </button>
                                 <button class="btn btn-icon btn-3 btn-success" type="submit">
-                                    <a class="btn-inner--icon text-white"><i class="fa fa-pencil" aria-hidden="true"></i>
+                                    <a class="btn-inner--icon text-white"><i class="fa fa-pencil"
+                                            aria-hidden="true"></i>
                                     </a>
                                     <a class="btn-inner--text text-white ms-2">Update</a>
                                 </button>
