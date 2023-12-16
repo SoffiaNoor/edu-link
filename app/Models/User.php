@@ -48,4 +48,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+
+    public function murid()
+    {
+        return $this->hasOne(Murid::class);
+    }
 }

@@ -10,6 +10,33 @@ use Illuminate\Support\Facades\Auth;
 
 class MuridController extends Controller
 {
+    public function showForm()
+    {
+        $loggedInUser = Auth::user();
+        $muridData = $loggedInUser->murid;
+        
+        return view('murid.dashboard', compact('loggedInUser', 'muridData'));
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'namasekolah' => 'required|string',
+            'gender' => 'required|string',
+            'tanggallahir' => 'required|date',
+        ]);
+
+        $user = Auth::user();
+
+        $murid = $user->murid ?? new Murid();
+        $murid->namasekolah = $request->input('namasekolah');
+        $murid->gender = $request->input('gender');
+        $murid->tanggallahir = $request->input('tanggallahir');
+
+        $user->murid()->save($murid);
+
+        return redirect()->route('home')->with('success', 'Murid data saved successfully!');
+    }
     public function dashboard(){
 
         $user = Auth::user();
@@ -21,6 +48,8 @@ class MuridController extends Controller
         $user = Auth::user();
         return view("murid.matapelajaran", compact('user'));
     }
+
+
 
     public function index()
     {  
@@ -42,38 +71,38 @@ class MuridController extends Controller
         return view("admin.murid.view", compact('murid'));
     }
 
-    public function store(Request $request)
-    {
-        $request['idbidang'] = intval($request['idbidang']);
+    // public function store(Request $request)
+    // {
+    //     $request['idbidang'] = intval($request['idbidang']);
 
-        $test = $this->validate($request, [
-            'namamurid' => 'required|string',
-            'namasekolah' => 'required|string',
-            'gender' => 'required|string',
-            'tanggallahir' => 'required|string',
-            'kelas' => 'required|string',
-            'idbidang' => 'required|integer',
-        ]);
+    //     $test = $this->validate($request, [
+    //         'namamurid' => 'required|string',
+    //         'namasekolah' => 'required|string',
+    //         'gender' => 'required|string',
+    //         'tanggallahir' => 'required|string',
+    //         'kelas' => 'required|string',
+    //         'idbidang' => 'required|integer',
+    //     ]);
 
-        // var_dump($test);die;
+    //     // var_dump($test);die;
 
-        try {
-            $data = [
-                'namamurid' => $request->input('namamurid'),
-                'namasekolah' => $request->input('namasekolah'),
-                'gender' => $request->input('gender'),
-                'tanggallahir' => $request->input('tanggallahir'),
-                'kelas' => $request->input('kelas'),
-                'idbidang' => $request->input('idbidang'),
-            ];
+    //     try {
+    //         $data = [
+    //             'namamurid' => $request->input('namamurid'),
+    //             'namasekolah' => $request->input('namasekolah'),
+    //             'gender' => $request->input('gender'),
+    //             'tanggallahir' => $request->input('tanggallahir'),
+    //             'kelas' => $request->input('kelas'),
+    //             'idbidang' => $request->input('idbidang'),
+    //         ];
     
-            Murid::create($data);
+    //         Murid::create($data);
     
-            return redirect()->route('murid.index')->with('success', 'Data Murid berhasil ditambahkan!');
-        } catch (\Exception $e) {
-            return redirect()->route('murid.create')->with('error', 'Gagal input Murid. Pastikan data yang Anda masukkan benar.');
-        }
-    }
+    //         return redirect()->route('murid.index')->with('success', 'Data Murid berhasil ditambahkan!');
+    //     } catch (\Exception $e) {
+    //         return redirect()->route('murid.create')->with('error', 'Gagal input Murid. Pastikan data yang Anda masukkan benar.');
+    //     }
+    // }
 
     public function update(Request $request, Murid $murid)
     {

@@ -43,16 +43,19 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::resource('/user', UserController::class);
     Route::post('/user/{id}', [UserController::class, 'changePassword'])->name('user.changePassword');
+
 });
 
-Route::middleware(['auth', 'role:murid'])->group(function (){
-    Route::get('/dashboard', [MuridController::class, 'dashboard']);
-    Route::get('/akses_matapelajaran', [MuridController::class, 'mataPelajaran']);
+Route::middleware(['auth', 'role:murid'])->group(function () {
+    Route::get('/dashboard_murid', [MuridController::class, 'showForm'])->name('murid.form');
+    Route::post('/dashboard_murid', [MuridController::class, 'store'])->name('murid_ngeseng.store');
+    Route::get('/akses_matapelajaran_murid', [MuridController::class, 'mataPelajaran']);
 });
 
-Route::middleware(['auth', 'role:mentor'])->group(function (){
+
+Route::middleware(['auth', 'role:mentor'])->group(function () {
     Route::get('/dashboard', [MentorController::class, 'dashboard']);
-    Route::get('/akses_matapelajaran', [MentorController::class, 'mataPelajaran']);
+    Route::get('/akses_matapelajaran_mentor', [MentorController::class, 'mataPelajaran']);
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

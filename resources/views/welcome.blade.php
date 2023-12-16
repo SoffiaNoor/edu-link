@@ -310,7 +310,7 @@
                                         @if(auth()->user()->role->name === 'superadmin')
                                         <li><a href="{{ url('/admin') }}" class="block px-4 py-2">Dashboard</a></li>
                                         @elseif(auth()->user()->role->name === 'murid')
-                                        <li><a href="{{ url('/dashboard') }}" class="block px-4 py-2">Dashboard</a>
+                                        <li><a href="{{ url('/dashboard_murid') }}" class="block px-4 py-2">Dashboard</a>
                                         </li>
                                         @elseif(auth()->user()->role->name === 'mentor')
                                         <li><a href="{{ url('/dashboard') }}" class="block px-4 py-2">Dashboard</a>
@@ -415,7 +415,7 @@
                                     <div
                                         class="flex flex-col sm:flex-row space-y-6 sm:space-y-0 sm:space-x-6 pt-3 pb-3 mt-2 aos-init aos-animate">
                                         <a class="font-['Fredoka'] lg:text-2xl duration-300 hover:scale-125 ease-in-out font-extrabold text-center rounded-full shadow-md transition max-w-full px-6 py-4 bg-gradient-to-r from-purple-400 to-pink-600 text-white"
-                                            href="{{url('/dashboard')}}">
+                                            href="{{url('/dashboard_murid')}}">
                                             Jadwal Kelas
                                         </a>
                                     </div>
@@ -531,7 +531,7 @@
                                     <div
                                         class="flex flex-col sm:flex-row space-y-6 sm:space-y-0 sm:space-x-6 pt-3 pb-3 mt-2 aos-init aos-animate">
                                         <a class="font-['Fredoka'] lg:text-2xl duration-300 hover:scale-125 ease-in-out font-extrabold text-center rounded-full shadow-md transition max-w-full px-6 py-4 bg-gradient-to-r from-purple-400 to-pink-600 text-white"
-                                            href="{{url('/dashboard')}}">
+                                            href="{{url('/dashboard_murid')}}">
                                             Jadwal Kelas
                                         </a>
                                     </div>
@@ -1122,10 +1122,10 @@
                                         Resources</h2>
                                     <ul class="text-black font-medium">
                                         <li class="mb-4">
-                                            <a href="https://flowbite.com/" class="hover:underline">Flowbite</a>
+                                            <a href="#" class="hover:underline">Tentang</a>
                                         </li>
                                         <li>
-                                            <a href="https://tailwindcss.com/" class="hover:underline">Tailwind CSS</a>
+                                            <a href="#" class="hover:underline">Alumni</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -1134,23 +1134,23 @@
                                         Follow us</h2>
                                     <ul class="text-black font-medium">
                                         <li class="mb-4">
-                                            <a href="https://github.com/themesberg/flowbite"
-                                                class="hover:underline ">Github</a>
+                                            <a href="#"
+                                                class="hover:underline ">Kursus Online</a>
                                         </li>
                                         <li>
-                                            <a href="https://discord.gg/4eeurUVvTy" class="hover:underline">Discord</a>
+                                            <a href="#" class="hover:underline">Konsultasi Akademik</a>
                                         </li>
                                     </ul>
                                 </div>
                                 <div>
-                                    <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Legal
+                                    <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Lainnya
                                     </h2>
                                     <ul class="text-black font-medium">
                                         <li class="mb-4">
-                                            <a href="#" class="hover:underline">Privacy Policy</a>
+                                            <a href="#" class="hover:underline">Ketentuan Privasi</a>
                                         </li>
                                         <li>
-                                            <a href="#" class="hover:underline">Terms &amp; Conditions</a>
+                                            <a href="#" class="hover:underline">Syarat dan Ketentuan</a>
                                         </li>
                                     </ul>
                                 </div>

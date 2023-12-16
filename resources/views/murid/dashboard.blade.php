@@ -10,14 +10,14 @@
                     <div class="text-2xl text-white">Akun saya</div>
                 </div>
                 <div class="card-content divide-y flex flex-col gap-y-3 mt-5">
-                    <a href="/dashboard"
-                        class="py-3 px-8 text-white {{ preg_match('/dashboard/', Route::current()->uri) == 1 ? 'bg-gradient-to-r from-fuchsia-600 to-violet-800 text-white rounded-xl shadow-xl': '' }}">
+                    <a href="/dashboard_murid"
+                        class="py-3 px-8 text-white {{ preg_match('/dashboard_murid/', Route::current()->uri) == 1 ? 'bg-gradient-to-r from-fuchsia-600 to-violet-800 text-white rounded-xl shadow-xl': '' }}">
                         <i class="fa fa-user text-white mr-5"></i>Profil Saya
                     </a>
                 </div>
                 <div class="card-content divide-y flex flex-col gap-y-3 mt-5">
-                    <a href="/akses_matapelajaran"
-                        class="py-3 px-8 text-white {{ preg_match('/akses_matapelajaran/', Route::current()->uri) == 1 ? 'bg-gradient-to-r from-fuchsia-600 to-violet-800 text-white rounded-xl shadow-xl': '' }}">
+                    <a href="/akses_matapelajaran_murid"
+                        class="py-3 px-8 text-white {{ preg_match('/akses_matapelajaran_murid/', Route::current()->uri) == 1 ? 'bg-gradient-to-r from-fuchsia-600 to-violet-800 text-white rounded-xl shadow-xl': '' }}">
                         <i class="fa fa-paper-plane text-white mr-5"></i>Akses Mata Pelajaran
                     </a>
                 </div>
@@ -28,34 +28,39 @@
                     </div>
                 </div>
             </div>
+
             <div
                 class="w-2/3 bg-[#1f2652] font-[Fredoka] p-5 mt-20 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg">
                 <div class="header-card text-center font-semibold">
-                    <div class="text-2xl text-white text-center">Halo, {{$user->name}}</div>
+                    <div class="text-2xl text-white text-center">Halo, {{$loggedInUser->name}}</div>
                 </div>
-                <div class="header-card text-center">
-                    <div class="text-lg text-white text-center">Data profil dan pembelian Anda disemua program EduLink
+                <form class="p-3" method="POST" action="{{ route('murid_ngeseng.store')}}" enctype="multipart/form-data">
+                    @csrf
+                    <div class="header-card text-center">
+                        <div class="text-lg text-white text-center">Data profil dan pembelian Anda disemua program
+                            EduLink
+                        </div>
                     </div>
-                </div>
-                <div class="card-content divide-y flex flex-col gap-y-3 mt-5">
-                    <label class="text-white px-4 py-0 mb-[-1rem]">Nama Lengkap</label>
-                    <input class="form-control rounded-2xl m-3 py-3 px-4" value="{{$user->name}}" />
-                </div>
-                <div class="card-content divide-y flex flex-col gap-y-3 mt-5">
-                    <label class="text-white px-4 py-0 mb-[-1rem]">Asal Sekolah</label>
-                    <input class="form-control rounded-2xl m-3 py-3 px-4" value="" />
-                </div>
-                <div class="card-content divide-y flex flex-col gap-y-3 mt-5">
-                    <label class="text-white px-4 py-0 mb-[-1rem]">Gender</label>
-                    <input class="form-control rounded-2xl m-3 py-3 px-4" value="" />
-                </div>
-                <div class="card-content divide-y flex flex-col gap-y-3 mt-5">
-                    <label class="text-white px-4 py-0 mb-[-1rem]">Tanggal Lahir</label>
-                    <input class="form-control rounded-2xl m-3 py-3 px-4" value="" />
-                </div>
-                <div class="card-content divide-y text-right mr-4 mt-5">
-                    <div class="btn btn-info py-2 px-4 rounded-full">Simpan</div>
-                </div>
+                    <div class="card-content divide-y flex flex-col gap-y-3 mt-5">
+                        <label class="text-white px-4 py-0 mb-[-1rem]">Nama Lengkap</label>
+                        <input class="form-control rounded-2xl m-3 py-3 px-4" name="name" value="{{$loggedInUser->name}}" />
+                    </div>
+                    <div class="card-content divide-y flex flex-col gap-y-3 mt-5">
+                        <label class="text-white px-4 py-0 mb-[-1rem]">Asal Sekolah</label>
+                        <input class="form-control rounded-2xl m-3 py-3 px-4" name="namasekolah" value="{{$muridData->namasekolah}}" />
+                    </div>
+                    <div class="card-content divide-y flex flex-col gap-y-3 mt-5">
+                        <label class="text-white px-4 py-0 mb-[-1rem]">Gender</label>
+                        <input class="form-control rounded-2xl m-3 py-3 px-4" name="gender" value="{{$muridData->gender}}" />
+                    </div>
+                    <div class="card-content divide-y flex flex-col gap-y-3 mt-5">
+                        <label class="text-white px-4 py-0 mb-[-1rem]">Tanggal Lahir</label>
+                        <input type="date" class="form-control rounded-2xl m-3 py-3 px-4" name="tanggallahir" value="{{$muridData->tanggallahir}}" />
+                    </div>
+                    <div class="card-content divide-y text-right mr-4 mt-5">
+                        <button type="submit" class="btn btn-info py-2 px-4 rounded-full">Simpan</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

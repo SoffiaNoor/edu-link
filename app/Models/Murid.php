@@ -10,7 +10,6 @@ class Murid extends Model
     use HasFactory;
     protected $table = 'murid';
 
-    // Specify the primary key column name
     protected $primaryKey = 'idmurid';
     protected $fillable = ['namamurid', 'namasekolah','gender', 'tanggallahir','kelas','fotomurid','idbidang'];
 
@@ -19,5 +18,8 @@ class Murid extends Model
     {
         return $this->belongsTo(Bidang::class, 'idbidang');
     }
-
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_users');
+    }
 }

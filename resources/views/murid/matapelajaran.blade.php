@@ -10,14 +10,14 @@
                     <div class="text-2xl text-white">Akun saya</div>
                 </div>
                 <div class="card-content divide-y flex flex-col gap-y-3 mt-5">
-                    <a href="/dashboard"
-                        class="py-3 px-8 text-white {{ preg_match('/dashboard/', Route::current()->uri) == 1 ? 'bg-gradient-to-r from-fuchsia-600 to-violet-800 text-white rounded-xl shadow-xl': '' }}">
+                    <a href="/dashboard_murid"
+                        class="py-3 px-8 text-white {{ preg_match('/dashboard_murid/', Route::current()->uri) == 1 ? 'bg-gradient-to-r from-fuchsia-600 to-violet-800 text-white rounded-xl shadow-xl': '' }}">
                         <i class="fa fa-user text-white mr-5"></i>Profil Saya
                     </a>
                 </div>
                 <div class="card-content divide-y flex flex-col gap-y-3 mt-5">
-                    <a href="/akses_matapelajaran"
-                        class="py-3 px-8 text-white {{ preg_match('/akses_matapelajaran/', Route::current()->uri) == 1 ? 'bg-gradient-to-r from-fuchsia-600 to-violet-800 text-white rounded-xl shadow-xl': '' }}">
+                    <a href="/akses_matapelajaran_murid"
+                        class="py-3 px-8 text-white {{ preg_match('/akses_matapelajaran_murid/', Route::current()->uri) == 1 ? 'bg-gradient-to-r from-fuchsia-600 to-violet-800 text-white rounded-xl shadow-xl': '' }}">
                         <i class="fa fa-paper-plane text-white mr-5"></i>Akses Mata Pelajaran
                     </a>
                 </div>
