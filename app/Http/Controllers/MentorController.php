@@ -79,6 +79,9 @@ class MentorController extends Controller
             'pendidikan' => 'required|string',
             'ptn' => 'required|string',
             'idbidang' => 'required|integer',
+            'deskripsi' => 'required|string',
+            'twitter' => 'required|string',
+            'instagram' => 'required|string'
         ]);
 
         try {
@@ -109,6 +112,9 @@ class MentorController extends Controller
             'pendidikan' => 'required|string',
             'ptn' => 'required|string',
             'idbidang' => 'required|integer',
+            'deskripsi' => 'string',
+            'twitter' => 'string',
+            'instagram' => 'string'
         ]);
 
         $input = $request->all();

@@ -84,7 +84,7 @@
 
 @section('jquery')
 
-<script src="https://cdn.tiny.cloud/1/your-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/a2m8qq7i48j1gc5izphurmemg39o165ft6pbpiz5a7waq805/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
 <!-- Initialize TinyMCE on your textarea -->
 <script>

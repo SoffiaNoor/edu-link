@@ -50,8 +50,25 @@
                                 <option value="2">IPS</option>
                             </select>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="twitter">Twitter</label>
+                                <input type="url" class="form-control" id="twitter" name="twitter" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="instagram">Instagram</label>
+                                <input type="url" class="form-control" id="instagram" name="instagram" required>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="deskripsi">Deskripsi</label>
+                                <textarea type="text" class="form-control" id="deskripsi" name="deskripsi"></textarea>
+                            </div>
+                        </div>
                     </div>
-
                     <div class="row">
                         <div class="col-sm-6 pt-2">
                             <button class="btn btn-icon btn-3 btn-secondary" type="button">
@@ -76,5 +93,15 @@
 @endsection
 
 @section('jquery')
+<script src="https://cdn.tiny.cloud/1/a2m8qq7i48j1gc5izphurmemg39o165ft6pbpiz5a7waq805/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
+<!-- Initialize TinyMCE on your textarea -->
+<script>
+    tinymce.init({
+        selector: 'textarea#deskripsi',
+        plugins: 'lists bold italic',
+        toolbar: 'undo redo | formatselect | bold italic | bullist numlist',
+        menubar: false
+    });
+</script>
 @endsection

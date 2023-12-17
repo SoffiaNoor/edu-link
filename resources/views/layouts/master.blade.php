@@ -78,14 +78,9 @@
 </style>
 
 <body class="g-sidenav-show bg-default">
-    {{-- <div class="loader-container">
-        <img src="http://localhost:8000/assets/images/RUNGKAD3.png" class="swing-animation" alt="Loading..." />
-    </div> --}}
     <div class="min-height-300 position-absolute w-100"></div>
-    <span class="mask bg-gradient-warning opacity-10"
-        style="background: linear-gradient(45deg, #0e1737, #0e1737);background-size: cover;"></span>
     <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 "
-        id="sidenav-main" style="background-color:#2c0a71">
+        id="sidenav-main" style="background-color:#051836">
         <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
                 aria-hidden="true" id="iconSidenav"></i>
@@ -99,7 +94,7 @@
                 <li class="nav-item">
                     <a class="nav-link mx-3 my-1 text-white {{ preg_match('/admin/', Route::current()->uri) == 1 ? 'bg-gradient-secondary shadow border-radius-xl mx-3 my-1 text-white font-weight-bolder' : '' }}"
                         href="/"
-                        style="{{ preg_match('/admin/', Route::current()->uri) == 1 ? 'background:#7523d6;background-size: cover;' : '' }}">
+                        style="{{ preg_match('/admin/', Route::current()->uri) == 1 ? 'background:#049ab5;background-size: cover;' : '' }}">
                         <i class="fa fa-tachometer" aria-hidden="true"></i>
                         <span class="nav-link-text ms-1 font-weight-bold">Dashboard</span>
                     </a>
@@ -107,7 +102,7 @@
                 <li class="nav-item">
                     <a class="nav-link mx-3 my-1 text-white {{ preg_match('/mentor/',Route::current()->uri) == true ? 'bg-gradient-secondary shadow border-radius-xl mx-3 my-1 text-white font-weight-bolder' : '' }}"
                         href="/mentor"
-                        style="{{ preg_match('/mentor/',Route::current()->uri) == true ? 'background:#7523d6;background-size: cover;' : '' }}">
+                        style="{{ preg_match('/mentor/',Route::current()->uri) == true ? 'background:#049ab5;background-size: cover;' : '' }}">
                         <i class="fa fa-user" aria-hidden="true"></i>
                         <span class="nav-link-text ms-1 font-weight-bold">Mentor</span>
                     </a>
@@ -115,7 +110,7 @@
                 <li class="nav-item">
                     <a class="nav-link mx-3 my-1 text-white {{ preg_match('/murid/',Route::current()->uri) == true ? 'bg-gradient-secondary shadow border-radius-xl mx-3 my-1 text-white font-weight-bolder' : '' }}"
                         href="/murid"
-                        style="{{ preg_match('/murid/',Route::current()->uri) == true ? 'background:#7523d6;background-size: cover;' : '' }}">
+                        style="{{ preg_match('/murid/',Route::current()->uri) == true ? 'background:#049ab5;background-size: cover;' : '' }}">
                         <i class="fa fa-bookmark" aria-hidden="true"></i>
                         <span class="nav-link-text ms-1 font-weight-bold">Murid</span>
                     </a>
@@ -123,7 +118,7 @@
                 <li class="nav-item">
                     <a class="nav-link mx-3 my-1 text-white {{ preg_match('/mata_pelajaran/',Route::current()->uri) == true ? 'bg-gradient-secondary shadow border-radius-xl mx-3 my-1 text-white font-weight-bolder' : '' }}"
                         href="/mata_pelajaran"
-                        style="{{ preg_match('/mata_pelajaran/',Route::current()->uri) == true ? 'background:#7523d6;background-size: cover;' : '' }}">
+                        style="{{ preg_match('/mata_pelajaran/',Route::current()->uri) == true ? 'background:#049ab5;background-size: cover;' : '' }}">
                         <i class="fa fa-users" aria-hidden="true"></i>
                         <span class="nav-link-text ms-1 font-weight-bold">Mata Pelajaran</span>
                     </a>
@@ -131,7 +126,7 @@
                 <li class="nav-item">
                     <a class="nav-link mx-3 my-1 text-white {{ preg_match('/pesan_kursus/',Route::current()->uri) == true ? 'bg-gradient-secondary shadow border-radius-xl mx-3 my-1 text-white font-weight-bolder' : '' }}"
                         href="/pesan_kursus"
-                        style="{{ preg_match('/pesan_kursus/',Route::current()->uri) == true ? 'background:#7523d6;background-size: cover;' : '' }}">
+                        style="{{ preg_match('/pesan_kursus/',Route::current()->uri) == true ? 'background:#049ab5;background-size: cover;' : '' }}">
                         <i class="fa fa-map-marker" aria-hidden="true"></i>
                         <span class="nav-link-text ms-1 font-weight-bold">Pesan Kursus</span>
                     </a>
@@ -139,7 +134,7 @@
                 <li class="nav-item">
                     <a class="nav-link mx-3 my-1 text-white {{ preg_match('/pesan_konsul/',Route::current()->uri) == true ? 'bg-gradient-secondary shadow border-radius-xl mx-3 my-1 text-white font-weight-bolder' : '' }}"
                         href="/pesan_konsul"
-                        style="{{ preg_match('/pesan_konsul/',Route::current()->uri) == true ? 'background:#7523d6;background-size: cover;' : '' }}">
+                        style="{{ preg_match('/pesan_konsul/',Route::current()->uri) == true ? 'background:#049ab5;background-size: cover;' : '' }}">
                         <i class="fa fa-map-marker" aria-hidden="true"></i>
                         <span class="nav-link-text ms-1 font-weight-bold">Pesan Konsul</span>
                     </a>
@@ -149,7 +144,7 @@
                 <li class="nav-item">
                     <a class="nav-link mx-3 my-1 text-white {{ preg_match('/user/',Route::current()->uri) == true ? 'bg-gradient-secondary shadow border-radius-xl mx-3 my-1 text-white font-weight-bolder' : '' }}"
                         href="/user"
-                        style="{{ preg_match('/user/',Route::current()->uri) == true ? 'background:#7523d6;background-size: cover;' : '' }}">
+                        style="{{ preg_match('/user/',Route::current()->uri) == true ? 'background:#049ab5;background-size: cover;' : '' }}">
                         <i class="fa fa-save" aria-hidden="true"></i>
                         <span class="nav-link-text ms-1 font-weight-bold">List User</span>
                     </a>
@@ -168,7 +163,7 @@
                 </div>
             </div>
             <a href="/register" target="_blank" class="btn btn-dark btn-sm w-100 mb-3"
-                style="background:#7523d6;background-size: cover;">Daftar Akun</a>
+                style="background:#049ab5;background-size: cover;">Daftar Akun</a>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button class="btn btn-danger btn-sm mb-0 w-100" type="submit">Log Out</button>
