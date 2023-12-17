@@ -6,12 +6,17 @@ use Illuminate\Http\Request;
 use App\Models\Mapel;
 use App\Models\Bidang;
 use App\Models\Mentor;
+use App\Models\PesanKursus;
+use Illuminate\Support\Facades\Auth;
+
 class WelcomeController extends Controller
 {
     public function index()
     {
+        $loggedInUser = Auth::user();
+        // $muridData = $loggedInUser->murid;
         $mentor = Mentor::all();
-        return view('welcome', compact('mentor'));
+        return view('welcome', compact('loggedInUser', 'mentor'));
     }
 
     public function kursus()
@@ -36,11 +41,6 @@ class WelcomeController extends Controller
     public function login()
     {
         return view('pages.login', []);
-    }
-
-    public function pesan()
-    {
-        return view('pages.pesan', []);
     }
 
     public function detail($id)

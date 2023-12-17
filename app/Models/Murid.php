@@ -11,7 +11,7 @@ class Murid extends Model
     protected $table = 'murid';
 
     protected $primaryKey = 'idmurid';
-    protected $fillable = ['namamurid', 'namasekolah','gender', 'tanggallahir','kelas','fotomurid','idbidang'];
+    protected $fillable = ['namamurid', 'namasekolah','gender', 'tanggallahir','kelas','fotomurid','idbidang', 'user_id'];
 
     
     public function bidang()

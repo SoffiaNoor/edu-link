@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Bidang;
 use Illuminate\Http\Request;
 use App\Models\Murid;
+use App\Models\User;
+use App\Models\PesanKursus;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -21,6 +23,7 @@ class MuridController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'namamurid' => 'required|string',
             'namasekolah' => 'required|string',
             'gender' => 'required|string',
             'tanggallahir' => 'required|date',
@@ -29,13 +32,14 @@ class MuridController extends Controller
         $user = Auth::user();
 
         $murid = $user->murid ?? new Murid();
+        $murid->namamurid = $request->input('namamurid');
         $murid->namasekolah = $request->input('namasekolah');
         $murid->gender = $request->input('gender');
         $murid->tanggallahir = $request->input('tanggallahir');
 
         $user->murid()->save($murid);
 
-        return redirect()->route('home')->with('success', 'Murid data saved successfully!');
+        return redirect()->route('murid.dashboard')->with('success', 'Murid data saved successfully!');
     }
     public function dashboard(){
 
@@ -46,10 +50,9 @@ class MuridController extends Controller
     public function mataPelajaran(){
 
         $user = Auth::user();
-        return view("murid.matapelajaran", compact('user'));
+        $pesanKursusHistory = $user->pesan_kursus;
+        return view("murid.matapelajaran", compact('user', 'pesanKursusHistory'));
     }
-
-
 
     public function index()
     {  

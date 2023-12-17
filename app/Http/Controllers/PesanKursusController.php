@@ -3,86 +3,169 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Ruang;
+use App\Models\Bidang;
+use App\Models\PesanKursus;
+use App\Models\Mapel;
+use App\Models\Mentor;
+use Illuminate\Support\Facades\Auth;
 
 class PesanKursusController extends Controller
 {
-    public function index()
+    public function pesan()
     {
-        // $Ruang = Ruang::paginate(5);
-
-        // return view("ruang.index", compact('Ruang'));
-        return view("admin.pesan_kursus.index");
-    }
-    public function create()
-    {
-        return view("admin.pesan_kursus.create");
+        $mapel = Mapel::all();
+        $mentor = Mentor::all();
+        $bidang = Bidang::all();
+        return view('pages.pesan', compact('mapel', 'mentor', 'bidang'));
     }
 
-
-    public function show(string $IDRuang)
+    public function pesanKursus()
     {
-        $Ruang = Ruang::where('IDRuang', $IDRuang)->first();
-        return view("ruang.view", compact('Ruang'));
+        $mapel = Mapel::all();
+        $mentor = Mentor::all();
+        $bidang = Bidang::all();
+        return view('pages.pesan_kursus', compact('mapel', 'mentor', 'bidang'));
     }
 
-    public function store(Request $request)
+    public function pesanKonsul()
     {
-        $this->validate($request, [
-            'IDRuang' => 'required|max:5|string',
-            'NamaRuang' => 'required|string',
-            'Kapasitas'=> 'required|integer|min:1',
-        ], [
-            'Kapasitas.min' => 'Kapasitas harus lebih dari atau sama dengan :min.',
-        ]);
-        
-        try {
-            $data = [
-                'IDRuang' => $request->input('IDRuang'),
-                'NamaRuang' => $request->input('NamaRuang'),
-                'Kapasitas' => $request->input('Kapasitas'),
-            ];
-    
-            Ruang::create($data);
-    
-            return redirect()->route('ruang.index')->with('success', 'Ruang berhasil ditambah!');
-        } catch (\Exception $e) {
-            return redirect()->route('ruang.create')->with('error', 'Gagal input Ruang. Pastikan data yang Anda masukkan benar.');
-        }
-        
+        $mapel = Mapel::all();
+        $mentor = Mentor::all();
+        $bidang = Bidang::all();
+        return view('pages.pesan_konsul', compact('mapel', 'mentor', 'bidang'));
     }
-
-    public function update(Request $request, Ruang $Ruang)
+    public function fetchMapelOptions()
     {
-        $this->validate($request, [
-            'NamaRuang' => 'required|string',
-            'Kapasitas' => 'required|integer|min:1',
-        ], [
-            'Kapasitas.min' => 'Kapasitas harus lebih dari atau sama dengan :min.',
-        ]);
+        $success = true;
+        $message = "";
+        $data = [];
 
-        $Ruang->update($request->all());
-
-        return redirect()->route('ruang.index')->with('success', 'Ruang berhasil diperbarui!');
-
-    }
-
-    public function destroy($id)
-    {
-        $Ruang = Ruang::find($id);
-
-        if (!$Ruang) {
-            return redirect()->route('ruang.index')->with('error', 'Ruang tidak ditemukan!');
+        $bidang = isset($_GET['bidang']) ? $_GET['bidang'] : '';
+        if (!empty($bidang)) {
+            $mapelOptions = Mapel::where('idbidang', $bidang)->get(['idmp', 'namamapel']);
+            if (!empty($mapelOptions)) {
+                foreach ($mapelOptions as $r => $v) {
+                    $data[$r]['id'] = $v->idmp;
+                    $data[$r]['name'] = $v->namamapel;
+                }
+            }
+        } else {
+            $success = false;
+            $message = 'Gagal ambil matkul';
         }
 
-        $Ruang->delete();
-
-        return redirect()->route('ruang.index')->with('success', 'Ruang berhasil dihapus!');
+        return json_encode(['success' => $success, 'message' => $message, 'data' => $data]);
     }
 
-
-    public function edit(Ruang $Ruang)
+    public function fetchMentorOptions()
     {
-        return view("ruang.update", compact('Ruang'));
+        $success = true;
+        $message = "";
+        $data = [];
+
+        $bidang = isset($_GET['bidang']) ? $_GET['bidang'] : '';
+        if (!empty($bidang)) {
+            $mentorOptions = Mentor::where('idbidang', $bidang)->get(['idmentor', 'namamentor']);
+            if (!empty($mentorOptions)) {
+                foreach ($mentorOptions as $r => $v) {
+                    $data[$r]['id'] = $v->idmentor;
+                    $data[$r]['name'] = $v->namamentor;
+                }
+            }
+        } else {
+            $success = false;
+            $message = 'Gagal ambil Mentor';
+        }
+
+        return json_encode(['success' => $success, 'message' => $message, 'data' => $data]);
+    }
+
+    public function fetchHarga()
+    {
+        $success = true;
+        $message = "";
+        $data = [];
+
+        $mapel = isset($_GET['mapel']) ? $_GET['mapel'] : '';
+        if (!empty($mapel)) {
+            $hargakursus = Mapel::where('idmp', $mapel)->get(['idmp', 'harga']);
+            if (!empty($hargakursus)) {
+                foreach ($hargakursus as $r => $v) {
+                    $data[$r]['id'] = $v->idmp;
+                    $data[$r]['name'] = $v->harga;
+                }
+            }
+        } else {
+            $success = false;
+            $message = 'Gagal ambil Harga';
+        }
+
+        return json_encode(['success' => $success, 'message' => $message, 'data' => $data]);
+    }
+
+    public function savePesanKursus(Request $request)
+    {
+        $validatedData = $request->validate([
+            'bidang' => 'required',
+            'mapel' => 'required',
+            'mentor' => 'required',
+            'jadwal' => 'required',
+            'via' => 'required',
+        ]);
+
+        $bidang = $request->input('bidang');
+        $mapel = $request->input('mapel');
+        $mentor = $request->input('mentor');
+        $jadwal = $request->input('jadwal');
+        $via = $request->input('via');
+
+        $pesanKursus = new PesanKursus();
+        $pesanKursus->idmurid = Auth::user()->id;
+        $pesanKursus->idmapel = $mapel;
+        $pesanKursus->idmentor = $mentor;
+        $pesanKursus->idbidang = $bidang;
+        $pesanKursus->jadwal = $jadwal;
+        $pesanKursus->via = $via;
+
+        $pesanKursus->save();
+
+        $idkursus = $pesanKursus->idkursus;
+        session(['idkursus' => $idkursus]);
+
+        return response()->json(['success' => true, 'message' => 'Data saved successfully']);
+    }
+
+    public function bayarKursus()
+    {
+        $idkursus = session('idkursus');
+        if ($idkursus) {
+            return view("pages.bayar_kursus", ['idkursus' => $idkursus]);
+        } else {
+            return response()->json(['error' => true, 'message' => 'idkursus not found in session']);
+        }
+    }
+
+    public function buktiBayarKursus(Request $request)
+    {
+        $idkursus = session('idkursus');
+        if (!$idkursus) {
+            return redirect()->route('murid.dashboard')->with(['error' => true, 'message' => 'idkursus not found in session']);
+        }
+    
+        $request->validate([
+            'buktibayar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+    
+        $imageName = time() . '.' . $request->file('buktibayar')->extension();
+        $request->file('buktibayar')->storeAs('uploads', $imageName);
+    
+        PesanKursus::where('idkursus', $idkursus)->update([
+            'status' => 1,
+            'buktibayar' => $imageName,
+        ]);
+    
+        session()->forget('idkursus');
+    
+        return redirect()->route('murid.dashboard');
     }
 }

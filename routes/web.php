@@ -12,14 +12,13 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PesanKonsulController;
 use App\Http\Controllers\PesanKursusController;
 use App\Http\Controllers\MataPelajaranController;
-use App\Models\Murid;
 
 Route::get('/', [WelcomeController::class, 'index']);
 Route::get('/kursus', [WelcomeController::class, 'kursus']);
 Route::get('/detail_mapel/{id}', [WelcomeController::class, 'detail'])->name('detail_mapel');
 Route::get('/pelayanan', [WelcomeController::class, 'pelayanan']);
 Route::get('/konsultasi', [WelcomeController::class, 'konsultasi']);
-Route::get('/pesan', [WelcomeController::class, 'pesan']);
+Route::get('/pesan', [PesanKursusController::class, 'pesan']);
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -32,6 +31,12 @@ View::composer('layouts.master', function ($view) {
     $loggedInUser = Auth::user();
     $view->with('loggedInUser', $loggedInUser);
 });
+
+// View::composer('layouts.header_footer', function ($view) {
+//     $muridData = Auth::user()->murid;
+//     $view->with('$muridData', $muridData);
+// });
+
 
 Route::middleware(['auth', 'role:superadmin'])->group(function () {
     Route::get('/admin', [HomeController::class, 'index']);
@@ -47,9 +52,20 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
 });
 
 Route::middleware(['auth', 'role:murid'])->group(function () {
-    Route::get('/dashboard_murid', [MuridController::class, 'showForm'])->name('murid.form');
+    Route::get('/dashboard_murid', [MuridController::class, 'showForm'])->name('murid.dashboard');
     Route::post('/dashboard_murid', [MuridController::class, 'store'])->name('murid_ngeseng.store');
     Route::get('/akses_matapelajaran_murid', [MuridController::class, 'mataPelajaran']);
+
+    //Transaksi Kursus
+    Route::get('/pesan/get-bidang/', [PesanKursusController::class, 'fetchMapelOptions']);
+    Route::get('/pesan/get-mentor/', [PesanKursusController::class, 'fetchMentorOptions']);
+    Route::get('/pesan/get-harga/', [PesanKursusController::class, 'fetchHarga']);
+    Route::post('/simpan-pesan-kursus', [PesanKursusController::class, 'savePesanKursus'])->name('save.pesan.kursus');
+    Route::get('/pesankursus', [PesanKursusController::class, 'pesanKursus']);
+    Route::get('/bayar_kursus', [PesanKursusController::class, 'bayarKursus'])->name('bayar.kursus');
+    Route::post('/bayar_kursus', [PesanKursusController::class, 'buktiBayarKursus'])->name('buktiBayarKursus');
+    Route::get('/pesankonsul', [PesanKursusController::class, 'pesanKonsul']);
+    Route::post('/save-bukti-pembayaran', [PesanKursusController::class, 'saveBuktiPembayaran'])->name('save.bukti.pembayaran');
 });
 
 

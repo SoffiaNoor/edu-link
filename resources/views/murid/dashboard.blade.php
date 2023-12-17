@@ -32,7 +32,7 @@
             <div
                 class="w-2/3 bg-[#1f2652] font-[Fredoka] p-5 mt-20 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg">
                 <div class="header-card text-center font-semibold">
-                    <div class="text-2xl text-white text-center">Halo, {{$loggedInUser->name}}</div>
+                    <div class="text-2xl text-white text-center">Halo, {{$muridData->namamurid}}</div>
                 </div>
                 <form class="p-3" method="POST" action="{{ route('murid_ngeseng.store')}}" enctype="multipart/form-data">
                     @csrf
@@ -43,7 +43,7 @@
                     </div>
                     <div class="card-content divide-y flex flex-col gap-y-3 mt-5">
                         <label class="text-white px-4 py-0 mb-[-1rem]">Nama Lengkap</label>
-                        <input class="form-control rounded-2xl m-3 py-3 px-4" name="name" value="{{$loggedInUser->name}}" />
+                        <input class="form-control rounded-2xl m-3 py-3 px-4" name="namamurid" value="{{$muridData->namamurid}}" />
                     </div>
                     <div class="card-content divide-y flex flex-col gap-y-3 mt-5">
                         <label class="text-white px-4 py-0 mb-[-1rem]">Asal Sekolah</label>

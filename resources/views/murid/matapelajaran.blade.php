@@ -5,7 +5,7 @@
     <div class="relative max-w-screen-xl px-4 sm:px-8 mx-auto grid gap-x-6 overflow-hidden">
         <div class="flex gap-8">
             <div
-                class="w-1/3 h-1/2 bg-[#1f2652] font-[Fredoka] p-5 mt-20 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg">
+                class="w-1/3 h-96 bg-[#1f2652] font-[Fredoka] p-5 mt-20 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg">
                 <div class="header-card flex justify-between font-semibold">
                     <div class="text-2xl text-white">Akun saya</div>
                 </div>
@@ -38,72 +38,33 @@
                     </div>
                 </div>
                 <div class="grid grid-cols-3 flex-wrap gap-4">
+                    @forelse($pesanKursusHistory->groupBy('jadwal') as $jadwal => $groupedPesanKursus)
+                    @foreach($groupedPesanKursus as $pk)
+                    @if ($pk->status !== null && $pk->buktibayar !== null)
                     <div class="card m-5 rounded-xl shadow-xl">
-                        <div class="card-header flex flex-row-2">
-                            <img src="{{ asset('assets/images/carousel-1.jpg') }}" class="bg-cover w-full rounded-xl" />
+                        <div class="card-header flex flex-row-2 bg-white rounded-t-lg">
+                            <img src="{{ asset($pk->mapel->gambar) }}"
+                                class="bg-cover h-36 object-cover w-full rounded-t-lg" />
                         </div>
-                        <div class="card-body bg-white rounded-xl">
-                            <div class="text-center text-2xl font-semibold">
-                                Matematika
-                            </div>
-                            <div class="text-center text-xl">
-                                60.000
+                        <div class="card-body bg-gradient-to-r from-fuchsia-600 to-violet-800 rounded-b-lg">
+                            <div class="text-center text-2xl text-white font-semibold">
+                                {{$pk->mapel->namamapel}}
                             </div>
                         </div>
                     </div>
+                    @endif
+                    @endforeach
+                    @empty
                     <div class="card m-5 rounded-xl shadow-xl">
-                        <div class="card-header flex flex-row-2">
-                            <img src="{{ asset('assets/images/carousel-1.jpg') }}" class="bg-cover w-full rounded-xl" />
-                        </div>
-                        <div class="card-body bg-white rounded-xl">
-                            <div class="text-center text-2xl font-semibold">
-                                Matematika
-                            </div>
-                            <div class="text-center text-xl">
-                                60.000
+                        <div class="card-body bg-gradient-to-r from-fuchsia-600 to-violet-800 rounded">
+                            <div class="text-center text-2xl text-white font-semibold">
+                                Kosong
                             </div>
                         </div>
                     </div>
-                    <div class="card m-5 rounded-xl shadow-xl">
-                        <div class="card-header flex flex-row-2">
-                            <img src="{{ asset('assets/images/carousel-1.jpg') }}" class="bg-cover w-full rounded-xl" />
-                        </div>
-                        <div class="card-body bg-white rounded-xl">
-                            <div class="text-center text-2xl font-semibold">
-                                Matematika
-                            </div>
-                            <div class="text-center text-xl">
-                                60.000
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card m-5 rounded-xl shadow-xl">
-                        <div class="card-header flex flex-row-2">
-                            <img src="{{ asset('assets/images/carousel-1.jpg') }}" class="bg-cover w-full rounded-xl" />
-                        </div>
-                        <div class="card-body bg-white rounded-xl">
-                            <div class="text-center text-2xl font-semibold">
-                                Matematika
-                            </div>
-                            <div class="text-center text-xl">
-                                60.000
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card m-5 rounded-xl shadow-xl">
-                        <div class="card-header flex flex-row-2">
-                            <img src="{{ asset('assets/images/carousel-1.jpg') }}" class="bg-cover w-full rounded-xl" />
-                        </div>
-                        <div class="card-body bg-white rounded-xl">
-                            <div class="text-center text-2xl font-semibold">
-                                Matematika
-                            </div>
-                            <div class="text-center text-xl">
-                                60.000
-                            </div>
-                        </div>
-                    </div>
+                    @endforelse
                 </div>
+
             </div>
         </div>
     </div>

@@ -242,7 +242,7 @@
                                         @if(auth()->user()->role->name === 'superadmin')
                                         <li><a href="{{ url('/admin') }}" class="block px-4 py-2">Dashboard</a></li>
                                         @elseif(auth()->user()->role->name === 'murid')
-                                        <li><a href="{{ url('/dashboard') }}" class="block px-4 py-2">Dashboard</a></li>
+                                        <li><a href="{{ url('/dashboard_murid') }}" class="block px-4 py-2">Dashboard</a></li>
                                         @elseif(auth()->user()->role->name === 'mentor')
                                         <li><a href="{{ url('/dashboard') }}" class="block px-4 py-2">Dashboard</a></li>
                                         @endif

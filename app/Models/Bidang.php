@@ -14,4 +14,5 @@ class Bidang extends Model
 
 
     protected $fillable = ["idbidang", "namabidang"];
+
 }

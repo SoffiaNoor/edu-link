@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Murid;
 
 class AuthController extends Controller
 {
@@ -18,7 +19,7 @@ class AuthController extends Controller
     {
         if (Auth::attempt($request->only('email', 'password'))) {
             return redirect('/');
-        } else{
+        } else {
             return redirect('/login')->with('error', 'Email atau Password tidak sesuai');
         }
     }
@@ -30,25 +31,31 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        {
-            try {
-                $data = [
-                    'name' => $request->name,
-                    'email' => $request->email,
-                    'password' => bcrypt($request->password),
-                ];
-        
-                User::create($data);
-        
-                return redirect()->route('register')->with('success', 'Account created successfully.');
-        
-            } catch (\Exception $e) {
-        
-                return redirect()->route('register')->with('error', 'Gagal create account. Account sudah ada.');
-        
-            }
-        }
+        try {
+            $data = [
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+                'role_id' => 3
+            ];
 
+            $user = User::create($data);
+            $id_nama = $user->name;
+            $id_user = $user->id; 
+            $dataMurid = [
+                'namamurid' => $id_nama,
+                'user_id' => $id_user,
+            ];
+
+            Murid::create($dataMurid); 
+
+            return redirect()->route('register')->with('success', 'Account created successfully.');
+
+        } catch (\Exception $e) {
+
+            return redirect()->route('register')->with('error', 'Gagal create account. Account sudah ada.');
+
+        }
     }
 
     public function logout()

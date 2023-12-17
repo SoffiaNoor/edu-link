@@ -53,4 +53,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Murid::class);
     }
+    public function pesan_kursus()
+    {
+        return $this->hasMany(PesanKursus::class, 'idmurid', 'id'); 
+    }
+    
 }
