@@ -49,11 +49,11 @@ class AuthController extends Controller
 
             Murid::create($dataMurid); 
 
-            return redirect()->route('register')->with('success', 'Account created successfully.');
+            return redirect()->route('login')->with('success', 'Akun berhasil dibuat');
 
         } catch (\Exception $e) {
 
-            return redirect()->route('register')->with('error', 'Gagal create account. Account sudah ada.');
+            return redirect()->route('register')->with('error', 'Gagal membuat Akun');
 
         }
     }

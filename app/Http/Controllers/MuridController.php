@@ -16,17 +16,21 @@ class MuridController extends Controller
     {
         $loggedInUser = Auth::user();
         $muridData = $loggedInUser->murid;
-        
+
         return view('murid.dashboard', compact('loggedInUser', 'muridData'));
     }
 
     public function store(Request $request)
     {
+        $request['idbidang'] = intval($request['idbidang']);
+
         $request->validate([
             'namamurid' => 'required|string',
             'namasekolah' => 'required|string',
             'gender' => 'required|string',
             'tanggallahir' => 'required|date',
+            'kelas' => 'required|integer',
+            'idbidang' => 'required|integer',
         ]);
 
         $user = Auth::user();
@@ -36,18 +40,22 @@ class MuridController extends Controller
         $murid->namasekolah = $request->input('namasekolah');
         $murid->gender = $request->input('gender');
         $murid->tanggallahir = $request->input('tanggallahir');
+        $murid->kelas = $request->input('kelas');
+        $murid->idbidang = $request->input('idbidang');
 
         $user->murid()->save($murid);
 
         return redirect()->route('murid.dashboard')->with('success', 'Murid data saved successfully!');
     }
-    public function dashboard(){
+    public function dashboard()
+    {
 
         $user = Auth::user();
         return view("murid.dashboard", compact('user'));
     }
 
-    public function mataPelajaran(){
+    public function mataPelajaran()
+    {
 
         $user = Auth::user();
         $pesanKursusHistory = $user->pesan_kursus;
@@ -55,7 +63,7 @@ class MuridController extends Controller
     }
 
     public function index()
-    {  
+    {
         $murid = Murid::with('bidang')->paginate(5);
         $bidang = Bidang::all();
         return view("admin.murid.index", compact('murid', 'bidang'));
@@ -98,9 +106,9 @@ class MuridController extends Controller
     //             'kelas' => $request->input('kelas'),
     //             'idbidang' => $request->input('idbidang'),
     //         ];
-    
+
     //         Murid::create($data);
-    
+
     //         return redirect()->route('murid.index')->with('success', 'Data Murid berhasil ditambahkan!');
     //     } catch (\Exception $e) {
     //         return redirect()->route('murid.create')->with('error', 'Gagal input Murid. Pastikan data yang Anda masukkan benar.');

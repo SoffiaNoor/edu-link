@@ -34,33 +34,61 @@
                 <div class="header-card text-center font-semibold">
                     <div class="text-2xl text-white text-center">Halo, {{$muridData->namamurid}}</div>
                 </div>
-                <form class="p-3" method="POST" action="{{ route('murid_ngeseng.store')}}" enctype="multipart/form-data">
+                <form class="p-3" method="POST" action="{{ route('murid_ngeseng.store')}}"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="header-card text-center">
                         <div class="text-lg text-white text-center">Data profil dan pembelian Anda disemua program
-                            EduLink
+                            EduLink</div>
+                    </div>
+                    <div class="card-content divide-y flex flex-col gap-y-3 mt-5">
+                        <div class="flex flex-row items-center">
+                            <div class="w-full mr-2">
+                                <label class="text-white px-4 py-0 mb-[-1rem]">Nama Lengkap</label>
+                                <input class="form-control rounded-2xl m-3 py-3 px-4 w-full" name="namamurid"
+                                    value="{{$muridData->namamurid}}" />
+                            </div>
+                            <div class="w-full mr-2">
+                                <label class="text-white px-4 py-0 mb-[-1rem]">Asal Sekolah</label>
+                                <input class="form-control rounded-2xl m-3 py-3 px-4 w-full" name="namasekolah"
+                                    value="{{$muridData->namasekolah}}" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-content divide-y flex flex-col gap-y-3 mt-5">
-                        <label class="text-white px-4 py-0 mb-[-1rem]">Nama Lengkap</label>
-                        <input class="form-control rounded-2xl m-3 py-3 px-4" name="namamurid" value="{{$muridData->namamurid}}" />
-                    </div>
-                    <div class="card-content divide-y flex flex-col gap-y-3 mt-5">
-                        <label class="text-white px-4 py-0 mb-[-1rem]">Asal Sekolah</label>
-                        <input class="form-control rounded-2xl m-3 py-3 px-4" name="namasekolah" value="{{$muridData->namasekolah}}" />
-                    </div>
-                    <div class="card-content divide-y flex flex-col gap-y-3 mt-5">
-                        <label class="text-white px-4 py-0 mb-[-1rem]">Gender</label>
-                        <input class="form-control rounded-2xl m-3 py-3 px-4" name="gender" value="{{$muridData->gender}}" />
-                    </div>
-                    <div class="card-content divide-y flex flex-col gap-y-3 mt-5">
-                        <label class="text-white px-4 py-0 mb-[-1rem]">Tanggal Lahir</label>
-                        <input type="date" class="form-control rounded-2xl m-3 py-3 px-4" name="tanggallahir" value="{{$muridData->tanggallahir}}" />
+                        <div class="flex flex-row items-center">
+                            <div class="w-full mr-2">
+                                <label class="text-white px-4 py-0 mb-[-1rem]">Gender</label>
+                                <select class="form-control rounded-2xl m-3 py-3 px-4 w-full" name="gender">
+                                    <option value="Laki-laki" @if($muridData->gender === 'Laki-laki') selected @endif>Laki-laki</option>
+                                    <option value="Perempuan" @if($muridData->gender === 'Perempuan') selected @endif>Perempuan</option>
+                                    <option value="other" @if($muridData->gender === 'other') selected @endif>Other</option>
+                                </select>
+                            </div>
+                            <div class="w-full mr-2">
+                                <label class="text-white px-4 py-0 mb-[-1rem]">Tanggal Lahir</label>
+                                <input type="date" class="form-control text-left rounded-2xl m-3 py-3 w-full" name="tanggallahir"
+                                    value="{{$muridData->tanggallahir}}" />
+                            </div>
+                        </div>
+                        <div class="flex flex-row items-center">
+                            <div class="w-full mr-2">
+                                <label class="text-white px-4 py-0 mb-[-1rem]">Kelas</label>
+                                <input type="number" class="form-control rounded-2xl m-3 py-3 px-4 w-full" name="kelas"
+                                    value="{{$muridData->kelas}}" />
+                            </div>
+                            <div class="w-full mr-2">
+                                <label class="text-white px-4 py-0 mb-[-1rem]">Bidang</label>
+                                <select class="form-control rounded-2xl m-3 py-3 px-4 w-full" name="idbidang">
+                                    <option value="1" @if($muridData->idbidang === 1) selected @endif>IPA</option>
+                                    <option value="2" @if($muridData->idbidang === 2) selected @endif>IPS</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-content divide-y text-right mr-4 mt-5">
                         <button type="submit" class="btn btn-info py-2 px-4 rounded-full">Simpan</button>
                     </div>
                 </form>
+
             </div>
         </div>
     </div>
