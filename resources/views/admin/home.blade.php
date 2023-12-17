@@ -113,7 +113,6 @@
         var labels = Object.keys(idmapelCounts);
         var chartData = Object.values(idmapelCounts);
 
-        // Set up the new chart
         var ctx = document.getElementById('subjectSalesChart').getContext('2d');
 
         var subjectSalesChart = new Chart(ctx, {

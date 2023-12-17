@@ -243,7 +243,7 @@
 
 <body class="bg-gradient-to-r from-[#0e1737] to-[#0e183b]">
     <div class="loader fixed" id="loader">
-        <div class="load-text">
+        <div class="load-text ml-5">
             <div class="loaded-text font-[Fredoka] font-bold text-9xl">H</div>
             <div class="loading-text font-[Fredoka] font-bold text-9xl">alo, Edulearns!</div>
         </div>

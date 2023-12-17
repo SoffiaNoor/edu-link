@@ -33,4 +33,8 @@ class PesanKursus extends Model
     {
         return $this->belongsTo(Mentor::class, 'idmentor');
     }
+
+    public function user(){
+        return $this->belongsTo(User::class, 'idmurid');
+    }
 }

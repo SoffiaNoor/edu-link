@@ -7,10 +7,27 @@ use App\Models\Bidang;
 use App\Models\PesanKursus;
 use App\Models\Mapel;
 use App\Models\Mentor;
+use App\Models\Murid;
 use Illuminate\Support\Facades\Auth;
 
 class PesanKursusController extends Controller
 {
+    public function index()
+    {
+        $mapel = Mapel::all();
+        $bidang = Bidang::all();
+        $mentor = Mentor::all();
+        $murid = Murid::all();
+        $pesan_kursus = PesanKursus::with('bidang')->paginate(10);
+
+        return view("admin.pesan_kursus.index", compact('mapel', 'bidang', 'mentor', 'murid', 'pesan_kursus'));
+    }
+
+    public function show(string $idkursus)
+    {
+        $pesan_kursus = PesanKursus::where('idkursus', $idkursus)->with('bidang')->first();
+        return view("admin.pesan_kursus.view", compact('pesan_kursus'));
+    }
     public function pesan()
     {
         $mapel = Mapel::all();
@@ -151,21 +168,21 @@ class PesanKursusController extends Controller
         if (!$idkursus) {
             return redirect()->route('murid.dashboard')->with(['error' => true, 'message' => 'idkursus not found in session']);
         }
-    
+
         $request->validate([
             'buktibayar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-    
+
         $imageName = time() . '.' . $request->file('buktibayar')->extension();
         $request->file('buktibayar')->storeAs('uploads', $imageName);
-    
+
         PesanKursus::where('idkursus', $idkursus)->update([
             'status' => 1,
             'buktibayar' => $imageName,
         ]);
-    
+
         session()->forget('idkursus');
-    
+
         return redirect()->route('murid.dashboard');
     }
 }
