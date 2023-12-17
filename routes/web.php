@@ -48,7 +48,8 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::resource('/user', UserController::class);
     Route::post('/user/{id}', [UserController::class, 'changePassword'])->name('user.changePassword');
-
+    Route::get('/get-mentor-booking-data', [HomeController::class, 'getMentorBookingData']);
+    Route::get('/api/chart-data', [HomeController::class, 'getChartData']);
 });
 
 Route::middleware(['auth', 'role:murid'])->group(function () {

@@ -17,6 +17,8 @@
     <!-- Animasi -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 <style>
     .fixed-bottom-footer {
@@ -93,7 +95,7 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link mx-3 my-1 text-white {{ preg_match('/admin/', Route::current()->uri) == 1 ? 'bg-gradient-secondary shadow border-radius-xl mx-3 my-1 text-white font-weight-bolder' : '' }}"
-                        href="/"
+                        href="/admin"
                         style="{{ preg_match('/admin/', Route::current()->uri) == 1 ? 'background:#049ab5;background-size: cover;' : '' }}">
                         <i class="fa fa-tachometer" aria-hidden="true"></i>
                         <span class="nav-link-text ms-1 font-weight-bold">Dashboard</span>
@@ -272,11 +274,6 @@
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
     </script>
-    {{-- <script>
-        window.addEventListener('load', function () {
-        document.querySelector('.loader-container').style.display = 'none';
-    });
-    </script> --}}
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 
     <script src="../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
