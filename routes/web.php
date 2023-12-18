@@ -18,7 +18,6 @@ Route::get('/kursus', [WelcomeController::class, 'kursus']);
 Route::get('/detail_mapel/{id}', [WelcomeController::class, 'detail'])->name('detail_mapel');
 Route::get('/pelayanan', [WelcomeController::class, 'pelayanan']);
 Route::get('/konsultasi', [WelcomeController::class, 'konsultasi']);
-Route::get('/pesan', [PesanKursusController::class, 'pesan']);
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -53,6 +52,7 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
 });
 
 Route::middleware(['auth', 'role:murid'])->group(function () {
+    Route::get('/pesan', [PesanKursusController::class, 'pesan']);
     Route::get('/dashboard_murid', [MuridController::class, 'showForm'])->name('murid.dashboard');
     Route::post('/dashboard_murid', [MuridController::class, 'saveForm'])->name('simpan.murid');
     Route::get('/akses_matapelajaran_murid', [MuridController::class, 'mataPelajaran']);

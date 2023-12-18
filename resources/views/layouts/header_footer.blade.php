@@ -327,7 +327,7 @@
                 </div>
 
                 <div class="fixed bottom-10 right-10 z-10">
-                    <a title="Chat Whatsapp" href="{{url('/login')}}" target="_blank"
+                    <a title="Chat Whatsapp" href="{{url('/pesan')}}" target="_blank"
                         class="block rounded-full transition-all transform hover:scale-110 hover:rotate-12">
                         <img class="object-cover object-center lg:w-full lg:h-24 w-full h-24"
                             src="{{ asset('assets/images/order.png') }}" alt="Saya mau pesan">
