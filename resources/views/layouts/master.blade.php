@@ -129,7 +129,7 @@
                     <a class="nav-link mx-3 my-1 text-white {{ preg_match('/pesan_kursus/',Route::current()->uri) == true ? 'bg-gradient-secondary shadow border-radius-xl mx-3 my-1 text-white font-weight-bolder' : '' }}"
                         href="/pesan_kursus"
                         style="{{ preg_match('/pesan_kursus/',Route::current()->uri) == true ? 'background:#049ab5;background-size: cover;' : '' }}">
-                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                         <span class="nav-link-text ms-1 font-weight-bold">Pesan Kursus</span>
                     </a>
                 </li>
@@ -137,7 +137,7 @@
                     <a class="nav-link mx-3 my-1 text-white {{ preg_match('/pesan_konsul/',Route::current()->uri) == true ? 'bg-gradient-secondary shadow border-radius-xl mx-3 my-1 text-white font-weight-bolder' : '' }}"
                         href="/pesan_konsul"
                         style="{{ preg_match('/pesan_konsul/',Route::current()->uri) == true ? 'background:#049ab5;background-size: cover;' : '' }}">
-                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                        <i class="fa fa-handshake-o" aria-hidden="true"></i>
                         <span class="nav-link-text ms-1 font-weight-bold">Pesan Konsul</span>
                     </a>
                 </li>

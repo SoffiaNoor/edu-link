@@ -54,8 +54,9 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
 
 Route::middleware(['auth', 'role:murid'])->group(function () {
     Route::get('/dashboard_murid', [MuridController::class, 'showForm'])->name('murid.dashboard');
-    Route::post('/dashboard_murid', [MuridController::class, 'store'])->name('murid_ngeseng.store');
+    Route::post('/dashboard_murid', [MuridController::class, 'saveForm'])->name('simpan.murid');
     Route::get('/akses_matapelajaran_murid', [MuridController::class, 'mataPelajaran']);
+    Route::get('/akses_konsultasi_murid', [MuridController::class, 'konsultasi']);
 
     //Transaksi Kursus
     Route::get('/pesan/get-bidang/', [PesanKursusController::class, 'fetchMapelOptions']);
@@ -65,8 +66,14 @@ Route::middleware(['auth', 'role:murid'])->group(function () {
     Route::get('/pesankursus', [PesanKursusController::class, 'pesanKursus']);
     Route::get('/bayar_kursus', [PesanKursusController::class, 'bayarKursus'])->name('bayar.kursus');
     Route::post('/bayar_kursus', [PesanKursusController::class, 'buktiBayarKursus'])->name('buktiBayarKursus');
-    Route::get('/pesankonsul', [PesanKursusController::class, 'pesanKonsul']);
     Route::post('/save-bukti-pembayaran', [PesanKursusController::class, 'saveBuktiPembayaran'])->name('save.bukti.pembayaran');
+
+    //Transaksi Konsul
+    Route::get('/pesankonsul', [PesanKonsulController::class, 'pesanKonsul'])->name('pesan_konsul_form');
+    Route::post('/save-pesan-konsul', [PesanKonsulController::class, 'savePesanKonsul'])->name('save_pesan_konsul');
+    Route::get('/bayar_konsul', [PesanKonsulController::class, 'bayarKonsul'])->name('bayar.konsul');
+    Route::post('/bayar_konsul', [PesanKonsulController::class, 'buktiBayarKonsul'])->name('buktiBayarKonsul');
+    Route::post('/save-bukti-pembayaran-konsul', [PesanKonsulController::class, 'saveBuktiPembayaran'])->name('save.bukti.pembayaran');
 });
 
 

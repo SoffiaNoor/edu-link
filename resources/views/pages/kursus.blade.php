@@ -20,7 +20,8 @@
                 @if ($m->idbidang == 1)
                 <div class="group relative rounded-2xl shadow-lg my-3 mx-3 py-3 " data-aos="zoom-in-up">
                     <a href="{{ route('detail_mapel', $m->idmp) }}">
-                        <div class="h-72 w-72 p-6 font-['Fredoka'] rounded-2xl shadow-2xl bg-gradient-to-r from-fuchsia-600 to-violet-800 hover:bg-gradient-to-r hover:from-pink-600 hover:to-fuchsia-600 hover:scale-110 transition-all duration-300 text-white flex items-center justify-center text-center text-4xl font-bold">
+                        <div
+                            class="h-72 w-72 p-6 font-['Fredoka'] rounded-2xl shadow-2xl bg-gradient-to-r from-fuchsia-600 to-violet-800 hover:bg-gradient-to-r hover:from-pink-600 hover:to-fuchsia-600 hover:scale-110 transition-all duration-300 text-white flex items-center justify-center text-center text-4xl font-bold">
                             <div class="row">
                                 <p>
                                     {{$m->namamapel}}
@@ -53,16 +54,18 @@
                 <div class="group relative rounded-2xl shadow-lg my-3 mx-3 py-3 " data-aos="zoom-in-up">
                     <div
                         class="h-72 w-72 p-6 font-['Fredoka'] rounded-2xl shadow-2xl bg-gradient-to-r from-fuchsia-600 to-violet-800 hover:bg-gradient-to-r hover:from-pink-600 hover:to-fuchsia-600 hover:scale-110 transition-all duration-300 text-white flex items-center justify-center text-center text-4xl font-bold">
-                        <div class="row">
-                            <p>
-                                {{$m->namamapel}}
-                            </p>
-                            <hr class="w-48 h-2 mx-auto bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700"
-                                style="margin-top:10px;margin-bottom:0px">
-                            <p class="text-xl">Rp. {{$m->harga}},-
-                            </p>
+                        <a href="{{ route('detail_mapel', $m->idmp) }}">
+                            <div class="row">
+                                <p>
+                                    {{$m->namamapel}}
+                                </p>
+                                <hr class="w-48 h-2 mx-auto bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700"
+                                    style="margin-top:10px;margin-bottom:0px">
+                                <p class="text-xl">Rp. {{$m->harga}},-
+                                </p>
 
-                        </div>
+                            </div>
+                        </a>
                     </div>
                 </div>
                 @endif

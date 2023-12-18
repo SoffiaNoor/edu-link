@@ -37,23 +37,25 @@
                     <div class="text-lg text-white text-center">Dibawah ini adalah semua kursus yang anda beli
                     </div>
                 </div>
-                <div class="grid grid-cols-3 flex-wrap gap-4">
-                    @forelse($pesanKursusHistory->groupBy('jadwal') as $jadwal => $groupedPesanKursus)
-                    @foreach($groupedPesanKursus as $pk)
-                    @if ($pk->status !== null && $pk->buktibayar !== null)
+                <div class="grid grid-cols-2 flex-wrap gap-4">
+                    @forelse($pesanKonsultasiHistory as $pk)
+                    @if ($pk->status !== null && $pk->bukti_bayar !== null)
                     <div class="card m-5 rounded-xl shadow-xl">
                         <div class="card-header flex flex-row-2 bg-white rounded-t-lg">
-                            <img src="{{ asset($pk->mapel->gambar) }}"
-                                class="bg-cover h-36 object-cover w-full rounded-t-lg" />
                         </div>
-                        <div class="card-body bg-gradient-to-r from-fuchsia-600 to-violet-800 rounded-b-lg">
+                        <div class="card-body bg-gradient-to-r from-fuchsia-600 to-violet-800 rounded-lg">
                             <div class="text-center text-2xl text-white font-semibold">
-                                {{$pk->mapel->namamapel}}
+                                {{$pk->program->namakonsul}}
+                            </div>
+                            <div class="bg-white shadow-xl rounded-2xl ">
+                                <div
+                                    class="text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 text-center text-2xl font-semibold">
+                                    {{$pk->aktif}}
+                                </div>
                             </div>
                         </div>
                     </div>
                     @endif
-                    @endforeach
                     @empty
                     <div class="card m-5 rounded-xl shadow-xl">
                         <div class="card-body bg-gradient-to-r from-fuchsia-600 to-violet-800 rounded">

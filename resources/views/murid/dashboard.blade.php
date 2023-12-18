@@ -5,7 +5,7 @@
     <div class="relative max-w-screen-xl px-4 sm:px-8 mx-auto grid gap-x-6 overflow-hidden">
         <div class="flex gap-8">
             <div
-                class="w-1/3 h-1/2 bg-[#1f2652] font-[Fredoka] p-5 mt-20 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg">
+                class="w-1/3 h-96 bg-[#1f2652] font-[Fredoka] p-5 mt-20 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg">
                 <div class="header-card flex justify-between font-semibold">
                     <div class="text-2xl text-white">Akun saya</div>
                 </div>
@@ -22,10 +22,10 @@
                     </a>
                 </div>
                 <div class="card-content divide-y flex flex-col gap-y-3 mt-5">
-                    <div
-                        class="py-3 px-8 text-white {{ preg_match('/akses_konsultasi/', Route::current()->uri) == 1 ? 'bg-gradient-to-r from-fuchsia-600 to-violet-800 text-white rounded-xl shadow-xl': '' }}">
+                    <a href="/akses_konsultasi_murid"
+                        class="py-3 px-8 text-white {{ preg_match('/akses_konsultasi_murid/', Route::current()->uri) == 1 ? 'bg-gradient-to-r from-fuchsia-600 to-violet-800 text-white rounded-xl shadow-xl': '' }}">
                         <i class="fa fa-handshake-o text-white mr-5"></i>Akses Konsultasi
-                    </div>
+                    </a>
                 </div>
             </div>
 
@@ -34,7 +34,7 @@
                 <div class="header-card text-center font-semibold">
                     <div class="text-2xl text-white text-center">Halo, {{$muridData->namamurid}}</div>
                 </div>
-                <form class="p-3" method="POST" action="{{ route('murid_ngeseng.store')}}"
+                <form class="p-3" method="POST" action="{{ route('simpan.murid')}}"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="header-card text-center">

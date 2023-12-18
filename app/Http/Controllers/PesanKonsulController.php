@@ -3,86 +3,79 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Bidang;
+use App\Models\PesanKursus;
 use App\Models\PesanKonsul;
+use App\Models\Mapel;
+use App\Models\Mentor;
+use App\Models\Murid;
+use Illuminate\Support\Facades\Auth;
 
 class PesanKonsulController extends Controller
 {
-    public function index()
+    public function pesanKonsul()
     {
-        $pesan_konsul = PesanKonsul::paginate(5);
+        $pesan_konsul = PesanKonsul::all();
+        $redirectRoute = route('bayar.konsul');
 
-        // return view("pesan_konsul.index", compact('pesan_konsul'));
-        return view("admin.PesanKonsul.index");
-    }
-    public function create()
-    {
-        return view("admin.pesan_konsul.create");
+        return view('pages.pesan_konsul', compact('pesan_konsul', 'redirectRoute'));
     }
 
-
-    public function show(string $IDpesan_konsul)
+    public function savePesanKonsul(Request $request)
     {
-        $pesan_konsul = pesan_konsul::where('IDpesan_konsul', $IDpesan_konsul)->first();
-        return view("admin.pesan_konsul.view", compact('pesan_konsul'));
-    }
+        $user = Auth::user();
 
-    public function store(Request $request)
-    {
-        $this->validate($request, [
-            'IDpesan_konsul' => 'required|max:5|string',
-            'Namapesan_konsul' => 'required|string',
-            'Kapasitas'=> 'required|integer|min:1',
-        ], [
-            'Kapasitas.min' => 'Kapasitas harus lebih dari atau sama dengan :min.',
-        ]);
-        
-        try {
-            $data = [
-                'IDpesan_konsul' => $request->input('IDpesan_konsul'),
-                'Namapesan_konsul' => $request->input('Namapesan_konsul'),
-                'Kapasitas' => $request->input('Kapasitas'),
-            ];
-    
-            pesan_konsul::create($data);
-    
-            return redirect()->route('admin.pesan_konsul.index')->with('success', 'pesan_konsul berhasil ditambah!');
-        } catch (\Exception $e) {
-            return redirect()->route('admin.pesan_konsul.create')->with('error', 'Gagal input pesan_konsul. Pastikan data yang Anda masukkan benar.');
-        }
-        
-    }
+        $mentorId = rand(1, 10);
+        $selectedProgram = $request->input('radio');
 
-    public function update(Request $request, pesan_konsul $pesan_konsul)
-    {
-        $this->validate($request, [
-            'Namapesan_konsul' => 'required|string',
-            'Kapasitas' => 'required|integer|min:1',
-        ], [
-            'Kapasitas.min' => 'Kapasitas harus lebih dari atau sama dengan :min.',
+        $pesanKonsul = PesanKonsul::create([
+            'idmentor' => $mentorId,
+            'idmurid' => $user->id,
+            'idprogram' => $selectedProgram,
+            'status' => 0,
+            'bukti_bayar' => null,
         ]);
 
-        $pesan_konsul->update($request->all());
+        $idkonsul = $pesanKonsul->idkonsul;
+        session(['idkonsul' => $idkonsul]);
 
-        return redirect()->route('admin.pesan_konsul.index')->with('success', 'pesan_konsul berhasil diperbarui!');
+        return view('pages.bayar_konsul');
 
     }
 
-    public function destroy($id)
+    public function bayarKonsul()
     {
-        $pesan_konsul = pesan_konsul::find($id);
+        $idkonsul = session('idkonsul');
+        if ($idkonsul) {
+            return view("pages.bayar_kursus", ['idkonsul' => $idkonsul]);
+        } else {
+            return response()->json(['error' => true, 'message' => 'idkursus not found in session']);
+        }
+    }
 
-        if (!$pesan_konsul) {
-            return redirect()->route('admin.pesan_konsul.index')->with('error', 'pesan_konsul tidak ditemukan!');
+    public function buktiBayarKonsul(Request $request)
+    {
+        $idkonsul = session('idkonsul');
+        // var_dump($idkonsul);die;
+        if (!$idkonsul) {
+            return redirect()->route('murid.dashboard')->with(['error' => true, 'message' => 'idkonsul not found in session']);
         }
 
-        $pesan_konsul->delete();
+        $request->validate([
+            'bukti_bayar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
-        return redirect()->route('admin.pesan_konsul.index')->with('success', 'pesan_konsul berhasil dihapus!');
-    }
+        $imageName = time() . '.' . $request->file('bukti_bayar')->extension();
+        $request->file('bukti_bayar')->storeAs('uploads', $imageName);
 
+        PesanKonsul::where('idkonsul', $idkonsul)->update([
+            'status' => 1,
+            'aktif' => 'Belum Digunakan',
+            'bukti_bayar' => $imageName,
+        ]);
 
-    public function edit(pesan_konsul $pesan_konsul)
-    {
-        return view("admin.pesan_konsul.update", compact('pesan_konsul'));
+        session()->forget('idkonsul');
+
+        return redirect()->route('murid.dashboard');
     }
 }

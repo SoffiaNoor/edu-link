@@ -55,7 +55,11 @@ class User extends Authenticatable
     }
     public function pesan_kursus()
     {
-        return $this->hasMany(PesanKursus::class, 'idmurid', 'id'); 
+        return $this->hasMany(PesanKursus::class, 'idmurid', 'id');
     }
-    
+    public function pesan_konsul()
+    {
+        return $this->hasMany(PesanKonsul::class, 'idmurid', 'id');
+    }
+
 }

@@ -234,7 +234,7 @@
                                         class="flex items-center px-6 py-2 shadow-xl bg-gradient-to-r from-fuchsia-600 to-violet-800 rounded-full cursor-pointer">
                                         <span class="mr-4 text-white font-bold text-xl">{{ auth()->user()->name
                                             }}</span>
-                                        <img src="assets/images/profile-user.png" alt="Profile Photo"
+                                        <img src="http://localhost:8000/assets/images/profile-user.png" alt="Profile Photo"
                                             class="w-8 h-8 rounded-full">
                                     </div>
                                     <ul id="dropdownMenu"

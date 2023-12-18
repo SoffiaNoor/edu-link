@@ -20,7 +20,7 @@ class MuridController extends Controller
         return view('murid.dashboard', compact('loggedInUser', 'muridData'));
     }
 
-    public function store(Request $request)
+    public function saveForm(Request $request)
     {
         $request['idbidang'] = intval($request['idbidang']);
 
@@ -62,9 +62,17 @@ class MuridController extends Controller
         return view("murid.matapelajaran", compact('user', 'pesanKursusHistory'));
     }
 
+    public function konsultasi()
+    {
+
+        $user = Auth::user();
+        $pesanKonsultasiHistory = $user->pesan_konsul;
+        return view("murid.konsultasi", compact('user', 'pesanKonsultasiHistory'));
+    }
+
     public function index()
     {
-        $murid = Murid::with('bidang')->paginate(5);
+        $murid = Murid::with('bidang')->paginate(8);
         $bidang = Bidang::all();
         return view("admin.murid.index", compact('murid', 'bidang'));
     }
